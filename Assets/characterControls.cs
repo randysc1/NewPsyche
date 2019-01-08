@@ -14,9 +14,10 @@ public class characterControls : MonoBehaviour {
 	public int numHits;
 
 	public GameObject meleeBox;
+	public GameObject AOEBox;
 	public GameObject tempBox;
 	public GameObject bullet;
-	public GameObject tempShot;
+	//public GameObject tempShot;
 	//public Shader heroS;
 	public Material heroM;
 	//public GameObject hero;
@@ -49,9 +50,9 @@ public class characterControls : MonoBehaviour {
 		c = GameObject.Find ("Main Camera").GetComponent<controller>();
 		PS = GameObject.Find("UITentacle").GetComponentInChildren<ParticleSystem>();
 
-		if (phase == null) {
-			phase = 1;
-		}
+		//if (phase == null) {
+		//	phase = 1;
+		//}
 
 		//initialHBar = new Vector3 (HBar.size ().x, HBar.size ().y);
 		initialHBar = new Vector3 (HBar.GetComponent<RectTransform> ().sizeDelta.x, HBar.GetComponent<RectTransform>().sizeDelta.y);
@@ -85,22 +86,34 @@ public class characterControls : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.P))
 			Damage ();
 
-		if (Input.GetKeyDown (KeyCode.Z)) {
+		if (Input.GetKeyDown (KeyCode.Z) && phase == 1) {
 			//meleeBox.SetActive(true);		
 			//////////////if not playing the attack animation. else play part 2?
 			tempBox = Instantiate(meleeBox, meleeBox.transform.position, meleeBox.transform.rotation, this.transform);
 			tempBox.SetActive(true);
 			//tempBox.tag = "Weapon2";
 			Destroy(tempBox, 1);
+			Debug.Log ("Melee Attack");
 		}
 
-		if (Input.GetKeyDown (KeyCode.X)) {
-			tempShot = Instantiate (bullet, bullet.transform.position, bullet.transform.rotation, this.transform);
-			tempShot.SetActive(true);
+		if (Input.GetKeyDown (KeyCode.X) && phase == 2) {
+			tempBox = Instantiate (bullet, bullet.transform.position, bullet.transform.rotation, this.transform);
+			tempBox.SetActive(true);
 			//tempShot.transform = tempShot.transform.forward;
-			tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward*4;
-			tempShot.transform.parent = null;
-			Destroy (tempShot, 5);
+			tempBox.GetComponent<Rigidbody>().velocity = tempBox.transform.forward*4;
+			tempBox.transform.parent = null;
+			Destroy (tempBox, 5);
+			Debug.Log ("Ranged Attack");
+		}
+
+		if (Input.GetKeyDown (KeyCode.V) && phase == 3) {
+			//meleeBox.SetActive(true);		
+			//////////////if not playing the attack animation. else play part 2?
+			tempBox = Instantiate(AOEBox, AOEBox.transform.position, AOEBox.transform.rotation, this.transform);
+			tempBox.SetActive(true);
+			//tempBox.tag = "Weapon2";
+			Destroy(tempBox, 0);
+			Debug.Log ("AOE Attack");
 		}
 
 		if (Input.GetKeyDown (KeyCode.B)) {
@@ -169,12 +182,14 @@ public class characterControls : MonoBehaviour {
 		//Maybe add a buffer on the health bar so it is always a little sliver before it moves to the next, instead of evenly dividing it up
 		//HBar.gameObject.transform.x = HBar.gameObject.transform.x - 10;
 		//HBar.transform.x = HBar.transform.x - 10;
+		hit = true;
+		PS.Play ();
 		if (phase <= 3) {
 
-			hit = true;
+			//hit = true;
 			//heroR.material.color = Color.red;
 
-			PS.Play ();
+			//PS.Play ();
 
 			if (HBar.GetComponent<RectTransform> ().sizeDelta.x <= (initialHBar.x/numHits)+1) {
 				//Debug.Log ("1");
@@ -200,6 +215,10 @@ public class characterControls : MonoBehaviour {
 					else if (phase == 3){
 						//heroR.material.color = Color.black;
 						c.EnterPhase3();
+					}
+					else if (phase == 4){
+						Destroy (HBar, 0);
+						Debug.Log ("Dead");
 					}
 				}
 			} 
@@ -229,15 +248,15 @@ public class characterControls : MonoBehaviour {
 				//	Debug.Log ("Dead");
 				//}
 			}
-			if (phase > 3){
+			//if (phase > 3){
 				//Debug.Log ("3");
 				//HBar.transform.Translate (-2.5f, 0f, 0f);
 				///HBar.transform.Translate (((initialHBar.x/numHits)/-2), 0f, 0f);
 				//HBar.GetComponent<RectTransform> ().sizeDelta = new Vector3 (HBar.GetComponent<RectTransform> ().sizeDelta.x - 5, 100);
 				///HBar.GetComponent<RectTransform>().sizeDelta = new Vector3 (HBar.GetComponent<RectTransform>().sizeDelta.x - ((initialHBar.x/numHits)), initialHBar.y);
-				Destroy (HBar, 0);
-				Debug.Log ("Dead");
-			}
+			//	Destroy (HBar, 0);
+			//	Debug.Log ("Dead");
+			//}
 		} 
 
 	}
