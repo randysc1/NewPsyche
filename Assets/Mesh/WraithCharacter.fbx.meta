@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: 180a7324fab83e048b0bcddbc459db68
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: BodyMesh
+    100002: CloakBottom1
+    100004: CloakBottom2
+    100006: CloakTop2
+    100008: CollarFur
+    100010: HeadClaws3
+    100012: QuickRigCharacter_Head
+    100014: QuickRigCharacter_Hips
+    100016: QuickRigCharacter_HipsTranslation
+    100018: QuickRigCharacter_LeftArm
+    100020: QuickRigCharacter_LeftFoot
+    100022: QuickRigCharacter_LeftForeArm
+    100024: QuickRigCharacter_LeftHand
+    100026: QuickRigCharacter_LeftLeg
+    100028: QuickRigCharacter_LeftShoulder
+    100030: QuickRigCharacter_LeftToeBase
+    100032: QuickRigCharacter_LeftUpLeg
+    100034: QuickRigCharacter_Neck
+    100036: QuickRigCharacter_Neck1
+    100038: QuickRigCharacter_Neck2
+    100040: QuickRigCharacter_Reference
+    100042: QuickRigCharacter_RightArm
+    100044: QuickRigCharacter_RightFoot
+    100046: QuickRigCharacter_RightForeArm
+    100048: QuickRigCharacter_RightHand
+    100050: QuickRigCharacter_RightLeg
+    100052: QuickRigCharacter_RightShoulder
+    100054: QuickRigCharacter_RightToeBase
+    100056: QuickRigCharacter_RightUpLeg
+    100058: QuickRigCharacter_Spine
+    100060: QuickRigCharacter_Spine1
+    100062: QuickRigCharacter_Spine2
+    100064: QuickRigCharacter_Spine3
+    100066: QuickRigCharacter_Spine4
+    100068: TattersLeft
+    100070: TattersRight
+    100072: //RootNode
+    400000: BodyMesh
+    400002: CloakBottom1
+    400004: CloakBottom2
+    400006: CloakTop2
+    400008: CollarFur
+    400010: HeadClaws3
+    400012: QuickRigCharacter_Head
+    400014: QuickRigCharacter_Hips
+    400016: QuickRigCharacter_HipsTranslation
+    400018: QuickRigCharacter_LeftArm
+    400020: QuickRigCharacter_LeftFoot
+    400022: QuickRigCharacter_LeftForeArm
+    400024: QuickRigCharacter_LeftHand
+    400026: QuickRigCharacter_LeftLeg
+    400028: QuickRigCharacter_LeftShoulder
+    400030: QuickRigCharacter_LeftToeBase
+    400032: QuickRigCharacter_LeftUpLeg
+    400034: QuickRigCharacter_Neck
+    400036: QuickRigCharacter_Neck1
+    400038: QuickRigCharacter_Neck2
+    400040: QuickRigCharacter_Reference
+    400042: QuickRigCharacter_RightArm
+    400044: QuickRigCharacter_RightFoot
+    400046: QuickRigCharacter_RightForeArm
+    400048: QuickRigCharacter_RightHand
+    400050: QuickRigCharacter_RightLeg
+    400052: QuickRigCharacter_RightShoulder
+    400054: QuickRigCharacter_RightToeBase
+    400056: QuickRigCharacter_RightUpLeg
+    400058: QuickRigCharacter_Spine
+    400060: QuickRigCharacter_Spine1
+    400062: QuickRigCharacter_Spine2
+    400064: QuickRigCharacter_Spine3
+    400066: QuickRigCharacter_Spine4
+    400068: TattersLeft
+    400070: TattersRight
+    400072: //RootNode
+    2100000: WraithTxtr
+    4300000: HeadClaws3
+    4300002: CloakBottom2
+    4300004: CollarFur
+    4300006: BodyMesh
+    4300008: TattersLeft
+    4300010: TattersRight
+    4300012: CloakTop2
+    9500000: //RootNode
+    13700000: BodyMesh
+    13700002: CloakBottom2
+    13700004: CloakTop2
+    13700006: CollarFur
+    13700008: HeadClaws3
+    13700010: TattersLeft
+    13700012: TattersRight
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
