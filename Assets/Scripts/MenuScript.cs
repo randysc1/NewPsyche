@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class MenuScript : MonoBehaviour
 {
     GameManager gameManager;
+    UserCharacterController controls;
     public Transform menuPanel;
+    public Transform mainPanel;
 
     Event keyEvent;
 
@@ -19,6 +21,8 @@ public class MenuScript : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        controls = GameObject.FindGameObjectWithTag("Player").GetComponent<UserCharacterController>();
+
         waitingForKey = false;
 
         for (int i = 0; i < menuPanel.childCount; i++)
@@ -64,13 +68,20 @@ public class MenuScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !menuPanel.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !mainPanel.gameObject.activeSelf)
+        {
+            Time.timeScale = 0;
+            controls.enabled = false;
+            mainPanel.gameObject.SetActive(true);
+        }
 
-            menuPanel.gameObject.SetActive(true);
+        else if (Input.GetKeyDown(KeyCode.Escape) && mainPanel.gameObject.activeSelf)
+        {
+            Time.timeScale = 1;
+            controls.enabled = true;
+            mainPanel.gameObject.SetActive(false);
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && menuPanel.gameObject.activeSelf)
-
-            menuPanel.gameObject.SetActive(false);
+        }
     }
 
     void OnGUI()
