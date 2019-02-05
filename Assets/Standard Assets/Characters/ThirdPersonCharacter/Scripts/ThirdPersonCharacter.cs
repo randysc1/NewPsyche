@@ -58,8 +58,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (move.magnitude > 1f) move.Normalize();
             curMove = move;
             animMove = transform.InverseTransformDirection(curMove);
-            print("Cur move is: " + curMove);
-            print("Anim move is: " + animMove);
             //So forward is still going to be animMove.z since we made it local.
             //Direction is going to be the local x, so animMove.x
 
@@ -74,16 +72,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Toggle-able only to show to team
             if (FollowMouse)
             {
-                //Shoot a ray from camera at mouse, track hit and make char look at point.
+                //Shoot a ray from cam to mouse pos for a distance of 100
+                RaycastHit[] hits;
                 RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.collider.gameObject.tag != "Player")
-                    {
-                        transform.LookAt(hit.point);
-                    }
+                hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 100.0f);
 
+                //Iterate through all collisions, when obj tagged "Ground" is found, turn char to look at it
+                //and stop iterating
+                for (int i = 0; i < hits.Length; i++)
+                {
+                    hit = hits[i];
+                    if (hit.collider.gameObject.tag == "Ground")
+                    {
+                        //TODO: We will eventually want to make sure this point is on level with the character's eyeline. 
+                        //So he doesn't look down when we put it at his feet
+                        transform.LookAt(hit.point);
+                        i = hits.Length;
+                    }                   
                 }
 
             } else
@@ -164,8 +169,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 m_Animator.SetFloat("Forward", animMove.z, 0.1f, Time.deltaTime);
                 m_Animator.SetFloat("Lateral", animMove.x, 0.1f, Time.deltaTime);
-                print("Forward is: " + m_Animator.GetFloat("Forward"));
-                print("Lateral is: " + m_Animator.GetFloat("Lateral"));
             } else
             {
                 m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
