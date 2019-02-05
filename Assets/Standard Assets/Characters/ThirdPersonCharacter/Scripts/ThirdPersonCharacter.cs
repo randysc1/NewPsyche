@@ -15,6 +15,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_MoveSpeedMultiplier = 1f;
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
+        [SerializeField] bool FollowMouse;
+        [SerializeField] bool NewMove;
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
@@ -28,9 +30,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
+        Vector3 lastV;
+        Vector3 curMove;
+        Vector3 animMove;
 
 
-		void Start()
+
+        void Start()
 		{
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
@@ -50,28 +56,61 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// turn amount and forward amount required to head in the desired
 			// direction.
 			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
+            curMove = move;
+            animMove = transform.InverseTransformDirection(curMove);
+            print("Cur move is: " + curMove);
+            print("Anim move is: " + animMove);
+            //So forward is still going to be animMove.z since we made it local.
+            //Direction is going to be the local x, so animMove.x
+
+            move = transform.InverseTransformDirection(move);
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
 
-			ApplyExtraTurnRotation();
+            //Added by Luke, turn to mouse. 
 
-			// control and velocity handling is different when grounded and airborne:
-			if (m_IsGrounded)
+            //Toggle-able only to show to team
+            if (FollowMouse)
+            {
+                //Shoot a ray from camera at mouse, track hit and make char look at point.
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.gameObject.tag != "Player")
+                    {
+                        transform.LookAt(hit.point);
+                    }
+
+                }
+
+            } else
+            {
+                //If removing above, drop this outside if/else to preserve asset
+                ApplyExtraTurnRotation();
+            }
+
+            //
+
+
+            // control and velocity handling is different when grounded and airborne:
+            if (m_IsGrounded)
 			{
-				HandleGroundedMovement(crouch, jump);
+                //Does not handle grounded movement, only checks if we can jump and if we are jumping.
+                HandleGroundedMovement(crouch, jump);
 			}
 			else
 			{
-				HandleAirborneMovement();
+                //Applies gravity, checks ground.
+                HandleAirborneMovement();
 			}
 
 			ScaleCapsuleForCrouching(crouch);
 			PreventStandingInLowHeadroom();
 
-			// send input and other state parameters to the animator
+            // send input and other state parameters to the animator
 			UpdateAnimator(move);
 		}
 
@@ -117,9 +156,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void UpdateAnimator(Vector3 move)
 		{
-			// update the animator parameters
-			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            //So this is where the biggest changes need to be made, currently it's on tank controls of forward/turn.
+            //at The Least we need to add a back, but optimally we need forward/left/right/back and the appropriate states.
+            // update the animator parameters
+
+            if (NewMove)
+            {
+                m_Animator.SetFloat("Forward", animMove.z, 0.1f, Time.deltaTime);
+                m_Animator.SetFloat("Lateral", animMove.x, 0.1f, Time.deltaTime);
+                print("Forward is: " + m_Animator.GetFloat("Forward"));
+                print("Lateral is: " + m_Animator.GetFloat("Lateral"));
+            } else
+            {
+                m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+
+            }
+            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)
@@ -152,7 +204,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
-
+        //Applies gravity, checks ground.
 		void HandleAirborneMovement()
 		{
 			// apply extra gravity from multiplier:
@@ -163,6 +215,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 
+        //Does not handle grounded movement, only checks if we can jump and if we are jumping.
 		void HandleGroundedMovement(bool crouch, bool jump)
 		{
 			// check whether conditions are right to allow a jump:
@@ -186,16 +239,36 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		public void OnAnimatorMove()
 		{
-			// we implement this function to override the default root motion.
-			// this allows us to modify the positional speed before it's applied.
-			if (m_IsGrounded && Time.deltaTime > 0)
-			{
-				Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
+            if (NewMove)
+            {
+                //Set this in inspector if changes accepted
+                m_Rigidbody.mass = 100;
+                m_Rigidbody.drag = 100;
+                //Change from  .3f to var when not using toggle to show to team. .5 seems to be good speed.
+                //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
+                Vector3 moving = m_Rigidbody.transform.position + (curMove * .3f);
 
-				// we preserve the existing y part of the current velocity.
-				v.y = m_Rigidbody.velocity.y;
-				m_Rigidbody.velocity = v;
-			}
+                m_Rigidbody.transform.position = moving;
+            } else
+            {
+
+                // we implement this function to override the default root motion.
+                // this allows us to modify the positional speed before it's applied.
+                if (m_IsGrounded && Time.deltaTime > 0)
+                {
+                    Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
+                    if (v.magnitude < lastV.magnitude)
+                    {
+                        v = new Vector3(0, 0, 0);
+                    }
+
+                    // we preserve the existing y part of the current velocity.
+                    v.y = m_Rigidbody.velocity.y;
+                    m_Rigidbody.velocity = v;
+                    lastV = v;
+                }
+            }
+
 		}
 
 
