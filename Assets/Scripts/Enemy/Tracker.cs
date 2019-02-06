@@ -6,7 +6,7 @@ using UnityEngine;
 public class Tracker : MonoBehaviour {
 
     private GameObject Player;
-    public int sightDistance = 10;
+    public int sightDistance = 5;
     public int MoveSpeed = 4;
     public float MinDist = 0;
     public GameObject meleeBox;

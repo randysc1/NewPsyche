@@ -139,10 +139,11 @@ public class PhaseManager : MonoBehaviour
 
     public void TakeDamage(int howMuch)
     {
-        print("Oh heck, got hit!");
+        //print("Oh heck, got hit!");
         //Figure out how to find the mesh renderer first before doing DamageColor
         //StartCoroutine(DamageColor());
         curHealth -= howMuch;
+        curIns -= howMuch;
 
         RefreshHealthAndIns();       
         
