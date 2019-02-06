@@ -12,6 +12,8 @@ TagManager:
   - EBullet
   - Ground
   - Enemy
+  - HB
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - PostProcessing
   - Weapon
   - Hero
-  - 
+  - Particle
   - 
   - 
   - 
