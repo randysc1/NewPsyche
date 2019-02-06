@@ -86,7 +86,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     {
                         //TODO: We will eventually want to make sure this point is on level with the character's eyeline. 
                         RaycastHit toLook = hit;
-                        toLook.point.y = .8f;
+                       // toLook.point.y = .8f;
                         //So he doesn't look down when we put it at his feet
                         transform.LookAt(hit.point);
                         i = hits.Length;
