@@ -1450,12 +1450,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114278437684901068, guid: 4d442ebe2740672419e507a440a4d06c,
-        type: 2}
-      propertyPath: meleeBox
-      value: 
-      objectReference: {fileID: 1125518888500446, guid: 7debe811700d5a74498dab5c67267159,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d442ebe2740672419e507a440a4d06c, type: 2}
   m_IsPrefabParent: 0
