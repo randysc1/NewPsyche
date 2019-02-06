@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47bad7efa5f614994dd0bef8165a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraMoveSpeed: 120
+  CameraMoveSpeed: 10
   cameraFollowObj1: {fileID: 713753961}
   cameraFollowObj2: {fileID: 0}
 --- !u!4 &445743076
@@ -818,20 +818,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaa8d91cc266ae4b851314315cede37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HBar: {fileID: 0}
-  phase: 0
-  initialHBar: {x: 0, y: 0, z: 0}
-  numHits: 0
-  meleeBox: {fileID: 1446240309}
-  tempBox: {fileID: 0}
-  bullet: {fileID: 801977588}
-  tempShot: {fileID: 0}
-  heroM: {fileID: 2100000, guid: 621e901dcf5ebaf46bce29d18f67194c, type: 2}
-  heroR: {fileID: 0}
-  hit: 0
-  hitTime: 5
-  timer: 0
-  PS: {fileID: 0}
+  Hero: {fileID: 0}
+  Phase2Hero: {fileID: 0}
+  Phase3Hero: {fileID: 0}
 --- !u!114 &693783327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,11 +1081,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &801977588 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1276836718269240, guid: 2921bfefa1ac5cc4887d700d41c5d2dd,
-    type: 2}
-  m_PrefabInternal: {fileID: 2025965981}
 --- !u!1 &966344398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,11 +1428,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &1446240309 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1988904437618284, guid: 2921bfefa1ac5cc4887d700d41c5d2dd,
-    type: 2}
-  m_PrefabInternal: {fileID: 2025965981}
 --- !u!1 &1455007121
 GameObject:
   m_ObjectHideFlags: 0

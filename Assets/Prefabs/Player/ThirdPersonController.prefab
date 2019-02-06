@@ -2873,7 +2873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b72e325b288c984bb4941ace91158c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 5
   isProjectile: 0
 --- !u!114 &114321169368929936
 MonoBehaviour:
@@ -2948,7 +2948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b72e325b288c984bb4941ace91158c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 3
   isProjectile: 1
 --- !u!135 &135393461363981668
 SphereCollider:

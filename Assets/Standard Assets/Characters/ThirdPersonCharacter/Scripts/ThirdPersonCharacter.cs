@@ -88,7 +88,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         RaycastHit toLook = hit;
                        // toLook.point.y = .8f;
                         //So he doesn't look down when we put it at his feet
-                        transform.LookAt(hit.point + new Vector3(0f,.8f,0));
+                        transform.LookAt(hit.point);
                         i = hits.Length;
                     }                   
                 }
