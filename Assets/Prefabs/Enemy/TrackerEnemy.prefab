@@ -186,8 +186,9 @@ MonoBehaviour:
   sightDistance: 100
   MoveSpeed: 4
   MinDist: 1.5
-  meleeBox: {fileID: 1035519573948608}
+  meleeBox: {fileID: 1125518888500446, guid: 7debe811700d5a74498dab5c67267159, type: 2}
   tempBox: {fileID: 0}
+  Dead: 0
 --- !u!114 &114697485565405692
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour {
     {
         CurHealth -= damage;
         StartCoroutine(DamageColor());
-        print("Ow! I got hit! Now at: " + CurHealth);
+        //print("Ow! I got hit! Now at: " + CurHealth);
         
         if(CurHealth <= 0)
         {

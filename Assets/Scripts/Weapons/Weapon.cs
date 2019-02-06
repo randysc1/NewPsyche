@@ -22,18 +22,20 @@ public class Weapon : MonoBehaviour {
         //print("Triggered!");
         if (other.transform.tag != "Player" && other.transform.tag != "Enemy")
         {
-            print("Tag is: " + other.transform.tag);
+            //print("Tag is: " + other.transform.tag);
             return;
         }
 
-        //print("Hit player or enemy!");
         if(other.transform.tag == "Player")
         {
+            //print("Hit player !");
+
             PhaseManager PM = other.gameObject.GetComponent<PhaseManager>();
 
             PM.TakeDamage(damage);
         } else
         {
+            print("Hit enemy!");
             EnemyHealth Enemy = other.gameObject.GetComponent<EnemyHealth>();
 
             Enemy.TakeDamage(damage);

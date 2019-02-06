@@ -15,7 +15,13 @@ public class PhaseManager : MonoBehaviour
 
     public int ShotSpeed;
     public ParticleSystem PS;
-    public GameObject HBar;
+    private GameObject HBar;
+    private GameObject IBar;
+
+    private int maxHealth = 100;
+    private int curHealth;
+    private int maxIns = 100;
+    private int curIns;
 
 
     private GameObject AOEEffect;
@@ -33,10 +39,14 @@ public class PhaseManager : MonoBehaviour
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
 
+        //Set starting full health.
+        curHealth = 100;
+        curIns = 100;
 
-        //initialHBar = new Vector3 (HBar.size ().x, HBar.size ().y);
-        //initialHBar = new Vector3(HBar.GetComponent<RectTransform>().sizeDelta.x, HBar.GetComponent<RectTransform>().sizeDelta.y);
-        numHits = 10;
+
+        HBar = GameObject.Find("HBarSprite");
+        IBar = GameObject.Find("IBarSprite");
+
 
         if (PS != null)
         {
@@ -130,9 +140,27 @@ public class PhaseManager : MonoBehaviour
     public void TakeDamage(int howMuch)
     {
         print("Oh heck, got hit!");
+        //Figure out how to find the mesh renderer first before doing DamageColor
+        //StartCoroutine(DamageColor());
+        curHealth -= howMuch;
 
-       // curHealth -= howMuch;
+        RefreshHealthAndIns();       
         
-        
+    }
+
+    private void RefreshHealthAndIns()
+    {
+        HBar.transform.localScale = new Vector3((curHealth / maxHealth) * 40, 5, 1);
+        IBar.transform.localScale = new Vector3((curIns / maxIns) * 40, 5, 1);
+    }
+
+    //Wait a second, change back.
+    IEnumerator DamageColor()
+    {
+        MeshRenderer myMesh = GetComponentInChildren<MeshRenderer>();
+        Color storage = myMesh.material.color;
+        myMesh.material.color = Color.red;
+        yield return new WaitForSecondsRealtime(1);
+        myMesh.material.color = storage;
     }
 }
