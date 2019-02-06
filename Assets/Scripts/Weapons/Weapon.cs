@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour {
         }
         if (isProjectile)
         {
-            Destroy(this);
+            Destroy(this.gameObject,.0f);
         }
     }
 }
