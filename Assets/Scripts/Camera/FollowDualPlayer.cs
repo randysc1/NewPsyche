@@ -37,6 +37,10 @@ public class FollowDualPlayer : MonoBehaviour
 
         //print(target1.position.x);
         //Hey this may need to change but ffs when there's no /2 on target1.pos then it just flings the char off the left side.
-        transform.position = Vector3.MoveTowards(transform.position, target1.position / 2, step);
+        if(Vector3.Distance(transform.position, target1.position) < .2f)
+        {
+            return;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, target1.position, step);
     }
 }

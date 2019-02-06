@@ -85,6 +85,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     if (hit.collider.gameObject.tag == "Ground")
                     {
                         //TODO: We will eventually want to make sure this point is on level with the character's eyeline. 
+                        RaycastHit toLook = hit;
+                        toLook.point.y = .8f;
                         //So he doesn't look down when we put it at his feet
                         transform.LookAt(hit.point);
                         i = hits.Length;
@@ -249,8 +251,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_Rigidbody.drag = 100;
                 //Change from  .3f to var when not using toggle to show to team. .5 seems to be good speed.
                 //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
-                Vector3 moving = m_Rigidbody.transform.position + (curMove * .3f);
+                Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
 
+                moving.y = 0;
                 m_Rigidbody.transform.position = moving;
             } else
             {

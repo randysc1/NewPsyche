@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     public int damage;
+    public bool isProjectile = false;
     //Type?
 	// Use this for initialization
 	void Start () {
@@ -18,14 +19,14 @@ public class Weapon : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Triggered!");
+        //print("Triggered!");
         if (other.transform.tag != "Player" && other.transform.tag != "Enemy")
         {
             print("Tag is: " + other.transform.tag);
             return;
         }
 
-        print("Hit player or enemy!");
+        //print("Hit player or enemy!");
         if(other.transform.tag == "Player")
         {
             PhaseManager PM = other.gameObject.GetComponent<PhaseManager>();
@@ -36,6 +37,10 @@ public class Weapon : MonoBehaviour {
             EnemyHealth Enemy = other.gameObject.GetComponent<EnemyHealth>();
 
             Enemy.TakeDamage(damage);
+        }
+        if (isProjectile)
+        {
+            Destroy(this);
         }
     }
 }

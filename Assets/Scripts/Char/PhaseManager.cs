@@ -73,10 +73,10 @@ public class PhaseManager : MonoBehaviour
             switch (phase)
             {
                 case 1:
-                    meleeAttack();
+                    rangedAttack();
                     break;
                 case 2:
-                    rangedAttack();
+                    meleeAttack();
                     break;
                 case 3:
                     AOEAttack();
@@ -106,6 +106,7 @@ public class PhaseManager : MonoBehaviour
     private void rangedAttack()
     {
         //print("Ranged");
+        //TODO: Add timer.
         tempShot = Instantiate(bullet, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
         tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
@@ -130,6 +131,8 @@ public class PhaseManager : MonoBehaviour
     {
         print("Oh heck, got hit!");
 
+       // curHealth -= howMuch;
+        
         
     }
 }
