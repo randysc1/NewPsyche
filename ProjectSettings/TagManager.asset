@@ -11,6 +11,7 @@ TagManager:
   - rangedEnemy
   - EBullet
   - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
