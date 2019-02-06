@@ -10,6 +10,8 @@ TagManager:
   - meleeEnemy
   - rangedEnemy
   - EBullet
+  - Ground
+  - Enemy
   - HB
   - GameManager
   layers:
