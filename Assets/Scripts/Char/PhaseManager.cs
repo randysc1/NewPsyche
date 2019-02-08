@@ -35,7 +35,10 @@ public class PhaseManager : MonoBehaviour
     private int numHits;
     private Vector3 curRotate;
 
-    private Animator m_Animator; 
+    private Animator m_Animator;
+    //When the melee animation changes, change this so the box only spawns for this long.
+    private float meleeAnimDuration = .633f;
+    private bool meleeing = false;
 
 
 
@@ -126,7 +129,7 @@ public class PhaseManager : MonoBehaviour
         print("Ranged");
         curRotate = new Vector3(transform.forward.x, 0, transform.forward.z);
         RaycastHit hit; 
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Vector3 forward = transform.TransformDirection(curRotate) * 10;
         Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 100, true);
 
         if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), curRotate, out hit))
@@ -154,18 +157,22 @@ public class PhaseManager : MonoBehaviour
     private void meleeAttack()
     {
         //print("melee");
+        if (meleeing)
+        {
+            return;
+        }
+        meleeing = true;
         m_Animator.SetTrigger("Attack");
         meleeBox.SetActive(true);
         Physics.IgnoreCollision(meleeBox.GetComponent<Collider>(), GetComponent<Collider>());
         StartCoroutine(meleeBoxDeactivation());
-
-        Destroy(tempBox, 1);
     }
 
     IEnumerator meleeBoxDeactivation()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(meleeAnimDuration);
         meleeBox.SetActive(false);
+        meleeing = false;
     }
 
     public void TakeDamage(int howMuch)

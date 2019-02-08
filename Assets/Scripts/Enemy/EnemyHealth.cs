@@ -6,7 +6,8 @@ public class EnemyHealth : MonoBehaviour {
 
     public int StartHealth;
     public int CurHealth;
-    private bool isDamaged = false;
+    //Use this for invuln window later
+    //private bool isDamaged = false;
     private int timer;
 	// Use this for initialization
 	void Start () {
@@ -20,14 +21,13 @@ public class EnemyHealth : MonoBehaviour {
 
     public void TakeDamage(int damage)
     {
-        isDamaged = true; ;
+        //isDamaged = true; ;
         CurHealth -= damage;
         StartCoroutine(DamageColor());
         print("Ow! I got hit! Now at: " + CurHealth);
         
         if(CurHealth <= 0)
         {
-            this.GetComponent<Tracker>().Dead = true;
             print("I died!");
             Destroy(this.gameObject,1);
         }
@@ -39,6 +39,7 @@ public class EnemyHealth : MonoBehaviour {
         MeshRenderer myMesh = GetComponentInChildren<MeshRenderer>();
         Color storage = myMesh.material.color;
         myMesh.material.color = Color.red;
+        //Debug.Break();
         yield return new WaitForSecondsRealtime(1);
         myMesh.material.color = storage;
     }

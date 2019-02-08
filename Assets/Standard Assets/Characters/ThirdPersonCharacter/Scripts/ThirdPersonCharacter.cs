@@ -84,11 +84,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     hit = hits[i];
                     if (hit.collider.gameObject.tag == "Ground")
                     {
-                        //TODO: We will eventually want to make sure this point is on level with the character's eyeline. 
                         RaycastHit toLook = hit;
-                       // toLook.point.y = .8f;
                         //So he doesn't look down when we put it at his feet
-                        transform.LookAt(hit.point);
+                        transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
                         i = hits.Length;
                     }                   
                 }
@@ -98,9 +96,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 //If removing above, drop this outside if/else to preserve asset
                 ApplyExtraTurnRotation();
             }
-
-            //
-
 
             // control and velocity handling is different when grounded and airborne:
             if (m_IsGrounded)

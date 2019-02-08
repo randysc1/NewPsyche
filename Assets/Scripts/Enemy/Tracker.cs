@@ -6,15 +6,15 @@ using UnityEngine;
 public class Tracker : MonoBehaviour {
 
     private GameObject Player;
-    public int sightDistance = 5;
+    private readonly int sightDistance = 1000;
     public int MoveSpeed = 4;
     public float MinDist = 0;
     public GameObject meleeBox;
     public GameObject tempBox;
-    public bool Dead = false;
 
     private Transform playerTrans;
     private RaycastHit hit;
+    private bool attacking = false;
 
     // Use this for initialization
     void Start () {
@@ -25,30 +25,18 @@ public class Tracker : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Dead)
-        {
-            //If we die after swinging, disable the swing.
-            if(tempBox != null)
-            {
-                tempBox.SetActive(false);
-            }
-            return;
-        }
-        //Putting this in update may eventually be costly, we might want to use active/deactivate zones in the future.
-
         playerTrans = Player.transform;
-        CapsuleCollider Col = Player.GetComponent<CapsuleCollider>();
         transform.LookAt(playerTrans.position + new Vector3(0,1,0));
+
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance))
         {
-
             if (hit.collider.gameObject.tag != "Player")
             {
                 return;
             }
 
-            if (Vector3.Distance(transform.position, playerTrans.position) >= MinDist)
+            if (Vector3.Distance(transform.position, playerTrans.position) >= MinDist || attacking)
             {
 
                 transform.position += transform.forward * MoveSpeed * Time.deltaTime;
@@ -62,14 +50,24 @@ public class Tracker : MonoBehaviour {
 
     private void Attack()
     {
+        if (attacking)
+        {
+            return;
+        } else
+        {
+            attacking = true;
+        }
         tempBox = Instantiate(meleeBox, transform.position + (transform.forward), transform.rotation, this.transform);
         tempBox.SetActive(true);
         Physics.IgnoreCollision(tempBox.GetComponent<Collider>(), GetComponent<Collider>());
         Destroy(tempBox, 1);
+        StartCoroutine(meleeBoxDeactivation());
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+    IEnumerator meleeBoxDeactivation()
     {
-
+        yield return new WaitForSecondsRealtime(1f);
+        attacking = false;
     }
 }

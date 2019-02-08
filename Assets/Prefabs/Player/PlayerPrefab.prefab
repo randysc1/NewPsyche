@@ -756,7 +756,7 @@ Transform:
   m_LocalScale: {x: 2.2315419, y: 0.46001276, z: 2.2315412}
   m_Children: []
   m_Father: {fileID: 4977438584599940}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4079378007003212
 Transform:
@@ -835,7 +835,8 @@ Transform:
   m_LocalRotation: {x: 4.121703e-15, y: -1.4484941e-16, z: -6.938894e-18, w: 1}
   m_LocalPosition: {x: 0.37127456, y: 0.000000019050303, z: -0.00000010220398}
   m_LocalScale: {x: 0.9881483, y: 0.98814833, z: 0.98814833}
-  m_Children: []
+  m_Children:
+  - {fileID: 4813483593784564}
   m_Father: {fileID: 4212934019277818}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1231,7 +1232,7 @@ Transform:
   - {fileID: 4079378007003212}
   - {fileID: 4464544903063450}
   m_Father: {fileID: 4977438584599940}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4792136060803600
 Transform:
@@ -1267,13 +1268,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287591365166834}
-  m_LocalRotation: {x: -0, y: 0.70566136, z: -0, w: 0.70854926}
-  m_LocalPosition: {x: -0.011, y: 0.98798, z: -0.033}
-  m_LocalScale: {x: 0.24192517, y: 0.2525139, z: 1.112632}
+  m_LocalRotation: {x: -0.52444553, y: -0.40994212, z: -0.5244533, w: -0.53089845}
+  m_LocalPosition: {x: 0.613, y: -0.052, z: -0.06}
+  m_LocalScale: {x: 0.38186884, y: 0.21855097, z: 1.5970845}
   m_Children: []
-  m_Father: {fileID: 4977438584599940}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 89.76601, z: 0}
+  m_Father: {fileID: 4197177014003386}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 7.2880006, y: 83.412, z: 95.797005}
 --- !u!4 &4889459454474358
 Transform:
   m_ObjectHideFlags: 1
@@ -1301,7 +1302,6 @@ Transform:
   - {fileID: 4049688001133776}
   - {fileID: 4221804862562146}
   - {fileID: 4340369860574512}
-  - {fileID: 4813483593784564}
   - {fileID: 4058498922175552}
   - {fileID: 4768265939044702}
   m_Father: {fileID: 4258867082778132}
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   bullet: {fileID: 1554572209193852}
   meleeBox: {fileID: 1287591365166834}
   AOEPrefab: {fileID: 1477193715888428}
-  BulletDamage: 0
+  BulletDamage: 3
   ShotSpeed: 4
   PS: {fileID: 0}
 --- !u!114 &114415977703542868
@@ -1675,7 +1675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47bad7efa5f614994dd0bef8165a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraMoveSpeed: 10
+  CameraMoveSpeed: 20
   cameraFollowObj1: {fileID: 1972690740273674}
   cameraFollowObj2: {fileID: 0}
 --- !u!114 &114572112519221632
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_JumpPower: 6
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.3
+  m_MoveSpeedMultiplier: 0.1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
   FollowMouse: 1
