@@ -35,12 +35,16 @@ public class PhaseManager : MonoBehaviour
     private int numHits;
     private Vector3 curRotate;
 
+    private Animator m_Animator; 
+
+
 
 
 
     // Use this for initialization
     void Start()
     {
+        m_Animator = GetComponent<Animator>();
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
 
@@ -150,10 +154,18 @@ public class PhaseManager : MonoBehaviour
     private void meleeAttack()
     {
         //print("melee");
-        tempBox = Instantiate(meleeBox, transform.position + (transform.forward) + new Vector3(0,.8f,0), transform.rotation, this.transform);
-        tempBox.SetActive(true);
-        Physics.IgnoreCollision(tempBox.GetComponent<Collider>(), GetComponent<Collider>());
+        m_Animator.SetTrigger("Attack");
+        meleeBox.SetActive(true);
+        Physics.IgnoreCollision(meleeBox.GetComponent<Collider>(), GetComponent<Collider>());
+        StartCoroutine(meleeBoxDeactivation());
+
         Destroy(tempBox, 1);
+    }
+
+    IEnumerator meleeBoxDeactivation()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        meleeBox.SetActive(false);
     }
 
     public void TakeDamage(int howMuch)

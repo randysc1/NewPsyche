@@ -169,7 +169,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 
             m_Animator.SetFloat("xMovement", m_TurnAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetFloat("zMovement", m_ForwardAmount);
+			m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
 
 
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
