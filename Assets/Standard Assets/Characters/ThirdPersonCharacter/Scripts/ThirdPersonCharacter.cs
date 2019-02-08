@@ -64,7 +64,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             move = transform.InverseTransformDirection(move);
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
+			//m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
 
             //Added by Luke, turn to mouse. 
@@ -167,22 +167,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //at The Least we need to add a back, but optimally we need forward/left/right/back and the appropriate states.
             // update the animator parameters
 
-            if (NewMove)
-            {
-                m_Animator.SetFloat("Forward", animMove.z, 0.1f, Time.deltaTime);
-                m_Animator.SetFloat("Lateral", animMove.x, 0.1f, Time.deltaTime);
-            } else
-            {
-                m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 
-            }
-            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetBool("Crouch", m_Crouching);
-			m_Animator.SetBool("OnGround", m_IsGrounded);
-			if (!m_IsGrounded)
-			{
-				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
-			}
+            m_Animator.SetFloat("xMovement", m_TurnAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetFloat("zMovement", m_ForwardAmount);
+
 
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
 			// (This code is reliant on the specific run cycle offset in our animations,
@@ -193,7 +181,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
 			if (m_IsGrounded)
 			{
-				m_Animator.SetFloat("JumpLeg", jumpLeg);
+			//	m_Animator.SetFloat("JumpLeg", jumpLeg);
 			}
 
 			// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,

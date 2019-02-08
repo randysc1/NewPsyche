@@ -13,8 +13,12 @@ public class PhaseManager : MonoBehaviour
     public GameObject meleeBox;
     public GameObject AOEPrefab;
 
+    public int BulletDamage;
     public int ShotSpeed;
+
     public ParticleSystem PS;
+
+
     private GameObject HBar;
     private GameObject IBar;
 
@@ -112,17 +116,30 @@ public class PhaseManager : MonoBehaviour
 
     //grabbed from controller.cs, changed so instantiate starts at player pos with player rotation.
     //Ranged Attack, spawns bullet firing away from player, bullet collider should proc damage on enemies.
-    //TODO: Figure out how to pack bullets into a child folder, looks messy otherwise.
     private void rangedAttack()
     {
-        //print("Ranged");
-        //TODO: Add timer.
+        print("Ranged");
+        RaycastHit hit;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 20, true);
+
+        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), transform.TransformDirection(transform.forward), out hit))
+        {
+           // print("Hit : " + hit.transform.gameObject.tag);
+            if(hit.transform.gameObject.tag == "Enemy")
+            {
+           //     print("Hit");
+
+              //  hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+            }
+        }
+
+        //Old shot
         tempShot = Instantiate(bullet, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
         tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
         tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
-
         Destroy(tempShot, 5);
     }
 
