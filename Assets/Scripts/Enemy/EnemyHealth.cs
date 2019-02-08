@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour {
 
     public int StartHealth;
     public int CurHealth;
+    private bool isDamaged = false;
+    private int timer;
 	// Use this for initialization
 	void Start () {
         CurHealth = StartHealth;
@@ -18,6 +20,7 @@ public class EnemyHealth : MonoBehaviour {
 
     public void TakeDamage(int damage)
     {
+        isDamaged = true; ;
         CurHealth -= damage;
         StartCoroutine(DamageColor());
         print("Ow! I got hit! Now at: " + CurHealth);

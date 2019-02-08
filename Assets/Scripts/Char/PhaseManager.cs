@@ -33,6 +33,7 @@ public class PhaseManager : MonoBehaviour
     private GameObject tempShot;
     private Vector3 initialHBar;
     private int numHits;
+    private Vector3 curRotate;
 
 
 
@@ -47,7 +48,7 @@ public class PhaseManager : MonoBehaviour
         curHealth = 100;
         curIns = 100;
 
-
+        
         HBar = GameObject.Find("HBarSprite");
         IBar = GameObject.Find("IBarSprite");
 
@@ -82,7 +83,7 @@ public class PhaseManager : MonoBehaviour
         }
 
         //Attack button X
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             switch (phase)
             {
@@ -119,28 +120,29 @@ public class PhaseManager : MonoBehaviour
     private void rangedAttack()
     {
         print("Ranged");
-        RaycastHit hit;
+        curRotate = new Vector3(transform.forward.x, 0, transform.forward.z);
+        RaycastHit hit; 
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 20, true);
+        Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 100, true);
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), transform.TransformDirection(transform.forward), out hit))
+        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), curRotate, out hit))
         {
-           // print("Hit : " + hit.transform.gameObject.tag);
+            print("Hit : " + hit.transform.gameObject.tag);
             if(hit.transform.gameObject.tag == "Enemy")
             {
-           //     print("Hit");
+                print("Hit");
 
-              //  hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+                hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
             }
         }
 
         //Old shot
-        tempShot = Instantiate(bullet, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
-        tempShot.SetActive(true);
-        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
-        tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
-        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
-        Destroy(tempShot, 5);
+        //tempShot = Instantiate(bullet, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
+        //tempShot.SetActive(true);
+        //tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
+        //tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
+        //Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+        //Destroy(tempShot, 5);
     }
 
     //Also grabbed from controller.cs.

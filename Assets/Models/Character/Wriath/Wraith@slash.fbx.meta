@@ -119,7 +119,7 @@ ModelImporter:
       - path: QuickRigCharacter_HipsTranslation
         weight: 0
       - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips
-        weight: 0
+        weight: 1
       - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_LeftUpLeg
         weight: 0
       - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_LeftUpLeg/QuickRigCharacter_LeftLeg
