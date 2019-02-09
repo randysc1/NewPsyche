@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour {
 
     public int damage;
     public bool isProjectile = false;
+    public bool isEnemyWeapon = false;
     //Type?
 	// Use this for initialization
 	void Start () {
@@ -35,10 +36,13 @@ public class Weapon : MonoBehaviour {
             PM.TakeDamage(damage);
         } else
         {
-            print("Hit enemy!");
-            EnemyHealth Enemy = other.gameObject.GetComponent<EnemyHealth>();
+            if (!isEnemyWeapon)
+            {
+                print("Hit enemy!");
+                EnemyHealth Enemy = other.gameObject.GetComponent<EnemyHealth>();
 
-            Enemy.TakeDamage(damage);
+                Enemy.TakeDamage(damage);
+            }
         }
         if (isProjectile)
         {

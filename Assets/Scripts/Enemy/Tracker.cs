@@ -15,16 +15,22 @@ public class Tracker : MonoBehaviour {
     private Transform playerTrans;
     private RaycastHit hit;
     private bool attacking = false;
+    private EnemyHealth myHealth;
 
     // Use this for initialization
     void Start () {
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+        myHealth = this.transform.GetComponent<EnemyHealth>();
         Player = Players[0];
 	}
 
     // Update is called once per frame
     void Update()
     {
+        if (myHealth.Dead)
+        {
+            return;
+        }
         playerTrans = Player.transform;
         transform.LookAt(playerTrans.position + new Vector3(0,1,0));
 

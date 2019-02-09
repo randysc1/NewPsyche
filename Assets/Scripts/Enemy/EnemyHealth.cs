@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour {
     //Use this for invuln window later
     //private bool isDamaged = false;
     private int timer;
+    public bool Dead = false;
 	// Use this for initialization
 	void Start () {
         CurHealth = StartHealth;
@@ -28,6 +29,7 @@ public class EnemyHealth : MonoBehaviour {
         
         if(CurHealth <= 0)
         {
+            Dead = true;
             print("I died!");
             Destroy(this.gameObject,1);
         }

@@ -25,6 +25,8 @@ public class RangerTeleport : MonoBehaviour {
     public int delayToDestroyBullet = 5;
     public int ShotSpeed;
     private bool attacking = false;
+    private EnemyHealth myHealth;
+
 
     // Use this for initialization
     void Start()
@@ -35,14 +37,17 @@ public class RangerTeleport : MonoBehaviour {
         location1.transform.parent = null;
         location2 = transform.Find("Location2").gameObject;
         location2.transform.parent = null;
-
+        myHealth = this.transform.GetComponent<EnemyHealth>();
+        Player = Players[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Putting this in update may eventually be costly, we might want to use active/deactivate zones in the future.
-
+        if (myHealth.Dead)
+        {
+            return;
+        }
         playerTrans = Player.transform;
         transform.LookAt(playerTrans.position + new Vector3(0, 1, 0));
 

@@ -17,6 +17,8 @@ public class Ranger : MonoBehaviour {
     private Transform playerTrans;
     private RaycastHit hit;
     private GameObject tempShot = null;
+    private EnemyHealth myHealth;
+
 
     public GameObject Bullet;
     public int delayToDestroyBullet = 5;
@@ -27,14 +29,17 @@ public class Ranger : MonoBehaviour {
     void Start()
     {
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+        myHealth = this.transform.GetComponent<EnemyHealth>();
         Player = Players[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Putting this in update may eventually be costly, we might want to use active/deactivate zones in the future.
-
+        if (myHealth.Dead)
+        {
+            return;
+        }
         playerTrans = Player.transform;
         transform.LookAt(playerTrans.position + new Vector3(0, 1, 0));
 
