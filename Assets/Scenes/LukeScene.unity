@@ -901,6 +901,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 136281836596867792, guid: 4d442ebe2740672419e507a440a4d06c,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136281836596867792, guid: 4d442ebe2740672419e507a440a4d06c,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 136281836596867792, guid: 4d442ebe2740672419e507a440a4d06c,
+        type: 2}
+      propertyPath: m_Height
+      value: 1.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d442ebe2740672419e507a440a4d06c, type: 2}
   m_IsPrefabParent: 0
@@ -1477,17 +1492,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: ShotSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: Sniperbullet
-      value: 
-      objectReference: {fileID: 1676360969018978, guid: bfa14a509f1d3da4491846ed071c0cce,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0

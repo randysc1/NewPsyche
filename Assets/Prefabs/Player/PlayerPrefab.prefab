@@ -1645,11 +1645,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase: 0
-  bullet: {fileID: 1554572209193852}
+  curBullModel: {fileID: 0}
+  Sniperbullet: {fileID: 1676360969018978, guid: bfa14a509f1d3da4491846ed071c0cce,
+    type: 2}
   meleeBox: {fileID: 1287591365166834}
   AOEPrefab: {fileID: 1477193715888428}
   BulletDamage: 3
-  ShotSpeed: 4
+  ShotSpeed: 40
   PS: {fileID: 0}
 --- !u!114 &114415977703542868
 MonoBehaviour:
