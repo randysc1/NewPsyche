@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1843337743989062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.09, y: 1.31, z: 2.47}
+  m_LocalPosition: {x: 13.95463, y: 0.9200012, z: 15.100755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   MaxDist: 6
   meleeBox: {fileID: 0}
   Dead: 0
-  Bullet: {fileID: 1676360969018978, guid: bfa14a509f1d3da4491846ed071c0cce, type: 2}
+  Bullet: {fileID: 1135259138703104, guid: 298ebde56a4eede4292d3f740b74f13d, type: 2}
   delayToDestroyBullet: 2
   ShotSpeed: 6
 --- !u!136 &136416149898664186

@@ -1156,7 +1156,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 946905768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.88, y: 2.04, z: 16.6}
+  m_LocalPosition: {x: -5.88, y: 1.35, z: 16.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 179530295}
@@ -1477,6 +1477,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: ShotSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: Sniperbullet
+      value: 
+      objectReference: {fileID: 1676360969018978, guid: bfa14a509f1d3da4491846ed071c0cce,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0
@@ -1544,7 +1555,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4493369004085522, guid: 75bd3af861488154cb0aa97dfcd0f7cf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.04
+      value: 1.48
       objectReference: {fileID: 0}
     - target: {fileID: 4493369004085522, guid: 75bd3af861488154cb0aa97dfcd0f7cf, type: 2}
       propertyPath: m_LocalPosition.z

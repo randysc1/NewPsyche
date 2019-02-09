@@ -283,5 +283,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_Animator.applyRootMotion = false;
 			}
 		}
+
+
 	}
 }

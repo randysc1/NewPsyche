@@ -9,7 +9,8 @@ public class PhaseManager : MonoBehaviour
     //Eventually want to turn to private
     public int phase;
 
-    public GameObject bullet;
+    public GameObject curBullModel;
+    public GameObject Sniperbullet;
     public GameObject meleeBox;
     public GameObject AOEPrefab;
 
@@ -47,6 +48,9 @@ public class PhaseManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Change this if we want to start with different ammo
+        curBullModel = Sniperbullet;
+
         m_Animator = GetComponent<Animator>();
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
@@ -127,29 +131,30 @@ public class PhaseManager : MonoBehaviour
     private void rangedAttack()
     {
         print("Ranged");
-        curRotate = new Vector3(transform.forward.x, 0, transform.forward.z);
-        RaycastHit hit; 
-        Vector3 forward = transform.TransformDirection(curRotate) * 10;
-        Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 100, true);
 
-        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), curRotate, out hit))
-        {
-            print("Hit : " + hit.transform.gameObject.tag);
-            if(hit.transform.gameObject.tag == "Enemy")
-            {
-                print("Hit");
+        //Ray shot
+        //curRotate = new Vector3(transform.forward.x, 0, transform.forward.z);
+        //RaycastHit hit; 
+        //Vector3 forward = transform.TransformDirection(curRotate) * 10;
+        //Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 100, true);
 
-                hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
-            }
-        }
+        //if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), curRotate, out hit))
+        //{
+            //print("Hit : " + hit.transform.gameObject.tag);
+            //if(hit.transform.gameObject.tag == "Enemy")
+            //{
+                //print("Hit");
 
-        //Old shot
-        //tempShot = Instantiate(bullet, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
-        //tempShot.SetActive(true);
-        //tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
-        //tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
-        //Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
-        //Destroy(tempShot, 5);
+                //hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+            //}
+        //}
+
+        tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
+        tempShot.SetActive(true);
+        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
+        tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
+        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+        Destroy(tempShot, 5);
     }
 
     //Also grabbed from controller.cs.
@@ -201,5 +206,10 @@ public class PhaseManager : MonoBehaviour
         myMesh.material.color = Color.red;
         yield return new WaitForSecondsRealtime(1);
         myMesh.material.color = storage;
+    }
+
+    public void ChangeBulletType(string newType)
+    {
+
     }
 }
