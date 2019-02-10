@@ -8,6 +8,8 @@ public class PhaseManager : MonoBehaviour
 
     //Eventually want to turn to private
     public int phase;
+    public int phase1Threshold;
+    public int phase2Threshold;
 
     public GameObject curBullModel;
     public GameObject Sniperbullet;
@@ -35,6 +37,7 @@ public class PhaseManager : MonoBehaviour
     private Vector3 initialHBar;
     private int numHits;
     private Vector3 curRotate;
+    
 
     private Animator m_Animator;
     //When the melee animation changes, change this so the box only spawns for this long.
@@ -52,6 +55,8 @@ public class PhaseManager : MonoBehaviour
     RuntimeAnimatorController p2Controller;
     Avatar p2Avatar;
 
+    private GameObject curPhaseObj;
+
 
 
 
@@ -65,6 +70,7 @@ public class PhaseManager : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
+        
 
         anim = GetComponent<Animator>();
         player = GameObject.Find("/PlayerPrefab/Player");
@@ -76,6 +82,8 @@ public class PhaseManager : MonoBehaviour
         p2Anim = phase2.GetComponent<Animator>();
         p2Controller = p2Anim.runtimeAnimatorController;
         p2Avatar = p2Anim.avatar;
+
+        curPhaseObj = phase1;
 
         //Set starting full health.
         curHealth = 100f;
@@ -222,6 +230,31 @@ public class PhaseManager : MonoBehaviour
         //StartCoroutine(DamageColor());
         curHealth -= howMuch;
         curIns -= howMuch;
+
+        if(curIns > phase1Threshold)
+        {
+            phase = 1;
+            curPhaseObj.SetActive(false);
+            phase1.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
+            curPhaseObj = phase1;
+        } else if (curIns <= phase1Threshold && curIns > phase2Threshold)
+        {
+            curPhaseObj.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
+            phase = 2;
+            curPhaseObj = phase2;
+        } else if(curIns <= phase2Threshold)
+        {
+            curPhaseObj.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
+            phase = 3;
+        }
 
         RefreshHealthAndIns();
 
