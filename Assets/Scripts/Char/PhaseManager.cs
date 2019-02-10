@@ -41,6 +41,17 @@ public class PhaseManager : MonoBehaviour
     private float meleeAnimDuration = .633f;
     private bool meleeing = false;
 
+    GameObject player;
+    Animator anim;
+    GameObject phase1;
+    Animator p1Anim;
+    RuntimeAnimatorController p1Controller;
+    Avatar p1Avatar;
+    GameObject phase2;
+    Animator p2Anim;
+    RuntimeAnimatorController p2Controller;
+    Avatar p2Avatar;
+
 
 
 
@@ -54,6 +65,17 @@ public class PhaseManager : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
+
+        anim = GetComponent<Animator>();
+        player = GameObject.Find("/PlayerPrefab/Player");
+        phase1 = GameObject.Find("/PlayerPrefab/Player/Ethan");
+        p1Anim = phase1.GetComponent<Animator>();
+        p1Controller = p1Anim.runtimeAnimatorController;
+        p1Avatar = p1Anim.avatar;
+        phase2 = GameObject.Find("/PlayerPrefab/Player/Wraith");
+        p2Anim = phase2.GetComponent<Animator>();
+        p2Controller = p2Anim.runtimeAnimatorController;
+        p2Avatar = p2Anim.avatar;
 
         //Set starting full health.
         curHealth = 100;
@@ -78,17 +100,29 @@ public class PhaseManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             phase = 1;
+            phase1.SetActive(true);
+            phase2.SetActive(false);
+            anim.runtimeAnimatorController = p1Controller;
+            anim.avatar = p1Avatar;
             print("Changed to phase : " + phase);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             phase = 2;
+            phase1.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
             print("Changed to phase : " + phase);
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             phase = 3;
+            phase1.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
             print("Changed to phase : " + phase);
 
         }
