@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1519236297957908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.88, y: 2.04, z: -1.2}
+  m_LocalPosition: {x: -5.88, y: 1.48, z: 11.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4649956954838882}
@@ -161,7 +161,7 @@ MonoBehaviour:
   meleeBox: {fileID: 0}
   Dead: 0
   Bullet: {fileID: 1676360969018978, guid: bfa14a509f1d3da4491846ed071c0cce, type: 2}
-  delayToDestroyBullet: 2
+  delayToDestroyBullet: 10
   ShotSpeed: 6
 --- !u!114 &114985411410173178
 MonoBehaviour:
@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartHealth: 10
   CurHealth: 10
+  Dead: 0
 --- !u!136 &136036834020586874
 CapsuleCollider:
   m_ObjectHideFlags: 1

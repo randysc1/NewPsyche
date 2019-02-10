@@ -23,10 +23,10 @@ public class PhaseManager : MonoBehaviour
     private GameObject HBar;
     private GameObject IBar;
 
-    private int maxHealth = 100;
-    private int curHealth;
-    private int maxIns = 100;
-    private int curIns;
+    private float maxHealth = 100f;
+    private float curHealth;
+    private float maxIns = 100f;
+    private float curIns;
 
 
     private GameObject AOEEffect;
@@ -35,11 +35,14 @@ public class PhaseManager : MonoBehaviour
     private Vector3 initialHBar;
     private int numHits;
     private Vector3 curRotate;
+    private float curRegen;
 
     private Animator m_Animator;
     //When the melee animation changes, change this so the box only spawns for this long.
     private float meleeAnimDuration = .633f;
     private bool meleeing = false;
+
+    public float regenDelay;
 
 
 
@@ -56,13 +59,12 @@ public class PhaseManager : MonoBehaviour
         phase = 1;
 
         //Set starting full health.
-        curHealth = 100;
-        curIns = 100;
+        curHealth = 100f;
+        curIns = 100f;
 
         
-        HBar = GameObject.Find("HBarSprite");
-        IBar = GameObject.Find("IBarSprite");
-
+        HBar = GameObject.Find("HealthBar");
+        IBar = GameObject.Find("InsanityBar");
 
         if (PS != null)
         {
@@ -182,11 +184,12 @@ public class PhaseManager : MonoBehaviour
 
     public void TakeDamage(int howMuch)
     {
-        //print("Oh heck, got hit!");
         //Figure out how to find the mesh renderer first before doing DamageColor
         //StartCoroutine(DamageColor());
         curHealth -= howMuch;
         curIns -= howMuch;
+
+        curRegen = regenDelay;
 
         RefreshHealthAndIns();       
         
@@ -194,8 +197,8 @@ public class PhaseManager : MonoBehaviour
 
     private void RefreshHealthAndIns()
     {
-        HBar.transform.localScale = new Vector3((curHealth / maxHealth) * 40, 5, 1);
-        IBar.transform.localScale = new Vector3((curIns / maxIns) * 40, 5, 1);
+        HBar.transform.localScale = new Vector3((curHealth / maxHealth), IBar.transform.localScale.y, 1);
+        IBar.transform.localScale = new Vector3((curIns / maxIns), IBar.transform.localScale.y, 1);
     }
 
     //Wait a second, change back.
