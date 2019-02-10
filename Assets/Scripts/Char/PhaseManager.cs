@@ -35,14 +35,22 @@ public class PhaseManager : MonoBehaviour
     private Vector3 initialHBar;
     private int numHits;
     private Vector3 curRotate;
-    private float curRegen;
 
     private Animator m_Animator;
     //When the melee animation changes, change this so the box only spawns for this long.
     private float meleeAnimDuration = .633f;
     private bool meleeing = false;
 
-    public float regenDelay;
+    GameObject player;
+    Animator anim;
+    GameObject phase1;
+    Animator p1Anim;
+    RuntimeAnimatorController p1Controller;
+    Avatar p1Avatar;
+    GameObject phase2;
+    Animator p2Anim;
+    RuntimeAnimatorController p2Controller;
+    Avatar p2Avatar;
 
 
 
@@ -58,13 +66,26 @@ public class PhaseManager : MonoBehaviour
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
 
+        anim = GetComponent<Animator>();
+        player = GameObject.Find("/PlayerPrefab/Player");
+        phase1 = GameObject.Find("/PlayerPrefab/Player/Ethan");
+        p1Anim = phase1.GetComponent<Animator>();
+        p1Controller = p1Anim.runtimeAnimatorController;
+        p1Avatar = p1Anim.avatar;
+        phase2 = GameObject.Find("/PlayerPrefab/Player/Wraith");
+        p2Anim = phase2.GetComponent<Animator>();
+        p2Controller = p2Anim.runtimeAnimatorController;
+        p2Avatar = p2Anim.avatar;
+
         //Set starting full health.
         curHealth = 100f;
         curIns = 100f;
 
-        
+
         HBar = GameObject.Find("HealthBar");
         IBar = GameObject.Find("InsanityBar");
+
+
 
         if (PS != null)
         {
@@ -80,17 +101,29 @@ public class PhaseManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             phase = 1;
+            phase1.SetActive(true);
+            phase2.SetActive(false);
+            anim.runtimeAnimatorController = p1Controller;
+            anim.avatar = p1Avatar;
             print("Changed to phase : " + phase);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             phase = 2;
+            phase1.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
             print("Changed to phase : " + phase);
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             phase = 3;
+            phase1.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
             print("Changed to phase : " + phase);
 
         }
@@ -112,7 +145,7 @@ public class PhaseManager : MonoBehaviour
                 default:
                     print("Phase is invalid,");
                     break;
-                
+
             }
         }
     }
@@ -121,7 +154,7 @@ public class PhaseManager : MonoBehaviour
     private void AOEAttack()
     {
         //print("Aoe");
-        AOEEffect = Instantiate(AOEPrefab, this.transform.position + new Vector3(0,.8f,0), transform.rotation, this.transform);
+        AOEEffect = Instantiate(AOEPrefab, this.transform.position + new Vector3(0, .8f, 0), transform.rotation, this.transform);
         AOEEffect.SetActive(true);
         Physics.IgnoreCollision(AOEEffect.GetComponent<Collider>(), GetComponent<Collider>());
 
@@ -142,13 +175,13 @@ public class PhaseManager : MonoBehaviour
 
         //if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), curRotate, out hit))
         //{
-            //print("Hit : " + hit.transform.gameObject.tag);
-            //if(hit.transform.gameObject.tag == "Enemy")
-            //{
-                //print("Hit");
+        //print("Hit : " + hit.transform.gameObject.tag);
+        //if(hit.transform.gameObject.tag == "Enemy")
+        //{
+        //print("Hit");
 
-                //hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
-            //}
+        //hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+        //}
         //}
 
         tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
@@ -184,15 +217,14 @@ public class PhaseManager : MonoBehaviour
 
     public void TakeDamage(int howMuch)
     {
+        //print("Oh heck, got hit!");
         //Figure out how to find the mesh renderer first before doing DamageColor
         //StartCoroutine(DamageColor());
         curHealth -= howMuch;
         curIns -= howMuch;
 
-        curRegen = regenDelay;
+        RefreshHealthAndIns();
 
-        RefreshHealthAndIns();       
-        
     }
 
     private void RefreshHealthAndIns()
