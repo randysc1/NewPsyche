@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114390281112327680}
   - component: {fileID: 114547445395530384}
   - component: {fileID: 136281836596867792}
+  - component: {fileID: 54963056304307268}
   m_Layer: 0
   m_Name: TrackerEnemy
   m_TagString: Enemy
@@ -115,6 +116,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1488693804605288}
   m_Mesh: {fileID: 4300000, guid: f899516429265d74497dc560dd494972, type: 3}
+--- !u!54 &54963056304307268
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941825085857458}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &114390281112327680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartHealth: 10
   CurHealth: 10
+  Dead: 0
 --- !u!136 &136281836596867792
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -152,7 +169,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
+  m_Radius: 0.4
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
