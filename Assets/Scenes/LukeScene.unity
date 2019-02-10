@@ -1331,31 +1331,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: phase1Threshold
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: phase2Threshold
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: phase3Threshold
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: RegenDelay
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: RegenAmountPerSecond
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0
