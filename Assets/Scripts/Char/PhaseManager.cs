@@ -8,8 +8,10 @@ public class PhaseManager : MonoBehaviour
 
     //Eventually want to turn to private
     public int phase;
-    public int phase1Threshold;
+    //When Under phase2Threshold we go to phase2
     public int phase2Threshold;
+    //When Under phase3Threshold we go to phase 3
+    public int phase3Threshold;
 
     public GameObject curBullModel;
     public GameObject Sniperbullet;
@@ -29,6 +31,9 @@ public class PhaseManager : MonoBehaviour
     private float curHealth;
     private float maxIns = 100f;
     private float curIns;
+    public float RegenDelay;
+    public int RegenAmountPerSecond;
+    private float curDelay;
 
 
     private GameObject AOEEffect;
@@ -93,18 +98,24 @@ public class PhaseManager : MonoBehaviour
         HBar = GameObject.Find("HealthBar");
         IBar = GameObject.Find("InsanityBar");
 
-
-
-        if (PS != null)
-        {
-            PS.Play();
-            PS.Pause();
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //If curDelay is greater than zero, decrement the time.
+        if (curDelay > 0)
+        {
+            curDelay -= Time.deltaTime;
+
+            //If the curDelay is less than 0 and the health isn't full, regen health.
+        } else if (curHealth < 100) 
+        {
+            //We relate the amount to the time.deltaTime so that if update works faster or slower we regen the same amount.
+            curHealth += (RegenAmountPerSecond * Time.deltaTime);
+            RefreshHealthAndIns();
+        }
+
         //Dev mode change phases
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -136,7 +147,7 @@ public class PhaseManager : MonoBehaviour
 
         }
 
-        //Attack button X
+        //Attack button Mouse
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             switch (phase)
@@ -228,18 +239,32 @@ public class PhaseManager : MonoBehaviour
         //print("Oh heck, got hit!");
         //Figure out how to find the mesh renderer first before doing DamageColor
         //StartCoroutine(DamageColor());
+        //Change health/Ins values
         curHealth -= howMuch;
         curIns -= howMuch;
+        curDelay = RegenDelay;
 
-        if(curIns > phase1Threshold)
+
+        //Handle Death (Nothing here yet)
+        if (curHealth <= 0)
         {
-            phase = 1;
-            curPhaseObj.SetActive(false);
-            phase1.SetActive(true);
-            anim.runtimeAnimatorController = p2Controller;
-            anim.avatar = p2Avatar;
-            curPhaseObj = phase1;
-        } else if (curIns <= phase1Threshold && curIns > phase2Threshold)
+            //You Are Dead. Sthap.
+            Debug.Break();
+        }
+
+
+        //If your insanity is above threshold 2, should nothing happen?
+        if(curIns > phase2Threshold)
+        {
+            //phase = 1;
+           // curPhaseObj.SetActive(false);
+           // phase1.SetActive(true);
+            //anim.runtimeAnimatorController = p2Controller;
+            //anim.avatar = p2Avatar;
+            //curPhaseObj = phase1;
+
+        //If damaged under the threshold, enter phase 2
+        } else if (curIns <= phase2Threshold && curIns > phase3Threshold && phase!=2)
         {
             curPhaseObj.SetActive(false);
             phase2.SetActive(true);
@@ -247,7 +272,7 @@ public class PhaseManager : MonoBehaviour
             anim.avatar = p2Avatar;
             phase = 2;
             curPhaseObj = phase2;
-        } else if(curIns <= phase2Threshold)
+        } else if(curIns <= phase3Threshold && phase!=3)
         {
             curPhaseObj.SetActive(false);
             phase2.SetActive(true);
@@ -276,6 +301,8 @@ public class PhaseManager : MonoBehaviour
         myMesh.material.color = storage;
     }
 
+
+    //This will eventually hold a switch case that changes details about the shot we fire, such as the prefab and speed
     public void ChangeBulletType(string newType)
     {
 
