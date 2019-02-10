@@ -202,7 +202,7 @@ public class PhaseManager : MonoBehaviour
             return;
         }
         meleeing = true;
-        m_Animator.SetTrigger("Attack");
+        anim.SetTrigger("Attack");
         meleeBox.SetActive(true);
         Physics.IgnoreCollision(meleeBox.GetComponent<Collider>(), GetComponent<Collider>());
         StartCoroutine(meleeBoxDeactivation());
