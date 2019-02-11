@@ -19,7 +19,9 @@ public class PhaseManager : MonoBehaviour
     public GameObject AOEPrefab;
 
     public int BulletDamage;
-    public int ShotSpeed;
+    public int CurShotSpeed;
+    public int p1ShotSpeed;
+    public int p2ShotSpeed;
 
     public ParticleSystem PS;
 
@@ -71,6 +73,7 @@ public class PhaseManager : MonoBehaviour
     {
         //Change this if we want to start with different ammo
         curBullModel = Sniperbullet;
+        CurShotSpeed = p1ShotSpeed;
 
         m_Animator = GetComponent<Animator>();
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
@@ -186,26 +189,9 @@ public class PhaseManager : MonoBehaviour
     {
         print("Ranged");
 
-        //Ray shot
-        //curRotate = new Vector3(transform.forward.x, 0, transform.forward.z);
-        //RaycastHit hit; 
-        //Vector3 forward = transform.TransformDirection(curRotate) * 10;
-        //Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), forward, Color.red, 100, true);
-
-        //if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), curRotate, out hit))
-        //{
-        //print("Hit : " + hit.transform.gameObject.tag);
-        //if(hit.transform.gameObject.tag == "Enemy")
-        //{
-        //print("Hit");
-
-        //hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
-        //}
-        //}
-
         tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
-        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * ShotSpeed;
+        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
         tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
         Destroy(tempShot, 5);
@@ -256,29 +242,14 @@ public class PhaseManager : MonoBehaviour
         //If your insanity is above threshold 2, should nothing happen?
         if(curIns > phase2Threshold)
         {
-            //phase = 1;
-           // curPhaseObj.SetActive(false);
-           // phase1.SetActive(true);
-            //anim.runtimeAnimatorController = p2Controller;
-            //anim.avatar = p2Avatar;
-            //curPhaseObj = phase1;
-
+            
         //If damaged under the threshold, enter phase 2
         } else if (curIns <= phase2Threshold && curIns > phase3Threshold && phase!=2)
         {
-            curPhaseObj.SetActive(false);
-            phase2.SetActive(true);
-            anim.runtimeAnimatorController = p2Controller;
-            anim.avatar = p2Avatar;
-            phase = 2;
-            curPhaseObj = phase2;
+            ChangeToPhase(2);
         } else if(curIns <= phase3Threshold && phase!=3)
         {
-            curPhaseObj.SetActive(false);
-            phase2.SetActive(true);
-            anim.runtimeAnimatorController = p2Controller;
-            anim.avatar = p2Avatar;
-            phase = 3;
+            ChangeToPhase(3);
         }
 
         RefreshHealthAndIns();
@@ -289,6 +260,39 @@ public class PhaseManager : MonoBehaviour
     {
         HBar.transform.localScale = new Vector3((curHealth / maxHealth), IBar.transform.localScale.y, 1);
         IBar.transform.localScale = new Vector3((curIns / maxIns), IBar.transform.localScale.y, 1);
+    }
+
+    private void ChangeToPhase(int phase)
+    {
+        curPhaseObj.SetActive(false);
+        if (phase == 1)
+        {
+            phase1.SetActive(true);
+            anim.runtimeAnimatorController = p1Controller;
+            anim.avatar = p1Avatar;
+            phase = 1;
+            CurShotSpeed = p1ShotSpeed;
+
+            curPhaseObj = phase1;
+        }
+        else if (phase == 2)
+        {
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
+            phase = 2;
+            CurShotSpeed = p2ShotSpeed;
+            curPhaseObj = phase2;
+        }
+        else if (phase == 3)
+        {
+            curPhaseObj.SetActive(false);
+            phase2.SetActive(true);
+            anim.runtimeAnimatorController = p2Controller;
+            anim.avatar = p2Avatar;
+            CurShotSpeed = p1ShotSpeed;
+            phase = 3;
+        }
     }
 
     //Wait a second, change back.
