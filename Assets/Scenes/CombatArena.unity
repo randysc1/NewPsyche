@@ -977,35 +977,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4492565939405692, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 7.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4492565939405692, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -6.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: Sniperbullet
-      value: 
-      objectReference: {fileID: 1676360969018978, guid: bfa14a509f1d3da4491846ed071c0cce,
-        type: 2}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: ShotSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: p1ShotSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338964506100822, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: p2ShotSpeed
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0
