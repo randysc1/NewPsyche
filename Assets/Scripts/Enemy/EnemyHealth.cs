@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public int StartHealth;
-    public int CurHealth;
+    public float StartHealth;
+    public float CurHealth;
     //Use this for invuln window later
     //private bool isDamaged = false;
     private int timer;
     public bool Dead = false;
+    private int justDamaged = 0;
+    private Color storageColor;
+
 	// Use this for initialization
 	void Start () {
         CurHealth = StartHealth;
+        storageColor = GetComponentInChildren<MeshRenderer>().material.color;
 	}
 	
 	// Update is called once per frame
@@ -20,9 +24,8 @@ public class EnemyHealth : MonoBehaviour {
 		
 	}
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        //isDamaged = true; ;
         CurHealth -= damage;
         StartCoroutine(DamageColor());
         print("Ow! I got hit! Now at: " + CurHealth);
@@ -39,10 +42,18 @@ public class EnemyHealth : MonoBehaviour {
     IEnumerator DamageColor()
     {
         MeshRenderer myMesh = GetComponentInChildren<MeshRenderer>();
-        Color storage = myMesh.material.color;
         myMesh.material.color = Color.red;
+        justDamaged++;
+
         //Debug.Break();
         yield return new WaitForSecondsRealtime(1);
-        myMesh.material.color = storage;
+
+        justDamaged--;
+
+        if(justDamaged == 0)
+        {
+            myMesh.material.color = storageColor;
+        }
+
     }
 }

@@ -18,10 +18,15 @@ public class PhaseManager : MonoBehaviour
     public GameObject meleeBox;
     public GameObject AOEPrefab;
 
-    public int BulletDamage;
+    public float BulletDamage;
+    public bool shotgunEquipped = false;
+    public int numPellets = 5;
     public int CurShotSpeed;
     public int p1ShotSpeed;
     public int p2ShotSpeed;
+    public int shotgunSpeed;
+    public float shotgunDelay;
+    private float shotgunCD;
 
     public ParticleSystem PS;
 
@@ -188,14 +193,55 @@ public class PhaseManager : MonoBehaviour
     private void rangedAttack()
     {
         print("Ranged");
+        if (shotgunEquipped)
+        {
+            shotgun();
+            return;
+        } else
+        {
+            sniper();
+        }
 
+    }
+
+    //Spawns one bullet facing towards parent's forward, sets velocity to curShotSpeed
+    private void sniper()
+    {
         tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
         tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
-        tempShot.transform.rotation = new Quaternion(tempShot.transform.rotation.x, 0, tempShot.transform.rotation.z, tempShot.transform.rotation.w);
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
-        Destroy(tempShot, 5);
     }
+
+
+    //Spawn numPellets bullets, each firing forward after being turned randrange 10 degrees left or right.
+    private void shotgun()
+    {
+        
+        if (shotgunCD > 0)
+        {
+            shotgunDelay -= Time.deltaTime;
+            print("Shotgun on CD");
+            return;
+        } else
+        {
+            shotgunCD = shotgunDelay;
+        }
+
+        for (int i = 0; i <= numPellets; i++)
+        {
+            tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
+            tempShot.SetActive(true);
+            Weapon Weap = tempShot.GetComponent<Weapon>();
+            Weap.damage = BulletDamage / 2;
+            tempShot.transform.Rotate(0, UnityEngine.Random.Range(-10, 10), 0);
+
+            tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * shotgunSpeed;
+            Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());            
+        }
+        return;
+    }
+
 
     //Also grabbed from controller.cs.
     //Melee Attack, currently spawns 'sword' box in front of player, 
@@ -220,7 +266,7 @@ public class PhaseManager : MonoBehaviour
         meleeing = false;
     }
 
-    public void TakeDamage(int howMuch)
+    public void TakeDamage(float howMuch)
     {
         //print("Oh heck, got hit!");
         //Figure out how to find the mesh renderer first before doing DamageColor

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
-    public int damage;
+    public float damage;
     public bool isProjectile = false;
     public bool isEnemyWeapon = false;
     //Type?
