@@ -16,9 +16,12 @@ public class Tracker : MonoBehaviour {
     private RaycastHit hit;
     private bool attacking = false;
     private EnemyHealth myHealth;
+    private LayerMask sightMask;
 
     // Use this for initialization
     void Start () {
+        string[] layerString = new string[] { "Player", "Ground" };
+        sightMask = LayerMask.GetMask(layerString);
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         myHealth = this.transform.GetComponent<EnemyHealth>();
         Player = Players[0];
@@ -35,7 +38,7 @@ public class Tracker : MonoBehaviour {
         transform.LookAt(playerTrans.position + new Vector3(0,1,0));
 
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance, sightMask))
         {
             if (hit.collider.gameObject.tag != "Player")
             {
