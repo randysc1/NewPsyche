@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour {
 
     public float damage;
-    public bool isProjectile = false;
+    public bool shouldDissapate = false;
     public bool isEnemyWeapon = false;
     //Type?
 	// Use this for initialization
@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour {
                 Enemy.TakeDamage(damage);
             }
         }
-        if (isProjectile)
+        if (shouldDissapate)
         {
             Destroy(this.gameObject,.0f);
         }

@@ -9,6 +9,7 @@ public class AttackManager : MonoBehaviour {
     public GameObject Sniperbullet;
     public GameObject meleeBox;
     public GameObject AOEPrefab;
+    public GameObject MinePrefab;
 
     public float BulletDamage;
     public bool shotgunEquipped = false;
@@ -52,7 +53,6 @@ public class AttackManager : MonoBehaviour {
         //Change this if we want to start with different ammo
         curBullModel = Sniperbullet;
         CurShotSpeed = p1ShotSpeed;
-
     }
 
     // Update is called once per frame
@@ -84,10 +84,26 @@ public class AttackManager : MonoBehaviour {
 
             }
         }
+
+
+        //Test area for other attacks.
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            mine();
+        }
+    }
+
+    private void mine()
+    {
+        shotCD = sniperDelay;
+        tempShot = Instantiate(MinePrefab, this.transform.position, transform.rotation, null);
+        tempShot.SetActive(true);
+        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+
     }
 
     //AOE attack, spawns aoe sphere at feet, sphere collider should proc damage on enemies.
-    public void AOEAttack()
+    private void AOEAttack()
     {
         //print("Aoe");
         AOEEffect = Instantiate(AOEPrefab, this.transform.position + new Vector3(0, .8f, 0), transform.rotation, this.transform);
@@ -99,7 +115,7 @@ public class AttackManager : MonoBehaviour {
 
     //grabbed from controller.cs, changed so instantiate starts at player pos with player rotation.
     //Ranged Attack, spawns bullet firing away from player, bullet collider should proc damage on enemies.
-    public void rangedAttack()
+    private void rangedAttack()
     {
         //print("Ranged");
         if (shotgunEquipped)
@@ -146,7 +162,7 @@ public class AttackManager : MonoBehaviour {
 
     //Also grabbed from controller.cs.
     //Melee Attack, currently spawns 'sword' box in front of player, 
-    public void meleeAttack()
+    private void meleeAttack()
     {
         //print("melee");
         if (meleeing)
@@ -176,7 +192,7 @@ public class AttackManager : MonoBehaviour {
     //This will eventually hold a switch case that changes details about the shot we fire, such as the prefab and speed
     public void ChangeBulletType(string newType)
     {
-
+        print("Unimplemented change bullet type in AttackManager.cs");
     }
 
     
