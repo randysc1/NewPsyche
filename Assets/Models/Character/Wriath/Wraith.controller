@@ -42,7 +42,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Combat
     m_StateMachine: {fileID: 1107006112393369660}
-    m_Mask: {fileID: 0}
+    m_Mask: {fileID: 31900000, guid: caf6b29b20d98cb47b1ae81a28a0b4c0, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
