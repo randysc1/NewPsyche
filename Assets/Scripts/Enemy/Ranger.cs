@@ -24,10 +24,13 @@ public class Ranger : MonoBehaviour {
     public int delayToDestroyBullet = 5;
     public int ShotSpeed;
     private bool attacking = false;
+    private LayerMask sightMask;
 
     // Use this for initialization
     void Start()
     {
+        string[] layerString = new string[] { "Player", "Ground" };
+        sightMask = LayerMask.GetMask(layerString);
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         myHealth = this.transform.GetComponent<EnemyHealth>();
         Player = Players[0];
@@ -45,7 +48,7 @@ public class Ranger : MonoBehaviour {
 
         Vector3 NextDirection = new Vector3(transform.forward.x, 0, transform.forward.z);
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance, sightMask))
         {
             if (hit.collider.gameObject.tag != "Player")
             {

@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  isProjectile: 1
+  shouldDissapate: 1
+  isEnemyWeapon: 0
 --- !u!135 &135041382112641990
 SphereCollider:
   m_ObjectHideFlags: 1

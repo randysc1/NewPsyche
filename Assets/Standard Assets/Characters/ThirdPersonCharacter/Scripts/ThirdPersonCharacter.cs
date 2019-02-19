@@ -67,8 +67,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			//m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
 
-            //Added by Luke, turn to mouse. 
-
             //Toggle-able only to show to team
             if (FollowMouse)
             {
