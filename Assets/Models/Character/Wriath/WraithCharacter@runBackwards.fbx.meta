@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e37868724152f454ca6e0a42037c9de3
+guid: bf282d79ca96af647a02c83877617c38
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -59,7 +59,7 @@ ModelImporter:
     400050: QuickRigCharacter_Spine3
     400052: QuickRigCharacter_Spine4
     400054: //RootNode
-    7400000: slash
+    7400000: runBackwards
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -77,16 +77,16 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
       rotation in copied configuration does not match rotation in animation file:\n\t'QuickRigCharacter_Spine'
-      : rotation error = 0.341470 deg\n\t'QuickRigCharacter_Spine4' : rotation error
-      = 4.055641 deg\n\t'QuickRigCharacter_Neck1' : rotation error = 10.101804 deg\n\t'QuickRigCharacter_Neck2'
-      : rotation error = 10.173756 deg\n"
+      : rotation error = 1.274368 deg\n\t'QuickRigCharacter_Spine4' : rotation error
+      = 0.738748 deg\n\t'QuickRigCharacter_Neck1' : rotation error = 6.566768 deg\n\t'QuickRigCharacter_Neck2'
+      : rotation error = 5.962817 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'QuickRigCharacter_RightLeg' has translation
-      animation that will be discarded.\n\t'QuickRigCharacter_Spine' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'QuickRigCharacter_Spine4'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'QuickRigCharacter_Neck1'
+      improve retargeting quality.\n\t'QuickRigCharacter_Spine' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'QuickRigCharacter_Spine4'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'QuickRigCharacter_RightForeArm'
+      has translation animation that will be discarded.\n\t'QuickRigCharacter_Neck1'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'QuickRigCharacter_Neck2'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
@@ -102,17 +102,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: slash
+      name: runBackwards
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 39
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -125,64 +125,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_LeftUpLeg
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_LeftUpLeg/QuickRigCharacter_LeftLeg
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_LeftUpLeg/QuickRigCharacter_LeftLeg/QuickRigCharacter_LeftFoot
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_LeftUpLeg/QuickRigCharacter_LeftLeg/QuickRigCharacter_LeftFoot/QuickRigCharacter_LeftToeBase
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_RightUpLeg
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_RightUpLeg/QuickRigCharacter_RightLeg
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_RightUpLeg/QuickRigCharacter_RightLeg/QuickRigCharacter_RightFoot
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_RightUpLeg/QuickRigCharacter_RightLeg/QuickRigCharacter_RightFoot/QuickRigCharacter_RightToeBase
-        weight: 0
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_LeftShoulder
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_LeftShoulder/QuickRigCharacter_LeftArm
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_LeftShoulder/QuickRigCharacter_LeftArm/QuickRigCharacter_LeftForeArm
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_LeftShoulder/QuickRigCharacter_LeftArm/QuickRigCharacter_LeftForeArm/QuickRigCharacter_LeftHand
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_Neck
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_Neck/QuickRigCharacter_Neck1
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_Neck/QuickRigCharacter_Neck1/QuickRigCharacter_Neck2
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_Neck/QuickRigCharacter_Neck1/QuickRigCharacter_Neck2/QuickRigCharacter_Head
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_RightShoulder
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_RightShoulder/QuickRigCharacter_RightArm
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_RightShoulder/QuickRigCharacter_RightArm/QuickRigCharacter_RightForeArm
-        weight: 1
-      - path: QuickRigCharacter_HipsTranslation/QuickRigCharacter_Hips/QuickRigCharacter_Spine/QuickRigCharacter_Spine1/QuickRigCharacter_Spine2/QuickRigCharacter_Spine3/QuickRigCharacter_Spine4/QuickRigCharacter_RightShoulder/QuickRigCharacter_RightArm/QuickRigCharacter_RightForeArm/QuickRigCharacter_RightHand
-        weight: 1
-      maskType: 0
+      transformMask: []
+      maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 1
