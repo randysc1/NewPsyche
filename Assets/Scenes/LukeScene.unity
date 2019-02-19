@@ -404,22 +404,6 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: TrapPrefab
-      value: 
-      objectReference: {fileID: 1620201607766984, guid: 8b4035aeef9573841acdb255625926f1,
-        type: 2}
-    - target: {fileID: 54627464146628718, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 54627464146628718, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: m_Drag
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0

@@ -157,7 +157,6 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
         m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
         m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
-        print("movex : " + m_LateralAmount);
 
 
         // calculate which leg is behind, so as to leave that leg trailing in the jump animation
