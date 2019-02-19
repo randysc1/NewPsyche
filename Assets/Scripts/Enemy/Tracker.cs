@@ -30,12 +30,14 @@ public class Tracker : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (myHealth.Dead)
+        if (myHealth.Dead || myHealth.Stunned)
         {
             return;
         }
         playerTrans = Player.transform;
-        transform.LookAt(playerTrans.position + new Vector3(0,1,0));
+        //transform.LookAt(playerTrans.position + new Vector3(0,1,0));
+        transform.LookAt(new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z));
+
 
 
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance, sightMask))
@@ -49,7 +51,6 @@ public class Tracker : MonoBehaviour {
             {
 
                 transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-
             } else
             {
                 Attack();
@@ -68,6 +69,7 @@ public class Tracker : MonoBehaviour {
         }
         tempBox = Instantiate(meleeBox, transform.position + (transform.forward), transform.rotation, this.transform);
         tempBox.SetActive(true);
+        tempBox.GetComponent<Weapon>().isEnemyWeapon = true;
         Physics.IgnoreCollision(tempBox.GetComponent<Collider>(), GetComponent<Collider>());
         Destroy(tempBox, 1);
         StartCoroutine(meleeBoxDeactivation());

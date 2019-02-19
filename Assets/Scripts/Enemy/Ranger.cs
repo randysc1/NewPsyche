@@ -11,13 +11,11 @@ public class Ranger : MonoBehaviour {
     public float MinDist = 2;
     public float MaxDist = 0;
 
-    public GameObject meleeBox;
-    public bool Dead = false;
-
     private Transform playerTrans;
     private RaycastHit hit;
     private GameObject tempShot = null;
     private EnemyHealth myHealth;
+
 
 
     public GameObject Bullet;
@@ -39,7 +37,7 @@ public class Ranger : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (myHealth.Dead)
+        if (myHealth.Dead || myHealth.Stunned)
         {
             return;
         }

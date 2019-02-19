@@ -10,7 +10,8 @@ public class EnemyHealth : MonoBehaviour {
     //private bool isDamaged = false;
     private int timer;
     public bool Dead = false;
-    private int justDamaged = 0;
+    public bool Stunned;
+    private int colorChanged = 0;
     private Color storageColor;
 
 	// Use this for initialization
@@ -24,36 +25,61 @@ public class EnemyHealth : MonoBehaviour {
 		
 	}
 
+
+    public void ExplosionHit(float damage)
+    {
+
+    }
+
+    public void SetStunned(float duration)
+    {
+        Stunned = true;
+        StartCoroutine(RemoveStunned(duration));
+    }
+
+    IEnumerator RemoveStunned(float duration)
+    {
+        MeshRenderer myMesh = GetComponentInChildren<MeshRenderer>();
+        myMesh.material.color = Color.yellow;
+        colorChanged++;
+
+        yield return new WaitForSecondsRealtime(duration);
+        Stunned = false;
+        colorChanged--;
+
+        if (colorChanged == 0)
+        {
+            myMesh.material.color = storageColor;
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         CurHealth -= damage;
         StartCoroutine(DamageColor());
-        print("Ow! I got hit! Now at: " + CurHealth);
         
         if(CurHealth <= 0)
         {
             Dead = true;
-            print("I died!");
             Destroy(this.gameObject,1);
         }
     }
 
     //Wait a second, change back.
-    IEnumerator DamageColor()
+    private IEnumerator DamageColor()
     {
         MeshRenderer myMesh = GetComponentInChildren<MeshRenderer>();
         myMesh.material.color = Color.red;
-        justDamaged++;
+        colorChanged++;
 
         //Debug.Break();
         yield return new WaitForSecondsRealtime(1);
 
-        justDamaged--;
+        colorChanged--;
 
-        if(justDamaged == 0)
+        if(colorChanged == 0)
         {
             myMesh.material.color = storageColor;
         }
-
     }
 }

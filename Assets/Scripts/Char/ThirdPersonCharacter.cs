@@ -6,8 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
 
-public class ThirdPersonCharacter : MonoBehaviour
-{
+public class ThirdPersonCharacter : MonoBehaviour {
 
 
     [SerializeField] float m_MovingTurnSpeed = 360;
@@ -26,7 +25,7 @@ public class ThirdPersonCharacter : MonoBehaviour
     bool m_IsGrounded;
     float m_OrigGroundCheckDistance;
     const float k_Half = 0.5f;
-    float m_TurnAmount;
+    float m_LateralAmount;
     float m_ForwardAmount;
     Vector3 m_GroundNormal;
     float m_CapsuleHeight;
@@ -54,13 +53,12 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     public void Move(Vector3 move, bool crouch, bool jump)
     {
-
         // convert the world relative moveInput vector into a local-relative
         // turn amount and forward amount required to head in the desired
         // direction.
         if (move.magnitude > 1f) move.Normalize();
         curMove = move;
-        animMove = transform.InverseTransformDirection(curMove);
+        animMove = transform.InverseTransformDirection(move);
         //So forward is still going to be animMove.z since we made it local.
         //Direction is going to be the local x, so animMove.x
 
@@ -69,34 +67,26 @@ public class ThirdPersonCharacter : MonoBehaviour
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);
         //m_TurnAmount = Mathf.Atan2(move.x, move.z);
         m_ForwardAmount = move.z;
+        m_LateralAmount = move.x;
 
-        //Toggle-able only to show to team
-        if (FollowMouse)
+
+        //Shoot a ray from cam to mouse pos for a distance of 100
+        RaycastHit[] hits;
+        RaycastHit hit;
+        hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 100.0f);
+
+        //Iterate through all collisions, when obj tagged "Ground" is found, turn char to look at it
+        //and stop iterating
+        for (int i = 0; i < hits.Length; i++)
         {
-            //Shoot a ray from cam to mouse pos for a distance of 100
-            RaycastHit[] hits;
-            RaycastHit hit;
-            hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 100.0f);
-
-            //Iterate through all collisions, when obj tagged "Ground" is found, turn char to look at it
-            //and stop iterating
-            for (int i = 0; i < hits.Length; i++)
+            hit = hits[i];
+            if (hit.collider.gameObject.tag == "Ground")
             {
-                hit = hits[i];
-                if (hit.collider.gameObject.tag == "Ground")
-                {
-                    RaycastHit toLook = hit;
-                    //So he doesn't look down when we put it at his feet
-                    transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
-                    i = hits.Length;
-                }
+                RaycastHit toLook = hit;
+                //So he doesn't look down when we put it at his feet
+                transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
+                i = hits.Length;
             }
-
-        }
-        else
-        {
-            //If removing above, drop this outside if/else to preserve asset
-            ApplyExtraTurnRotation();
         }
 
         // control and velocity handling is different when grounded and airborne:
@@ -165,8 +155,9 @@ public class ThirdPersonCharacter : MonoBehaviour
         // update the animator parameters
 
 
-        m_Animator.SetFloat("xMovement", m_TurnAmount, 0.1f, Time.deltaTime);
+        m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
         m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
+        print("movex : " + m_LateralAmount);
 
 
         // calculate which leg is behind, so as to leave that leg trailing in the jump animation
@@ -219,48 +210,12 @@ public class ThirdPersonCharacter : MonoBehaviour
         }
     }
 
-    void ApplyExtraTurnRotation()
-    {
-        // help the character turn faster (this is in addition to root rotation in the animation)
-        float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
-        transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
-    }
-
-
     public void OnAnimatorMove()
     {
-        if (NewMove)
-        {
-            //Set this in inspector if changes accepted
-            m_Rigidbody.mass = 100;
-            m_Rigidbody.drag = 100;
-            //Change from  .3f to var when not using toggle to show to team. .5 seems to be good speed.
-            //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
-            Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
-
-            moving.y = 0;
-            m_Rigidbody.transform.position = moving;
-        }
-        else
-        {
-
-            // we implement this function to override the default root motion.
-            // this allows us to modify the positional speed before it's applied.
-            if (m_IsGrounded && Time.deltaTime > 0)
-            {
-                Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
-                if (v.magnitude < lastV.magnitude)
-                {
-                    v = new Vector3(0, 0, 0);
-                }
-
-                // we preserve the existing y part of the current velocity.
-                v.y = m_Rigidbody.velocity.y;
-                m_Rigidbody.velocity = v;
-                lastV = v;
-            }
-        }
-
+        //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
+        Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
+        moving.y = 0;
+        m_Rigidbody.transform.position = moving;
     }
 
 

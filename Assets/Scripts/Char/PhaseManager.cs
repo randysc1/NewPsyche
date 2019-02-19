@@ -32,10 +32,7 @@ public class PhaseManager : MonoBehaviour
     private int numHits;
     private Vector3 curRotate;
     
-
-    //When the melee animation changes, change this so the box only spawns for this long.
-    private float meleeAnimDuration = .633f;
-    private bool meleeing = false;
+    public bool Stunned;
 
     GameObject player;
     Animator anim;
@@ -135,6 +132,24 @@ public class PhaseManager : MonoBehaviour
 
         }
 
+    }
+
+    public void ExplosionHit(float damage)
+    {
+
+    }
+
+    public void SetStunned(float duration)
+    {
+        print("Got stunned");
+        Stunned = true;
+        StartCoroutine(RemoveStunned(duration));
+    }
+
+    IEnumerator RemoveStunned(float duration)
+    {
+        yield return new WaitForSecondsRealtime(duration);
+        Stunned = false;
     }
 
 

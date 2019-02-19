@@ -466,10 +466,10 @@ GameObject:
   - component: {fileID: 95126510618902790}
   - component: {fileID: 54627464146628718}
   - component: {fileID: 136626460737140460}
-  - component: {fileID: 114049546064178582}
-  - component: {fileID: 114572112519221632}
+  - component: {fileID: 114865536635863172}
   - component: {fileID: 114338964506100822}
   - component: {fileID: 114593171759091820}
+  - component: {fileID: 114521702145436704}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -4154,8 +4154,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1224430383839750}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
+  m_Mass: 100
+  m_Drag: 100
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -4235,17 +4235,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114049546064178582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1224430383839750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114078646280584860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4303,6 +4292,7 @@ MonoBehaviour:
   phase3Threshold: 30
   RegenDelay: 2
   RegenAmountPerSecond: 10
+  Stunned: 0
 --- !u!114 &114415977703542868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4368,6 +4358,27 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114521702145436704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224430383839750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c0fe246f13b2f498859f52ce339564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovingTurnSpeed: 500
+  m_StationaryTurnSpeed: 500
+  m_JumpPower: 6
+  m_GravityMultiplier: 2
+  m_RunCycleLegOffset: 0.2
+  m_MoveSpeedMultiplier: 0.1
+  m_AnimSpeedMultiplier: 1
+  m_GroundCheckDistance: 0.3
+  FollowMouse: 1
+  NewMove: 1
 --- !u!114 &114541014061301468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4395,27 +4406,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114572112519221632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1224430383839750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 500
-  m_StationaryTurnSpeed: 500
-  m_JumpPower: 6
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.3
-  FollowMouse: 1
-  NewMove: 1
 --- !u!114 &114593171759091820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4434,6 +4424,9 @@ MonoBehaviour:
   meleeBox: {fileID: 1287591365166834}
   AOEPrefab: {fileID: 1209672346772884, guid: e598d9e2c9023fd4a9cf2f521c272e78, type: 2}
   MinePrefab: {fileID: 1008624930796908, guid: fb1d1b3cf1cad574c94aefe7bb38f1e6, type: 2}
+  FlashPrefab: {fileID: 1864879733497762, guid: ef01a5e1246f8ac4c90b2aa8c047f8ac,
+    type: 2}
+  TrapPrefab: {fileID: 1620201607766984, guid: 8b4035aeef9573841acdb255625926f1, type: 2}
   BulletDamage: 3
   shotgunEquipped: 0
   numPellets: 10
@@ -4441,8 +4434,12 @@ MonoBehaviour:
   p1ShotSpeed: 10
   p2ShotSpeed: 6
   shotgunSpeed: 20
+  throwPower: 10
   shotgunDelay: 2
   sniperDelay: 0.5
+  mineDelay: 3
+  flashDelay: 2
+  trapDelay: 0
 --- !u!114 &114645486621793878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4497,6 +4494,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114865536635863172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1224430383839750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 321ec581327bdb74c94c8e55a010d903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114956781825887320
 MonoBehaviour:
   m_ObjectHideFlags: 1
