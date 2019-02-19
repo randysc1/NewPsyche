@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour {
     private int timer;
     public bool Dead = false;
     public bool Stunned;
+    private float onFire;
     private int colorChanged = 0;
     private Color storageColor;
 
@@ -22,13 +23,17 @@ public class EnemyHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(onFire > 0)
+        {
+            onFire -= Time.deltaTime;
+            TakeDamage(1 * Time.deltaTime);
+        }
 	}
 
 
-    public void ExplosionHit(float damage)
+    public void SetFire(float duration)
     {
-
+        onFire = duration;
     }
 
     public void SetStunned(float duration)

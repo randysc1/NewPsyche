@@ -6,29 +6,30 @@ public class AttackManager : MonoBehaviour {
 
 
     public GameObject curBullModel;
-    public GameObject Sniperbullet;
     public GameObject meleeBox;
     public GameObject AOEPrefab;
     public GameObject MinePrefab;
     public GameObject FlashPrefab;
     public GameObject TrapPrefab;
+    public GameObject MolotovPrefab;
+    public GameObject WraithShroudPrefab;
 
     //After tweaking, set to private
     public float BulletDamage;
     public bool shotgunEquipped = false;
     public int numPellets = 5;
     public int CurShotSpeed;
-    public int p1ShotSpeed;
-    public int p2ShotSpeed;
     public int shotgunSpeed;
     public float throwPower;
     public float shotgunDelay;
+    public float rangedDelay;
     public float sniperDelay;
     public float mineDelay;
     public float flashDelay;
     public float trapDelay;
+    public float molotovDelay;
     private float attackCD;
-    private float gadgetCD;
+    private float abilityCD;
 
 
 
@@ -53,10 +54,6 @@ public class AttackManager : MonoBehaviour {
     {
         PM = transform.gameObject.GetComponent<PhaseManager>();
         anim = GetComponent<Animator>();
-
-        //Change this if we want to start with different ammo
-        curBullModel = Sniperbullet;
-        CurShotSpeed = p1ShotSpeed;
     }
 
     // Update is called once per frame
@@ -64,9 +61,9 @@ public class AttackManager : MonoBehaviour {
     {
 
 
-        if (gadgetCD > 0 || attackCD > 0)
+        if (abilityCD > 0 || attackCD > 0)
         {
-            gadgetCD -= Time.deltaTime;
+            abilityCD -= Time.deltaTime;
             attackCD -= Time.deltaTime;
         }
 
@@ -75,7 +72,7 @@ public class AttackManager : MonoBehaviour {
             return;
         }
 
-        //Attack button Mouse
+        //Attack button Left Mouse
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (attackCD > 0)
@@ -101,28 +98,58 @@ public class AttackManager : MonoBehaviour {
             }
         }
 
-        //Test area for other attacks.
-        if (Input.GetKeyDown(KeyCode.Period))
+        //Ability button Right Mouse
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            shotgunEquipped = !shotgunEquipped;
+            if (abilityCD > 0)
+            {
+                return;
+            }
+
+            switch (PM.phase)
+            {
+                case 1:
+                    sniper();
+                    break;
+                case 2:
+                    molotov();
+                    break;
+                case 3:
+                    wraithShroud();
+                    break;
+                default:
+                    print("Phase is invalid,");
+                    break;
+            }
         }
 
-        if (gadgetCD > 0)
+        //Test area for other attacks.
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            shotgun();
+        }
+
+        if (abilityCD > 0)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             mine();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             flash();
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            molotov();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             trap();
         }
@@ -130,8 +157,22 @@ public class AttackManager : MonoBehaviour {
 
     private void flash()
     {
-        gadgetCD = flashDelay;
+        abilityCD = flashDelay;
         tempShot = Instantiate(FlashPrefab, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
+        tempShot.SetActive(true);
+        tempShot.transform.Rotate(-45, 0, 0);
+        Rigidbody RB = tempShot.GetComponent<Rigidbody>();
+        RB.AddForce(transform.forward * throwPower + transform.up * throwPower, ForceMode.Impulse);
+        RB.AddTorque(transform.right * 10f, ForceMode.Impulse);
+
+        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+    }
+
+    private void molotov()
+    {
+        print("Molo");
+        abilityCD = molotovDelay;
+        tempShot = Instantiate(MolotovPrefab, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
         tempShot.transform.Rotate(-45, 0, 0);
         Rigidbody RB = tempShot.GetComponent<Rigidbody>();
@@ -143,7 +184,7 @@ public class AttackManager : MonoBehaviour {
 
     private void mine()
     {
-        gadgetCD = mineDelay;
+        abilityCD = mineDelay;
         tempShot = Instantiate(MinePrefab, this.transform.position + new Vector3(0, .5f, 0), transform.rotation, null);
         tempShot.SetActive(true);
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
@@ -151,7 +192,7 @@ public class AttackManager : MonoBehaviour {
 
     private void trap()
     {
-        gadgetCD = trapDelay;
+        abilityCD = trapDelay;
         tempShot = Instantiate(TrapPrefab, this.transform.position + new Vector3(0,.5f,0), transform.rotation, null);
         tempShot.SetActive(true);
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
@@ -168,6 +209,13 @@ public class AttackManager : MonoBehaviour {
         Destroy(AOEEffect, .5f);
     }
 
+    private void wraithShroud()
+    {
+        print("Shroud");
+        AOEEffect = Instantiate(WraithShroudPrefab, this.transform.position, transform.rotation, this.transform);
+        Destroy(AOEEffect, 2f);
+    }
+
     //grabbed from controller.cs, changed so instantiate starts at player pos with player rotation.
     //Ranged Attack, spawns bullet firing away from player, bullet collider should proc damage on enemies.
     private void rangedAttack()
@@ -178,11 +226,11 @@ public class AttackManager : MonoBehaviour {
             shotgun();
             return;
         }
-        else
-        {
-            sniper();
-        }
-
+        attackCD = rangedDelay;
+        tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
+        tempShot.SetActive(true);
+        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
+        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     //Spawns one bullet facing towards parent's forward, sets velocity to curShotSpeed
@@ -191,7 +239,8 @@ public class AttackManager : MonoBehaviour {
         attackCD = sniperDelay;
         tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
-        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
+        tempShot.GetComponent<Weapon>().shouldDissapate = false;
+        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed * 3;
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
     }
 

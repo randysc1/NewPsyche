@@ -82,7 +82,6 @@ public class ThirdPersonCharacter : MonoBehaviour {
             hit = hits[i];
             if (hit.collider.gameObject.tag == "Ground")
             {
-                RaycastHit toLook = hit;
                 //So he doesn't look down when we put it at his feet
                 transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
                 i = hits.Length;

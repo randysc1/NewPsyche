@@ -101,6 +101,37 @@ public class PhaseManager : MonoBehaviour
             RefreshHealthAndIns();
         }
 
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            if(phase == 1)
+            {
+                return;
+            } else
+            {
+                phase--;
+                print("phase-- is now :" + phase);
+
+                ChangeToPhase(phase);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+
+            if (phase == 3)
+            {
+                return;
+            }
+            else
+            {
+                phase++;
+                print("phase++ is now :" + phase);
+
+                ChangeToPhase(phase);
+            }
+        }
+
+        return;
         //Dev mode change phases
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -129,7 +160,6 @@ public class PhaseManager : MonoBehaviour
             anim.runtimeAnimatorController = p2Controller;
             anim.avatar = p2Avatar;
             print("Changed to phase : " + phase);
-
         }
 
     }

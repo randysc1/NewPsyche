@@ -5,11 +5,11 @@ using UnityEngine;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
 	[RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-	[RequireComponent(typeof (ThirdPersonCharacter))]
+	//[RequireComponent(typeof (ThirdPersonCharacter))]
 	public class myAICharacterController : MonoBehaviour
 	{
 		public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-		public ThirdPersonCharacter character { get; private set; } // the character we are controlling
+		//public ThirdPersonCharacter character { get; private set; } // the character we are controlling
 		public Transform target;                                    // target to aim for
 
 		public GameObject meleeBox;
@@ -21,7 +21,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			// get the components on the object we need ( should not be null due to require component so no need to check )
 			agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-			character = GetComponent<ThirdPersonCharacter>();
+			//character = GetComponent<ThirdPersonCharacter>();
 			
 			agent.updateRotation = false;
 			agent.updatePosition = true;
@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 				if(this.tag == "rangedEnemy" && agent.remainingDistance <= 5){
 					//if(agent.remainingDistance <= 5 && tempShot == null){
-					character.Move (Vector3.zero, false, false);
+					//character.Move (Vector3.zero, false, false);
 					agent.isStopped = true;
 					if(tempShot == null){
 						//agent.updateRotation = true;
@@ -61,7 +61,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				else{
 					if(agent.isStopped == true)
 						agent.isStopped = false;
-					character.Move (agent.desiredVelocity, false, false);
+					//character.Move (agent.desiredVelocity, false, false);
 					//Debug.Log ("Moving");
 					//Debug.Log ("Remaining: " + agent.remainingDistance);
 					//Debug.Log ("Stop: " + agent.stoppingDistance);
@@ -69,7 +69,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				}
 			}
 			else {
-				character.Move (Vector3.zero, false, false);
+				//character.Move (Vector3.zero, false, false);
 				agent.isStopped = true;
 				if(this.tag == "meleeEnemy" && tempBox == null){
 					tempBox = Instantiate(meleeBox, meleeBox.transform.position, meleeBox.transform.rotation, this.transform);
