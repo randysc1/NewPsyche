@@ -220,12 +220,6 @@ public class AttackManager : MonoBehaviour {
     //Ranged Attack, spawns bullet firing away from player, bullet collider should proc damage on enemies.
     private void rangedAttack()
     {
-        //print("Ranged");
-        if (shotgunEquipped)
-        {
-            shotgun();
-            return;
-        }
         attackCD = rangedDelay;
         tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
@@ -248,7 +242,7 @@ public class AttackManager : MonoBehaviour {
     //Spawn numPellets bullets, each firing forward after being turned randrange 10 degrees left or right.
     private void shotgun()
     {
-        attackCD = shotgunDelay;
+        abilityCD = shotgunDelay;
         for (int i = 0; i <= numPellets; i++)
         {
             tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
