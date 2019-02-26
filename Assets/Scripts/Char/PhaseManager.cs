@@ -195,8 +195,9 @@ public class PhaseManager : MonoBehaviour
 
 
         //Handle Death (Nothing here yet)
-        if (curHealth <= 0)
+        if (curHealth <= 0 || curIns <= 0)
         {
+            Destroy(this.gameObject);
             //You Are Dead. Sthap.
             Debug.Break();
         }

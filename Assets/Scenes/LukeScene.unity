@@ -292,6 +292,18 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: tentaclePrefab
+      value: 
+      objectReference: {fileID: 1606799786110578, guid: 68df395fce0e4cd4aab92d8578d8b747,
+        type: 2}
+    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: tentaclePrefab2
+      value: 
+      objectReference: {fileID: 1836384655189716, guid: 663350343283bb8459a5d4ebe784476e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0

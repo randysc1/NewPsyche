@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
 
-public class ThirdPersonCharacter : MonoBehaviour
+public class ThirdPersonCharacterDepreciated : MonoBehaviour
 {
 
 

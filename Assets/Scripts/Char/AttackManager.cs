@@ -13,6 +13,8 @@ public class AttackManager : MonoBehaviour {
     public GameObject TrapPrefab;
     public GameObject MolotovPrefab;
     public GameObject WraithShroudPrefab;
+    public GameObject tentaclePrefab;
+    public GameObject tentaclePrefab2;
 
     //After tweaking, set to private
     public float BulletDamage;
@@ -21,6 +23,7 @@ public class AttackManager : MonoBehaviour {
     public int CurShotSpeed;
     public int shotgunSpeed;
     public float throwPower;
+    public float GrabMinimumDistance;
     public float shotgunDelay;
     public float rangedDelay;
     public float sniperDelay;
@@ -28,6 +31,7 @@ public class AttackManager : MonoBehaviour {
     public float flashDelay;
     public float trapDelay;
     public float molotovDelay;
+    private float tentacleDelay;
     private float attackCD;
     private float abilityCD;
 
@@ -132,6 +136,11 @@ public class AttackManager : MonoBehaviour {
         if (abilityCD > 0)
         {
             return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            tentacleGrabShot();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -262,30 +271,61 @@ public class AttackManager : MonoBehaviour {
     //Melee Attack, currently spawns 'sword' box in front of player, 
     private void meleeAttack()
     {
-        //print("melee");
-        if (meleeing)
-        {
-            return;
-        }
-        meleeing = true;
+        attackCD = meleeAnimDuration;
         anim.SetTrigger("Attack");
         meleeBox.SetActive(true);
         Physics.IgnoreCollision(meleeBox.GetComponent<Collider>(), GetComponent<Collider>());
-        //This extra curMelee is in case we phase change during an attack, save the old box to deactivate properly.
         StartCoroutine(meleeBoxDeactivation());
     }
 
     IEnumerator meleeBoxDeactivation()
     {
         yield return new WaitForSecondsRealtime(meleeAnimDuration);
-        //We double check the attack hasn't been deactivated by a phase change.
-
-        meleeBox.SetActive(false);
-        
-        meleeing = false;
+        meleeBox.SetActive(false);        
     }
 
 
+    private void tentacleGrab()
+    {
+        attackCD = tentacleDelay;
+        tempShot = Instantiate(tentaclePrefab, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, this.gameObject.transform);
+        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+    }
+
+    private void tentacleGrabShot()
+    {
+        attackCD = tentacleDelay;
+        tempShot = Instantiate(tentaclePrefab2, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, this.gameObject.transform);
+        Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+        tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
+
+    }
+
+    public void HandleGrab(GameObject Grabbed)
+    {
+        this.GetComponent<ThirdPersonCharacter>().MovementLocked = true;
+        this.GetComponent<ThirdPersonCharacter>().RotationLocked = true;
+        //If Grabbed has no rigidbody we don't care about it, so return
+        if(Grabbed.GetComponent<Rigidbody>() == null)
+        {
+            return;
+        }
+
+        StartCoroutine(pullGrabbed(Grabbed));
+    }
+
+    IEnumerator pullGrabbed(GameObject Grabbed)
+    {
+        while(Vector3.Distance(Grabbed.transform.position, this.transform.position) > GrabMinimumDistance)
+        {
+            Vector3 GrabbedToUs = this.transform.position - Grabbed.transform.position;
+
+            GrabbedToUs.Normalize();
+            yield return new WaitForSecondsRealtime(.5f);
+
+            Grabbed.GetComponent<Rigidbody>().AddForce(GrabbedToUs, ForceMode.Impulse);
+        }
+    }
 
     //This will eventually hold a switch case that changes details about the shot we fire, such as the prefab and speed
     public void ChangeBulletType(string newType)
