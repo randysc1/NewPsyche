@@ -4242,8 +4242,8 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  FollowMouse: 1
-  NewMove: 1
+  MovementLocked: 0
+  RotationLocked: 0
 --- !u!114 &114541014061301468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4294,12 +4294,19 @@ MonoBehaviour:
     type: 2}
   WraithShroudPrefab: {fileID: 1586590921855316, guid: 2187678d9c4b47c448e921b676d5caa2,
     type: 2}
+  MiasmaPrefab: {fileID: 0}
+  tentaclePrefab: {fileID: 1606799786110578, guid: 68df395fce0e4cd4aab92d8578d8b747,
+    type: 2}
+  tentaclePrefab2: {fileID: 1836384655189716, guid: 663350343283bb8459a5d4ebe784476e,
+    type: 2}
   BulletDamage: 3
+  GrabSlashDamage: 8
   shotgunEquipped: 0
   numPellets: 10
   CurShotSpeed: 10
   shotgunSpeed: 20
   throwPower: 10
+  GrabMinimumDistance: 2
   shotgunDelay: 2
   rangedDelay: 0.5
   sniperDelay: 3

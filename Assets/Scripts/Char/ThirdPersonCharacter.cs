@@ -157,13 +157,16 @@ public class ThirdPersonCharacter : MonoBehaviour {
         //at The Least we need to add a back, but optimally we need forward/left/right/back and the appropriate states.
         // update the animator parameters
 
+
+        
         if (MovementLocked)
         {
+
+            m_Animator.SetFloat("xMovement", 0, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("zMovement", 0, 0.1f, Time.deltaTime);
             return;
         }
 
-        m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
-        m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
 
 
         // the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
@@ -206,6 +209,10 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public void OnAnimatorMove()
     {
+        if (MovementLocked)
+        {
+            return;
+        }
         //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
         Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
         moving.y = 0;

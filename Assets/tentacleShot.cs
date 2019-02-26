@@ -28,6 +28,7 @@ public class tentacleShot : MonoBehaviour {
         if(other.tag == "Enemy" && !IsEnemyWeapon)
         {
             other.GetComponent<EnemyHealth>().Stunned = true;
+            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
             callBackObject.GetComponent<AttackManager>().HandleGrab(other.gameObject);
         }
 

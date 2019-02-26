@@ -13,11 +13,14 @@ public class AttackManager : MonoBehaviour {
     public GameObject TrapPrefab;
     public GameObject MolotovPrefab;
     public GameObject WraithShroudPrefab;
+    public GameObject MiasmaPrefab;
     public GameObject tentaclePrefab;
     public GameObject tentaclePrefab2;
 
+
     //After tweaking, set to private
     public float BulletDamage;
+    public float GrabSlashDamage;
     public bool shotgunEquipped = false;
     public int numPellets = 5;
     public int CurShotSpeed;
@@ -143,6 +146,12 @@ public class AttackManager : MonoBehaviour {
             tentacleGrabShot();
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            print("Miasma");
+            Miasma();
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             mine();
@@ -210,12 +219,7 @@ public class AttackManager : MonoBehaviour {
     //AOE attack, spawns aoe sphere at feet, sphere collider should proc damage on enemies.
     private void AOEAttack()
     {
-        //print("Aoe");
-        AOEEffect = Instantiate(AOEPrefab, this.transform.position + new Vector3(0, .8f, 0), transform.rotation, this.transform);
-        AOEEffect.SetActive(true);
-        Physics.IgnoreCollision(AOEEffect.GetComponent<Collider>(), GetComponent<Collider>());
 
-        Destroy(AOEEffect, .5f);
     }
 
     private void wraithShroud()
@@ -266,7 +270,11 @@ public class AttackManager : MonoBehaviour {
         return;
     }
 
-
+    private void Miasma()
+    {
+        //print("Aoe");
+        AOEEffect = Instantiate(MiasmaPrefab, this.transform.position + new Vector3(0, .8f, 0), transform.rotation, null);
+    }
     //Also grabbed from controller.cs.
     //Melee Attack, currently spawns 'sword' box in front of player, 
     private void meleeAttack()
@@ -278,13 +286,23 @@ public class AttackManager : MonoBehaviour {
         StartCoroutine(meleeBoxDeactivation());
     }
 
+    private void meleeAttack(int damage)
+    {
+        attackCD = meleeAnimDuration;
+        anim.SetTrigger("Attack");
+        meleeBox.SetActive(true);
+        Physics.IgnoreCollision(meleeBox.GetComponent<Collider>(), GetComponent<Collider>());
+        meleeBox.GetComponent<Weapon>().damage = GrabSlashDamage;
+        StartCoroutine(meleeBoxDeactivation());
+    }
+
     IEnumerator meleeBoxDeactivation()
     {
         yield return new WaitForSecondsRealtime(meleeAnimDuration);
         meleeBox.SetActive(false);        
     }
 
-
+    //Unused as of yet, i liked shot better. if team does as well delete this
     private void tentacleGrab()
     {
         attackCD = tentacleDelay;
@@ -298,11 +316,11 @@ public class AttackManager : MonoBehaviour {
         tempShot = Instantiate(tentaclePrefab2, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, this.gameObject.transform);
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
         tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
-
     }
 
     public void HandleGrab(GameObject Grabbed)
     {
+        print("Locking");
         this.GetComponent<ThirdPersonCharacter>().MovementLocked = true;
         this.GetComponent<ThirdPersonCharacter>().RotationLocked = true;
         //If Grabbed has no rigidbody we don't care about it, so return
@@ -314,6 +332,7 @@ public class AttackManager : MonoBehaviour {
         StartCoroutine(pullGrabbed(Grabbed));
     }
 
+    //Pull the character 
     IEnumerator pullGrabbed(GameObject Grabbed)
     {
         while(Vector3.Distance(Grabbed.transform.position, this.transform.position) > GrabMinimumDistance)
@@ -321,10 +340,25 @@ public class AttackManager : MonoBehaviour {
             Vector3 GrabbedToUs = this.transform.position - Grabbed.transform.position;
 
             GrabbedToUs.Normalize();
-            yield return new WaitForSecondsRealtime(.5f);
+            yield return new WaitForSecondsRealtime(.1f);
 
-            Grabbed.GetComponent<Rigidbody>().AddForce(GrabbedToUs, ForceMode.Impulse);
+            Grabbed.GetComponent<Rigidbody>().AddForce(GrabbedToUs * 10, ForceMode.Impulse);
         }
+        Grabbed.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        meleeAttack();
+
+        yield return new WaitForSecondsRealtime(meleeAnimDuration);
+
+        pullFinish(Grabbed);
+    }
+
+    private void pullFinish(GameObject Grabbed)
+    {
+        print("Unlocking");
+        this.GetComponent<ThirdPersonCharacter>().MovementLocked = false;
+        this.GetComponent<ThirdPersonCharacter>().RotationLocked = false;
+
+        Grabbed.GetComponent<EnemyHealth>().Stunned = false;
     }
 
     //This will eventually hold a switch case that changes details about the shot we fire, such as the prefab and speed

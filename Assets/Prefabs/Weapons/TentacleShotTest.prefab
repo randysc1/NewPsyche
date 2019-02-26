@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 23963382892006134}
   - component: {fileID: 135116853347710318}
   - component: {fileID: 54968216510704030}
-  - component: {fileID: 114199350562776524}
+  - component: {fileID: 114508873005396828}
+  - component: {fileID: 114941024667319816}
   m_Layer: 0
   m_Name: TentacleShotTest
   m_TagString: Weapon
@@ -101,7 +102,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114199350562776524
+--- !u!114 &114508873005396828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836384655189716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da1678558ebdf043982ce0ce32c2dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEnemyWeapon: 0
+--- !u!114 &114941024667319816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -112,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b72e325b288c984bb4941ace91158c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 0
   shouldDissapate: 1
   isEnemyWeapon: 0
 --- !u!135 &135116853347710318
