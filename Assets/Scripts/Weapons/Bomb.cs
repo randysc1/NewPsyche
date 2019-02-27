@@ -30,7 +30,6 @@ public class Bomb : MonoBehaviour {
     //generate sphere centered on this and register damage with collisions
     private void explode()
     {
-        Debug.Break();
         //Create a sphere for the 'explosion' and proc damage on all collisions of appropriate type
         Collider[]
         hits = Physics.OverlapSphere(this.transform.position, BombRadius);
@@ -86,8 +85,9 @@ public class Bomb : MonoBehaviour {
 
         if (IsPulseExplosion)
         {
-            pulseExplosion();
-        } else
+            StartCoroutine(pulseExplosion());
+        }
+        else
         {
             explode();
         }
@@ -97,6 +97,7 @@ public class Bomb : MonoBehaviour {
 
     IEnumerator pulseExplosion()
     {
+        print("Got to pulse");
         float i = NumOfPulses;
         ParticleSystem PS = GetComponent<ParticleSystem>();
 
@@ -106,8 +107,8 @@ public class Bomb : MonoBehaviour {
 
         while (i > 0)
         {
-            yield return new WaitForSecondsRealtime(PulseDelay);
-
+            yield return new WaitForSecondsRealtime(.5f);
+            print("exploding : " + i);
             explode();
             PS.Play();
             i--;

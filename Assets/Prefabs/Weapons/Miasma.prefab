@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BombRadius: 2
   Damage: 10
-  hitsPlayer: 1
+  hitsPlayer: 0
   hitsEnemy: 1
   Flash: 0
   Ignite: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
   IsPulseExplosion: 1
   FlashDuration: 0
   IgniteDuration: 1
-  NumOfPulses: 4
+  NumOfPulses: 6
   PulseDelay: 2
 --- !u!135 &135193889808222788
 SphereCollider:
