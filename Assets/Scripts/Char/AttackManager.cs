@@ -345,7 +345,7 @@ public class AttackManager : MonoBehaviour {
             Grabbed.GetComponent<Rigidbody>().AddForce(GrabbedToUs * 10, ForceMode.Impulse);
         }
         Grabbed.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        meleeAttack();
+        meleeAttack(10);
 
         yield return new WaitForSecondsRealtime(meleeAnimDuration);
 
