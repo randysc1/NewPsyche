@@ -17,9 +17,11 @@ public class ThirdPersonCharacter : MonoBehaviour {
     [SerializeField] float m_MoveSpeedMultiplier = 1f;
     [SerializeField] float m_AnimSpeedMultiplier = 1f;
     [SerializeField] float m_GroundCheckDistance = 0.1f;
-    [SerializeField] bool FollowMouse;
-    [SerializeField] bool NewMove;
 
+
+
+    public bool MovementLocked = false;
+    public bool RotationLocked = false;
     Rigidbody m_Rigidbody;
     Animator m_Animator;
     bool m_IsGrounded;
@@ -65,26 +67,28 @@ public class ThirdPersonCharacter : MonoBehaviour {
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-        //m_TurnAmount = Mathf.Atan2(move.x, move.z);
         m_ForwardAmount = move.z;
         m_LateralAmount = move.x;
 
 
-        //Shoot a ray from cam to mouse pos for a distance of 100
-        RaycastHit[] hits;
-        RaycastHit hit;
-        hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 100.0f);
-
-        //Iterate through all collisions, when obj tagged "Ground" is found, turn char to look at it
-        //and stop iterating
-        for (int i = 0; i < hits.Length; i++)
+        if (!RotationLocked)
         {
-            hit = hits[i];
-            if (hit.collider.gameObject.tag == "Ground")
+            //Shoot a ray from cam to mouse pos for a distance of 100
+            RaycastHit[] hits;
+            RaycastHit hit;
+            hits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition), 100.0f);
+
+            //Iterate through all collisions, when obj tagged "Ground" is found, turn char to look at it
+            //and stop iterating
+            for (int i = 0; i < hits.Length; i++)
             {
-                //So he doesn't look down when we put it at his feet
-                transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
-                i = hits.Length;
+                hit = hits[i];
+                if (hit.collider.gameObject.tag == "Ground")
+                {
+                    //So he doesn't look down when we put it at his feet
+                    transform.LookAt(new Vector3(hit.point.x, this.transform.position.y, hit.point.z));
+                    i = hits.Length;
+                }
             }
         }
 
@@ -154,21 +158,16 @@ public class ThirdPersonCharacter : MonoBehaviour {
         // update the animator parameters
 
 
-        m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
-        m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
-
-
-        // calculate which leg is behind, so as to leave that leg trailing in the jump animation
-        // (This code is reliant on the specific run cycle offset in our animations,
-        // and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
-        float runCycle =
-            Mathf.Repeat(
-                m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
-        float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
-        if (m_IsGrounded)
+        
+        if (MovementLocked)
         {
-            //	m_Animator.SetFloat("JumpLeg", jumpLeg);
+
+            m_Animator.SetFloat("xMovement", 0, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("zMovement", 0, 0.1f, Time.deltaTime);
+            return;
         }
+
+
 
         // the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
         // which affects the movement speed because of the root motion.
@@ -210,6 +209,10 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public void OnAnimatorMove()
     {
+        if (MovementLocked)
+        {
+            return;
+        }
         //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
         Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
         moving.y = 0;

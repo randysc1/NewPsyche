@@ -60,11 +60,16 @@ public class EnemyHealth : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
+        if(damage == 0)
+        {
+            return;
+        }
         CurHealth -= damage;
         StartCoroutine(DamageColor());
         
         if(CurHealth <= 0)
         {
+            this.gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             Dead = true;
             Destroy(this.gameObject,1);
         }

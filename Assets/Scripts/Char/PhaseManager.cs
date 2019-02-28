@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PhaseManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PhaseManager : MonoBehaviour
 
     private GameObject HBar;
     private GameObject IBar;
+    public GameObject GOText;
 
     private float maxHealth = 100f;
     private float curHealth;
@@ -31,7 +33,8 @@ public class PhaseManager : MonoBehaviour
     private Vector3 initialHBar;
     private int numHits;
     private Vector3 curRotate;
-    
+    private float restartTimer;
+    private float restartDelay = 5f;
     public bool Stunned;
 
     GameObject player;
@@ -88,6 +91,11 @@ public class PhaseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (curHealth <= 0 || curIns <= 0)
+        {
+            die();
+            return;
+        }
         //If curDelay is greater than zero, decrement the time.
         if (curDelay > 0)
         {
@@ -194,16 +202,15 @@ public class PhaseManager : MonoBehaviour
         curDelay = RegenDelay;
 
 
-        //Handle Death (Nothing here yet)
-        if (curHealth <= 0)
+        //Handle Death
+        if (curHealth <= 0 || curIns <= 0)
         {
-            //You Are Dead. Sthap.
-            Debug.Break();
+            die();
         }
 
 
         //If your insanity is above threshold 2, should nothing happen?
-        if(curIns > phase2Threshold)
+        if (curIns > phase2Threshold)
         {
             
         //If damaged under the threshold, enter phase 2
@@ -272,5 +279,24 @@ public class PhaseManager : MonoBehaviour
 
     }
 
+
+    private void die()
+    {
+        GOText.SetActive(true);
+
+        // .. increment a timer to count up to restarting.
+        restartTimer += Time.deltaTime;
+
+        // .. if it reaches the restart delay...
+        if (restartTimer >= restartDelay)
+        {
+            // .. then reload the currently loaded level.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            return;
+        }
+    }
    
 }

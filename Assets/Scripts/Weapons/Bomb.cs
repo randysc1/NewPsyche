@@ -10,8 +10,11 @@ public class Bomb : MonoBehaviour {
     public bool Flash;
     public bool Ignite;
     public bool DetonateOnGround;
+    public bool IsPulseExplosion;
     public float FlashDuration;
     public float IgniteDuration;
+    public float NumOfPulses;
+    public float PulseDelay;
 
     // Use this for initialization
     void Start()
@@ -24,20 +27,12 @@ public class Bomb : MonoBehaviour {
 
     }
 
-    //On collision with trigger, generate sphere centered on this and register damage with collided
-    private void OnTriggerEnter(Collider other)
+    //generate sphere centered on this and register damage with collisions
+    private void explode()
     {
-        //If we don't want to detonate on the ground and we just hit the ground ignore it
-        if (!DetonateOnGround)
-        {
-            if(other.gameObject.tag == "Ground")
-            {
-                return;
-            }
-        }
-
         //Create a sphere for the 'explosion' and proc damage on all collisions of appropriate type
-        Collider[] hits = Physics.OverlapSphere(this.transform.position, BombRadius);
+        Collider[]
+        hits = Physics.OverlapSphere(this.transform.position, BombRadius);
         Collider hit;
 
         for (int i = 0; i < hits.Length; i++)
@@ -54,9 +49,10 @@ public class Bomb : MonoBehaviour {
                 }
                 if (Ignite)
                 {
-                   // PM.SetStunned(FlashDuration);
+                    //Don't have ignite yet
                 }
-            } else if (hit.gameObject.tag == "Enemy")
+            }
+            else if (hit.gameObject.tag == "Enemy")
             {
                 EnemyHealth EH = hit.gameObject.GetComponent<EnemyHealth>();
                 EH.TakeDamage(Damage);
@@ -72,9 +68,54 @@ public class Bomb : MonoBehaviour {
             }
         }
 
-        //ParticleSystem PS = Instantiate(GetComponent<ParticleSystem>(), transform.position, transform.rotation, null);
+    }
+        
+
+    //On collision with trigger, check if we should explode then do so
+    private void OnTriggerEnter(Collider other)
+    {
+        //If we don't want to detonate on the ground and we just hit the ground ignore it
+        if (!DetonateOnGround)
+        {
+            if(other.gameObject.tag == "Ground")
+            {
+                return;
+            }
+        }
+
+        if (IsPulseExplosion)
+        {
+            StartCoroutine(pulseExplosion());
+        }
+        else
+        {
+            explode();
+        }
+
+       
+    }
+
+    IEnumerator pulseExplosion()
+    {
+        print("Got to pulse");
+        float i = NumOfPulses;
         ParticleSystem PS = GetComponent<ParticleSystem>();
+
+        explode();
         PS.Play();
+        i--;
+
+        while (i > 0)
+        {
+            yield return new WaitForSecondsRealtime(.5f);
+            print("exploding : " + i);
+            explode();
+            PS.Play();
+            i--;
+        }
+
+
         Destroy(this.gameObject, PS.main.duration);
+
     }
 }

@@ -287,10 +287,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 224915681088362016, guid: 3fbe940378b62a14bb22313b0949f826,
+    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
         type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
+      propertyPath: PistolSprayDelay
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: PistolSpraySpread
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
