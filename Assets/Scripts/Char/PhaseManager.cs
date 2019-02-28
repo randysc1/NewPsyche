@@ -291,7 +291,7 @@ public class PhaseManager : MonoBehaviour
         if (restartTimer >= restartDelay)
         {
             // .. then reload the currently loaded level.
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else
         {
