@@ -23,11 +23,14 @@ public class AttackManager : MonoBehaviour {
     public float GrabSlashDamage;
     public bool shotgunEquipped = false;
     public int numPellets = 5;
+    public int numSprayBullets = 5;
     public int CurShotSpeed;
     public int shotgunSpeed;
     public float throwPower;
     public float GrabMinimumDistance;
     public float shotgunDelay;
+    public float PistolSprayDelay;
+    public float PistolSpraySpread;
     public float rangedDelay;
     public float sniperDelay;
     public float mineDelay;
@@ -51,6 +54,7 @@ public class AttackManager : MonoBehaviour {
     private bool meleeing = false;
 
     private PhaseManager PM;
+    private ThirdPersonCharacter TPC;
     private GameObject curMeleeBox;
 
 
@@ -61,6 +65,7 @@ public class AttackManager : MonoBehaviour {
     {
         PM = transform.gameObject.GetComponent<PhaseManager>();
         anim = GetComponent<Animator>();
+        TPC = GetComponent<ThirdPersonCharacter>();
     }
 
     // Update is called once per frame
@@ -146,6 +151,11 @@ public class AttackManager : MonoBehaviour {
             tentacleGrabShot();
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StartCoroutine(PistolSpray());
+        }
+
         if (Input.GetKeyDown(KeyCode.M))
         {
             print("Miasma");
@@ -219,7 +229,9 @@ public class AttackManager : MonoBehaviour {
     //AOE attack, spawns aoe sphere at feet, sphere collider should proc damage on enemies.
     private void AOEAttack()
     {
-
+        print("Aoe");
+        AOEEffect = Instantiate(AOEPrefab, this.transform.position, transform.rotation, this.transform);
+        Destroy(AOEEffect, 2f);
     }
 
     private void wraithShroud()
@@ -249,6 +261,25 @@ public class AttackManager : MonoBehaviour {
         tempShot.GetComponent<Weapon>().shouldDissapate = false;
         tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed * 3;
         Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+    }
+
+    private IEnumerator PistolSpray()
+    {
+        TPC.RotationLocked = true;
+        abilityCD = PistolSprayDelay;
+        for (int i = 0; i <= numSprayBullets; i++)
+        {
+            tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
+            tempShot.SetActive(true);
+            Weapon Weap = tempShot.GetComponent<Weapon>();
+            Weap.damage = BulletDamage / 2;
+            tempShot.transform.Rotate(0, i * PistolSpraySpread, 0);
+
+            tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
+            Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
+            yield return new WaitForSecondsRealtime(PistolSprayDelay/numSprayBullets);
+        }
+        TPC.RotationLocked = false;
     }
 
 
