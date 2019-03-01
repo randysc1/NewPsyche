@@ -157,14 +157,20 @@ public class ThirdPersonCharacter : MonoBehaviour {
         //at The Least we need to add a back, but optimally we need forward/left/right/back and the appropriate states.
         // update the animator parameters
 
-
+        print("Got here");
         
         if (MovementLocked)
         {
+            print("Locking vars");
 
             m_Animator.SetFloat("xMovement", 0, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("zMovement", 0, 0.1f, Time.deltaTime);
             return;
+        } else
+        {
+            m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
+            print("We are not locked");            
         }
 
 
@@ -209,8 +215,10 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public void OnAnimatorMove()
     {
+        print("In animmove");
         if (MovementLocked)
         {
+            print("Move locked in onanimmove?");
             return;
         }
         //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
