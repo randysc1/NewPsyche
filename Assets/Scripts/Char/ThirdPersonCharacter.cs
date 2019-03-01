@@ -22,6 +22,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public bool MovementLocked = false;
     public bool RotationLocked = false;
+    private bool paused; 
     Rigidbody m_Rigidbody;
     Animator m_Animator;
     bool m_IsGrounded;
@@ -51,6 +52,17 @@ public class ThirdPersonCharacter : MonoBehaviour {
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;
     }
+
+    void OnPauseGame()
+    {
+        paused = true;
+    }
+
+    void OnResumeGame()
+    {
+        paused = false;
+    }
+
 
 
     public void Move(Vector3 move, bool crouch, bool jump)
@@ -157,11 +169,9 @@ public class ThirdPersonCharacter : MonoBehaviour {
         //at The Least we need to add a back, but optimally we need forward/left/right/back and the appropriate states.
         // update the animator parameters
 
-        print("Got here");
         
         if (MovementLocked)
         {
-            print("Locking vars");
 
             m_Animator.SetFloat("xMovement", 0, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("zMovement", 0, 0.1f, Time.deltaTime);
@@ -170,7 +180,6 @@ public class ThirdPersonCharacter : MonoBehaviour {
         {
             m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
-            print("We are not locked");            
         }
 
 
