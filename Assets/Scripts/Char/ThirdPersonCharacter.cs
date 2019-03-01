@@ -224,10 +224,8 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public void OnAnimatorMove()
     {
-        print("In animmove");
         if (MovementLocked)
         {
-            print("Move locked in onanimmove?");
             return;
         }
         //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
