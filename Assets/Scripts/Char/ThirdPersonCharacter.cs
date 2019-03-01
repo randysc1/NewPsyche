@@ -230,6 +230,13 @@ public class ThirdPersonCharacter : MonoBehaviour {
         }
         //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
         Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
+        if (m_IsGrounded)
+        {
+            moving.y = 0;
+        } else
+        {
+            moving.y -= m_GroundCheckDistance;
+        }
         moving.y = 0;
         m_Rigidbody.transform.position = moving;
     }

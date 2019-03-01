@@ -23,6 +23,10 @@ public class Weapon : MonoBehaviour {
         //print("Triggered!");
         if (other.transform.tag != "Player" && other.transform.tag != "Enemy")
         {
+            if (shouldDissapate)
+            {
+                Destroy(this.gameObject, .0f);
+            }
             //print("Tag is: " + other.transform.tag);
             return;
         }
