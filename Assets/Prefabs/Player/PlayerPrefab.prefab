@@ -929,6 +929,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1445780442902556
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4049688001133776}
+  m_Layer: 12
+  m_Name: Camera Follow 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1456835494334656
 GameObject:
   m_ObjectHideFlags: 1
@@ -2072,14 +2087,15 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1972690740273674
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4049688001133776}
+  - component: {fileID: 4297602786789884}
+  - component: {fileID: 114013045368175564}
   m_Layer: 12
-  m_Name: Camera Follow 1
+  m_Name: Camera Damp Follower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2177,7 +2193,7 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1972690740273674}
+  m_GameObject: {fileID: 1445780442902556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.033, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -2673,8 +2689,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4977438584599940}
+  - {fileID: 4297602786789884}
   - {fileID: 4812737961338504}
+  - {fileID: 4977438584599940}
   - {fileID: 224915681088362016}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2704,6 +2721,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4944580907772208}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4297602786789884
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972690740273674}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.033, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4258867082778132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4306015603385422
@@ -3810,7 +3840,7 @@ Transform:
   - {fileID: 4768265939044702}
   - {fileID: 4054528007214408}
   m_Father: {fileID: 4258867082778132}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4979744128844878
 Transform:
@@ -4035,8 +4065,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1224430383839750}
   serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 100
+  m_Mass: 1
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -4131,6 +4161,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114013045368175564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972690740273674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f47bad7efa5f614994dd0bef8165a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.2
+  CameraMoveSpeed: 0.75
+  cameraFollowObj1: {fileID: 1445780442902556}
+  cameraFollowObj2: {fileID: 0}
 --- !u!114 &114299601792735960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4250,7 +4295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47bad7efa5f614994dd0bef8165a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraMoveSpeed: 20
+  smoothTime: 0.5
+  CameraMoveSpeed: 0.75
   cameraFollowObj1: {fileID: 1972690740273674}
   cameraFollowObj2: {fileID: 0}
 --- !u!114 &114513081697733042
@@ -4288,13 +4334,15 @@ MonoBehaviour:
   m_MovingTurnSpeed: 500
   m_StationaryTurnSpeed: 500
   m_JumpPower: 6
-  m_GravityMultiplier: 2
+  m_GravityMultiplier: 4
   m_RunCycleLegOffset: 0.2
   m_MoveSpeedMultiplier: 0.1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
   MovementLocked: 0
   RotationLocked: 0
+  MaxSpeed: 18
+  m_IsGrounded: 0
 --- !u!114 &114541014061301468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5371,7 +5419,7 @@ RectTransform:
   - {fileID: 224366825719282490}
   - {fileID: 224041305175476666}
   m_Father: {fileID: 4258867082778132}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
