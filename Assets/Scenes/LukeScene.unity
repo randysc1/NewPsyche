@@ -284,6 +284,11 @@ Prefab:
       propertyPath: CameraMoveSpeed
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 114521702145436704, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: m_GravityMultiplier
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0

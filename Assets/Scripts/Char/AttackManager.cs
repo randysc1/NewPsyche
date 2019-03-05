@@ -274,7 +274,16 @@ public class AttackManager : MonoBehaviour {
         print("Finished charge");
         attackCharge = 0;
 
-        this.GetComponent<Rigidbody>().AddForce(this.transform.forward * 10, ForceMode.Impulse);
+        this.GetComponent<Rigidbody>().AddForce(this.transform.up * 10, ForceMode.Impulse);
+        this.GetComponent<Rigidbody>().AddForce(this.transform.forward * 20, ForceMode.Impulse);
+
+        bool store = TPC.m_IsGrounded;
+        TPC.CheckGroundStatus();
+        if (true != TPC.m_IsGrounded)
+        {
+            print("Grounded changed when we jumped");
+        }
+        meleeAttack(10);
 
         setNotCharging();
     }

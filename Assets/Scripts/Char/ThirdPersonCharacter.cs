@@ -27,7 +27,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
     private Vector3 lastMove;
     Rigidbody m_Rigidbody;
     Animator m_Animator;
-    bool m_IsGrounded;
+    public bool m_IsGrounded;
     float m_OrigGroundCheckDistance;
     const float k_Half = 0.5f;
     float m_LateralAmount;
@@ -107,105 +107,49 @@ public class ThirdPersonCharacter : MonoBehaviour {
         }
 
         // control and velocity handling is different when grounded and airborne:
-        if (m_IsGrounded)
+        if (!m_IsGrounded)
         {
-            //Does not handle grounded movement, only checks if we can jump and if we are jumping.
-            HandleGroundedMovement(crouch, jump);
-        }
-        else
-        {
-            //Applies gravity, checks ground.
             HandleAirborneMovement();
         }
 
         ScaleCapsuleForCrouching(crouch);
         PreventStandingInLowHeadroom();
 
-        if (MovementLocked)
+        //If we are locked or if we aren't on the ground don't worry about anim or moving
+        if (MovementLocked || !m_IsGrounded)
         {
             return;
         }
-        //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
-        Vector3 moving = (curMove * 50f);
-        Vector3 storeMove = moving;
-        Vector3 testImpulse = Vector3.zero; 
-        bool movingPositive = moving.x > 0;
+
+        curMove = (curMove * 50f);
+        Vector3 storeMove = curMove;
+        Vector3 negativeImpulse = Vector3.zero; 
+        bool movingPositive = curMove.x > 0;
         bool wasMovingPositive = lastMove.x > 0;
         //If they're both positive, but new is lesser
 
-        if (moving.magnitude < lastMove.magnitude)
+        if (curMove.magnitude < lastMove.magnitude)
         {
-            print("impulse applied");
             m_Rigidbody.velocity.Set(0f, 0f, 0f);
             m_Rigidbody.angularVelocity.Set(0f, 0f, 0f);
-            testImpulse = -((m_Rigidbody.mass * (m_Rigidbody.velocity * .1f)) / Time.deltaTime);
-            m_Rigidbody.AddForce(testImpulse);
+            negativeImpulse = -((m_Rigidbody.mass * (m_Rigidbody.velocity * .1f)) / Time.deltaTime);
+            m_Rigidbody.AddForce(negativeImpulse);
         }
-
-        /*if (moving.x < lastMove.x && movingPositive && wasMovingPositive)
-        {
-            print("Setting x to zero");
-
-            moving.x = 0;
-            //m_Rigidbody.velocity.Set(0, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
-            //m_Rigidbody.angularVelocity.Set(0, m_Rigidbody.angularVelocity.y, m_Rigidbody.angularVelocity.z);
-            testImpulse.x = -((m_Rigidbody.mass * (m_Rigidbody.velocity.x * .1f)) / Time.deltaTime);
-            m_Rigidbody.AddForce(testImpulse);
-
-            //If they're both negative, but new is lesser
-        }
-        else if (moving.x > lastMove.x && !movingPositive && !wasMovingPositive)
-        {
-            print("Setting x to zero");
-
-            moving.x = 0;
-            //m_Rigidbody.velocity.Set(0, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
-            //m_Rigidbody.angularVelocity.Set(0, m_Rigidbody.angularVelocity.y, m_Rigidbody.angularVelocity.z);
-            testImpulse.x = -((m_Rigidbody.mass * (m_Rigidbody.velocity.x * .1f)) / Time.deltaTime);
-            m_Rigidbody.AddForce(testImpulse);
-        }
-
-        movingPositive = moving.z > 0;
-        wasMovingPositive = lastMove.z > 0;
-
-        //If they're both positive, but new is lesser
-        if (moving.z < lastMove.z && movingPositive && wasMovingPositive)
-        {
-            print("Setting z to zero");
-            moving.z = 0;
-            //           m_Rigidbody.velocity.Set(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y, 0);
-            //           m_Rigidbody.angularVelocity.Set(m_Rigidbody.angularVelocity.x, m_Rigidbody.angularVelocity.y, 0);
-            testImpulse.z = -((m_Rigidbody.mass * (m_Rigidbody.velocity.z * .1f)) / Time.deltaTime);
-            m_Rigidbody.AddForce(testImpulse);
-
-            //If they're both negative, but new is lesser
-        }
-        else if (moving.z > lastMove.z && !movingPositive && !wasMovingPositive)
-        {
-            print("Setting z to zero");
-
-            moving.z = 0;
-            //            m_Rigidbody.velocity.Set(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y, 0);
-            //            m_Rigidbody.angularVelocity.Set(m_Rigidbody.angularVelocity.x, m_Rigidbody.angularVelocity.y, 0);
-            testImpulse.z = -((m_Rigidbody.mass * (m_Rigidbody.velocity.z * .1f)) / Time.deltaTime);
-            m_Rigidbody.AddForce(testImpulse);
-        }*/
 
         if (m_IsGrounded)
         {
-            moving.y = 0;
+            curMove.y = 0;
         }
         else
         {
-            moving.y -= m_GroundCheckDistance;
+            curMove.y -= m_GroundCheckDistance;
         }
 
         lastMove = storeMove;
 
-        moving.y = 0;
-        print(moving);
+        curMove.y = 0;
 
-        m_Rigidbody.AddForce(moving);
+        m_Rigidbody.AddForce(curMove);
 
         m_Rigidbody.velocity = Vector3.ClampMagnitude(m_Rigidbody.velocity, MaxSpeed);
 
@@ -303,16 +247,33 @@ public class ThirdPersonCharacter : MonoBehaviour {
             m_GroundCheckDistance = 0.1f;
         }
     }
-
+    
+    //Depreciated but saved in case team doesn't want it.
     public void OnAnimatorMove()
     {
+        return;
 
-        //m_Rigidbody.velocity = moving;
-       // m_Rigidbody.transform.position = moving;
+        if (MovementLocked)
+        {
+            return;
+        }
+        //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
+        Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
+        if (m_IsGrounded)
+        {
+            moving.y = 0;
+        }
+        else
+        {
+            moving.y -= m_GroundCheckDistance;
+        }
+        moving.y = 0;
+        m_Rigidbody.transform.position = moving;
+
     }
 
 
-    void CheckGroundStatus()
+    public void CheckGroundStatus()
     {
         RaycastHit hitInfo;
 #if UNITY_EDITOR
@@ -323,6 +284,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
         // it is also good to note that the transform position in the sample assets is at the base of the character
         if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
         {
+            print("Grounded is : " + m_IsGrounded);
             m_GroundNormal = hitInfo.normal;
             m_IsGrounded = true;
             m_Animator.applyRootMotion = true;
@@ -333,6 +295,9 @@ public class ThirdPersonCharacter : MonoBehaviour {
             m_GroundNormal = Vector3.up;
             m_Animator.applyRootMotion = false;
         }
+
+        print("Grounded is : " + m_IsGrounded);
+
     }
 
 
