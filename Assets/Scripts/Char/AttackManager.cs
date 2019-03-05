@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class AttackManager : MonoBehaviour {
     public GameObject tentaclePrefab2;
 
 
-    //After tweaking, set to private
+    //After tweaking, set to private, named as private
     public float BulletDamage;
     public float GrabSlashDamage;
     public bool shotgunEquipped = false;
@@ -37,9 +38,15 @@ public class AttackManager : MonoBehaviour {
     public float flashDelay;
     public float trapDelay;
     public float molotovDelay;
+    public float dashSlashDelay;
+    public float ChargeSpeed;
     private float tentacleDelay;
     private float attackCD;
     private float abilityCD;
+    private float attackCharge;
+    private float dashChargeAmount = 1;
+    private bool isCharging;
+    private KeyCode chargingButton; 
 
 
 
@@ -84,6 +91,26 @@ public class AttackManager : MonoBehaviour {
             return;
         }
 
+        if (isCharging)
+        {
+            if (Input.GetKeyUp(chargingButton))
+            {
+                setNotCharging();
+
+                //If we are still charging we don't want to allow attacks/abilities, so return.
+            } else
+            {
+                return;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            setCharging(KeyCode.Space, true, false);
+            StartCoroutine(dashSlash());
+            return;
+        }
+
         //Attack button Left Mouse
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -104,7 +131,7 @@ public class AttackManager : MonoBehaviour {
                     AOEAttack();
                     break;
                 default:
-                    print("Phase is invalid,");
+                    print("Phase " + PM.phase + " is invalid for mouse 1");
                     break;
 
             }
@@ -124,63 +151,132 @@ public class AttackManager : MonoBehaviour {
                     sniper();
                     break;
                 case 2:
+                    StartCoroutine(PistolSpray());
+                    break;
+                case 3:
+                    tentacleGrabShot();
+                    break;
+                default:
+                    print("Phase " + PM.phase + " is invalid for mouse 2");
+                    break;
+            }
+        }
+
+        //Ability 1 parse
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (abilityCD > 0)
+            {
+                return;
+            }
+
+            switch (PM.phase)
+            {
+                case 1:
+                    shotgun();
+                    break;
+                case 2:
                     molotov();
                     break;
                 case 3:
                     wraithShroud();
                     break;
                 default:
-                    print("Phase is invalid,");
+                    print("Phase " + PM.phase + " is invalid for key 1");
                     break;
             }
         }
 
-        //Test area for other attacks.
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            shotgun();
-        }
-
-        if (abilityCD > 0)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            tentacleGrabShot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartCoroutine(PistolSpray());
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            print("Miasma");
-            Miasma();
-        }
-
+        //Ability 2 parse
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            mine();
+            if (abilityCD > 0)
+            {
+                return;
+            }
+
+            switch (PM.phase)
+            {
+                case 1:
+                    mine();
+                    break;
+                case 2:
+                    Miasma();
+                    break;
+                case 3:
+                    wraithShroud();
+                    break;
+                default:
+                    print("Phase " + PM.phase + " is invalid for key 2");
+                    break;
+            }
         }
 
+        //Ability 3 parse
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            flash();
+            if (abilityCD > 0)
+            {
+                return;
+            }
+
+            switch (PM.phase)
+            {
+                case 1:
+                    flash();
+                    break;
+                case 2:
+                    trap();
+                    break;
+                case 3:
+                    wraithShroud();
+                    break;
+                default:
+                    print("Phase " + PM.phase + " is invalid for key 3");
+                    break;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            molotov();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+    }
+
+    private void setCharging(KeyCode inputKey, bool lockMove, bool lockRotation)
+    {
+        isCharging = true;
+        if (lockMove)
         {
-            trap();
+            TPC.MovementLocked = true;
         }
+        if (lockRotation)
+        {
+            TPC.RotationLocked = true;
+        }
+        chargingButton = inputKey;
+    }
+
+    private void setNotCharging()
+    {
+        isCharging = false;
+        TPC.MovementLocked = false;
+        TPC.RotationLocked = false;        
+        chargingButton = KeyCode.None;
+    }
+
+    private IEnumerator dashSlash()
+    {
+        while (attackCharge < dashChargeAmount)
+        {
+            //Hey Will, eventually we want to put some climbing variable here for the animation to play while charging various attacks. 
+            //I imagine it like the melee attack layer except with a float like walking rather than a bool.
+            yield return new WaitForFixedUpdate();
+            attackCharge += ChargeSpeed * Time.deltaTime;
+        }
+        print("Finished charge");
+        attackCharge = 0;
+
+        this.GetComponent<Rigidbody>().AddForce(this.transform.forward * 10, ForceMode.Impulse);
+
+        setNotCharging();
     }
 
     private void flash()

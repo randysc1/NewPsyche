@@ -4355,17 +4355,22 @@ MonoBehaviour:
   GrabSlashDamage: 8
   shotgunEquipped: 0
   numPellets: 10
+  numSprayBullets: 5
   CurShotSpeed: 10
   shotgunSpeed: 20
   throwPower: 10
   GrabMinimumDistance: 2
   shotgunDelay: 2
+  PistolSprayDelay: 0.3
+  PistolSpraySpread: 10
   rangedDelay: 0.5
   sniperDelay: 3
   mineDelay: 3
   flashDelay: 2
   trapDelay: 0
   molotovDelay: 0
+  dashSlashDelay: 0
+  ChargeSpeed: 1
 --- !u!114 &114645486621793878
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -197,8 +197,22 @@ public class PhaseManager : MonoBehaviour
         //Figure out how to find the mesh renderer first before doing DamageColor
         //StartCoroutine(DamageColor());
         //Change health/Ins values
-        curHealth -= howMuch;
-        curIns -= howMuch;
+        if (howMuch > curHealth)
+        {
+            curHealth = 0;
+        }
+        else
+        {
+            curHealth -= howMuch;
+        }
+        if (howMuch > curHealth)
+        {
+            curIns = 0;
+        }
+        else
+        {
+            curIns -= howMuch;
+        }
         curDelay = RegenDelay;
 
 
