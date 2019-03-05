@@ -5,6 +5,8 @@ using UnityEngine;
 public class FollowDualPlayer : MonoBehaviour
 {
 
+    private Vector3 curVelocity;
+    public float smoothTime;
     public float CameraMoveSpeed = 120.0f;
     public GameObject cameraFollowObj1;
     public GameObject cameraFollowObj2;
@@ -41,6 +43,7 @@ public class FollowDualPlayer : MonoBehaviour
         {
             return;
         }
-        transform.position = Vector3.MoveTowards(transform.position, target1.position, step);
+        //transform.position = Vector3.MoveTowards(transform.position, target1.position, step);
+        transform.position = Vector3.SmoothDamp(transform.position, target1.position, ref curVelocity, smoothTime);
     }
 }

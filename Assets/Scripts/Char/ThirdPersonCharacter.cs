@@ -22,7 +22,8 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public bool MovementLocked = false;
     public bool RotationLocked = false;
-    private bool paused; 
+    private bool paused;
+    private Vector3 lastMove;
     Rigidbody m_Rigidbody;
     Animator m_Animator;
     bool m_IsGrounded;
@@ -119,6 +120,82 @@ public class ThirdPersonCharacter : MonoBehaviour {
         ScaleCapsuleForCrouching(crouch);
         PreventStandingInLowHeadroom();
 
+        if (MovementLocked)
+        {
+            return;
+        }
+        //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
+        Vector3 moving = (curMove * 50f);
+        Vector3 storeMove = moving;
+        Vector3 testImpulse = Vector3.zero; 
+        bool movingPositive = moving.x > 0;
+        bool wasMovingPositive = lastMove.x > 0;
+        //If they're both positive, but new is lesser
+        if (moving.x < lastMove.x && movingPositive && wasMovingPositive)
+        {
+            print("Setting x to zero");
+
+            moving.x = 0;
+            //m_Rigidbody.velocity.Set(0, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
+            //m_Rigidbody.angularVelocity.Set(0, m_Rigidbody.angularVelocity.y, m_Rigidbody.angularVelocity.z);
+            testImpulse.x = -((m_Rigidbody.mass * m_Rigidbody.velocity.x) / Time.deltaTime);
+            m_Rigidbody.AddForce(testImpulse);
+
+            //If they're both negative, but new is lesser
+        }
+        else if (moving.x > lastMove.x && !movingPositive && !wasMovingPositive)
+        {
+            print("Setting x to zero");
+
+            moving.x = 0;
+            //m_Rigidbody.velocity.Set(0, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
+            //m_Rigidbody.angularVelocity.Set(0, m_Rigidbody.angularVelocity.y, m_Rigidbody.angularVelocity.z);
+            testImpulse.x = -((m_Rigidbody.mass * m_Rigidbody.velocity.x) / Time.deltaTime);
+            m_Rigidbody.AddForce(testImpulse);
+        }
+
+        movingPositive = moving.z > 0;
+        wasMovingPositive = lastMove.z > 0;
+
+        //If they're both positive, but new is lesser
+        if (moving.z < lastMove.z && movingPositive && wasMovingPositive)
+        {
+            print("Setting z to zero");
+            moving.z = 0;
+            //           m_Rigidbody.velocity.Set(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y, 0);
+            //           m_Rigidbody.angularVelocity.Set(m_Rigidbody.angularVelocity.x, m_Rigidbody.angularVelocity.y, 0);
+            testImpulse.z = -((m_Rigidbody.mass * m_Rigidbody.velocity.z) / Time.deltaTime);
+            m_Rigidbody.AddForce(testImpulse);
+
+            //If they're both negative, but new is lesser
+        }
+        else if (moving.z > lastMove.z && !movingPositive && !wasMovingPositive)
+        {
+            print("Setting z to zero");
+
+            moving.z = 0;
+            //            m_Rigidbody.velocity.Set(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y, 0);
+            //            m_Rigidbody.angularVelocity.Set(m_Rigidbody.angularVelocity.x, m_Rigidbody.angularVelocity.y, 0);
+            testImpulse.z = -((m_Rigidbody.mass * m_Rigidbody.velocity.z) / Time.deltaTime);
+            m_Rigidbody.AddForce(testImpulse);
+        }
+
+        if (m_IsGrounded)
+        {
+            moving.y = 0;
+        }
+        else
+        {
+            moving.y -= m_GroundCheckDistance;
+        }
+
+        lastMove = storeMove;
+
+        moving.y = 0;
+        print(moving);
+
+        m_Rigidbody.AddForce(moving);
+         
         // send input and other state parameters to the animator
         UpdateAnimator(move);
     }
@@ -165,14 +242,8 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     void UpdateAnimator(Vector3 move)
     {
-        //So this is where the biggest changes need to be made, currently it's on tank controls of forward/turn.
-        //at The Least we need to add a back, but optimally we need forward/left/right/back and the appropriate states.
-        // update the animator parameters
-
-        
         if (MovementLocked)
         {
-
             m_Animator.SetFloat("xMovement", 0, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("zMovement", 0, 0.1f, Time.deltaTime);
             return;
@@ -181,8 +252,6 @@ public class ThirdPersonCharacter : MonoBehaviour {
             m_Animator.SetFloat("xMovement", m_LateralAmount, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("zMovement", m_ForwardAmount, 0.1f, Time.deltaTime);
         }
-
-
 
         // the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
         // which affects the movement speed because of the root motion.
@@ -224,21 +293,9 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public void OnAnimatorMove()
     {
-        if (MovementLocked)
-        {
-            return;
-        }
-        //Vector3 moving = m_Rigidbody.transform.position + (curMove * m_MoveSpeedMultiplier);
-        Vector3 moving = (m_Rigidbody.transform.position + (curMove * .3f));
-        if (m_IsGrounded)
-        {
-            moving.y = 0;
-        } else
-        {
-            moving.y -= m_GroundCheckDistance;
-        }
-        moving.y = 0;
-        m_Rigidbody.transform.position = moving;
+
+        //m_Rigidbody.velocity = moving;
+       // m_Rigidbody.transform.position = moving;
     }
 
 

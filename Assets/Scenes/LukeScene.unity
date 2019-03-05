@@ -241,29 +241,88 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
+    - target: {fileID: 54627464146628718, guid: 3fbe940378b62a14bb22313b0949f826,
         type: 2}
-      propertyPath: PistolSprayDelay
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: PistolSpraySpread
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
-        type: 2}
-      propertyPath: ChargeSpeed
+      propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114593171759091820, guid: 3fbe940378b62a14bb22313b0949f826,
+    - target: {fileID: 54627464146628718, guid: 3fbe940378b62a14bb22313b0949f826,
         type: 2}
-      propertyPath: dashSlashDelay
-      value: 0
+      propertyPath: m_Drag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812737961338504, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224915681088362016, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977438584599940, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114490553490564024, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: cameraFollowObj1
+      value: 
+      objectReference: {fileID: 1014956897}
+    - target: {fileID: 114490553490564024, guid: 3fbe940378b62a14bb22313b0949f826,
+        type: 2}
+      propertyPath: smoothTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fbe940378b62a14bb22313b0949f826, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1014956897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1972690740273674, guid: 3fbe940378b62a14bb22313b0949f826,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1014956898}
+  - component: {fileID: 1014956899}
+  m_Layer: 12
+  m_Name: Camera Damp Follower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1014956898
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4049688001133776, guid: 3fbe940378b62a14bb22313b0949f826,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1014956897}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.033, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1663075437}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1014956899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1014956897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f47bad7efa5f614994dd0bef8165a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 0.5
+  CameraMoveSpeed: 120
+  cameraFollowObj1: {fileID: 2147117127}
+  cameraFollowObj2: {fileID: 0}
 --- !u!1 &1148353456
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +505,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1663075437 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4258867082778132, guid: 3fbe940378b62a14bb22313b0949f826,
+    type: 2}
+  m_PrefabInternal: {fileID: 629756369}
 --- !u!1 &1712569917
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,3 +840,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &2147117127 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1972690740273674, guid: 3fbe940378b62a14bb22313b0949f826,
+    type: 2}
+  m_PrefabInternal: {fileID: 629756369}
