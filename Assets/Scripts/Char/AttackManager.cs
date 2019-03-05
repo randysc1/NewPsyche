@@ -204,7 +204,8 @@ public class AttackManager : MonoBehaviour {
                     Miasma();
                     break;
                 case 3:
-                    wraithShroud();
+                    setCharging(KeyCode.Alpha2, true, false);
+                    StartCoroutine(dashSlash());
                     break;
                 default:
                     print("Phase " + PM.phase + " is invalid for key 2");
