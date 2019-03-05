@@ -22,6 +22,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
 
     public bool MovementLocked = false;
     public bool RotationLocked = false;
+    public int MaxSpeed;
     private bool paused;
     private Vector3 lastMove;
     Rigidbody m_Rigidbody;
@@ -131,14 +132,24 @@ public class ThirdPersonCharacter : MonoBehaviour {
         bool movingPositive = moving.x > 0;
         bool wasMovingPositive = lastMove.x > 0;
         //If they're both positive, but new is lesser
-        if (moving.x < lastMove.x && movingPositive && wasMovingPositive)
+
+        if (moving.magnitude < lastMove.magnitude)
+        {
+            print("impulse applied");
+            m_Rigidbody.velocity.Set(0f, 0f, 0f);
+            m_Rigidbody.angularVelocity.Set(0f, 0f, 0f);
+            testImpulse = -((m_Rigidbody.mass * (m_Rigidbody.velocity * .1f)) / Time.deltaTime);
+            m_Rigidbody.AddForce(testImpulse);
+        }
+
+        /*if (moving.x < lastMove.x && movingPositive && wasMovingPositive)
         {
             print("Setting x to zero");
 
             moving.x = 0;
             //m_Rigidbody.velocity.Set(0, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
             //m_Rigidbody.angularVelocity.Set(0, m_Rigidbody.angularVelocity.y, m_Rigidbody.angularVelocity.z);
-            testImpulse.x = -((m_Rigidbody.mass * m_Rigidbody.velocity.x) / Time.deltaTime);
+            testImpulse.x = -((m_Rigidbody.mass * (m_Rigidbody.velocity.x * .1f)) / Time.deltaTime);
             m_Rigidbody.AddForce(testImpulse);
 
             //If they're both negative, but new is lesser
@@ -150,7 +161,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
             moving.x = 0;
             //m_Rigidbody.velocity.Set(0, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
             //m_Rigidbody.angularVelocity.Set(0, m_Rigidbody.angularVelocity.y, m_Rigidbody.angularVelocity.z);
-            testImpulse.x = -((m_Rigidbody.mass * m_Rigidbody.velocity.x) / Time.deltaTime);
+            testImpulse.x = -((m_Rigidbody.mass * (m_Rigidbody.velocity.x * .1f)) / Time.deltaTime);
             m_Rigidbody.AddForce(testImpulse);
         }
 
@@ -164,7 +175,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
             moving.z = 0;
             //           m_Rigidbody.velocity.Set(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y, 0);
             //           m_Rigidbody.angularVelocity.Set(m_Rigidbody.angularVelocity.x, m_Rigidbody.angularVelocity.y, 0);
-            testImpulse.z = -((m_Rigidbody.mass * m_Rigidbody.velocity.z) / Time.deltaTime);
+            testImpulse.z = -((m_Rigidbody.mass * (m_Rigidbody.velocity.z * .1f)) / Time.deltaTime);
             m_Rigidbody.AddForce(testImpulse);
 
             //If they're both negative, but new is lesser
@@ -176,9 +187,9 @@ public class ThirdPersonCharacter : MonoBehaviour {
             moving.z = 0;
             //            m_Rigidbody.velocity.Set(m_Rigidbody.velocity.x, m_Rigidbody.velocity.y, 0);
             //            m_Rigidbody.angularVelocity.Set(m_Rigidbody.angularVelocity.x, m_Rigidbody.angularVelocity.y, 0);
-            testImpulse.z = -((m_Rigidbody.mass * m_Rigidbody.velocity.z) / Time.deltaTime);
+            testImpulse.z = -((m_Rigidbody.mass * (m_Rigidbody.velocity.z * .1f)) / Time.deltaTime);
             m_Rigidbody.AddForce(testImpulse);
-        }
+        }*/
 
         if (m_IsGrounded)
         {
@@ -195,7 +206,9 @@ public class ThirdPersonCharacter : MonoBehaviour {
         print(moving);
 
         m_Rigidbody.AddForce(moving);
-         
+
+        m_Rigidbody.velocity = Vector3.ClampMagnitude(m_Rigidbody.velocity, MaxSpeed);
+
         // send input and other state parameters to the animator
         UpdateAnimator(move);
     }
