@@ -248,7 +248,6 @@ public class PhaseManager : MonoBehaviour
 
     private void ChangeToPhase(int newPhase)
     {
-        print("Changing to phase: " + newPhase);
         curPhaseObj.SetActive(false);
         if (newPhase == 1)
         {
