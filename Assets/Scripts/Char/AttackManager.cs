@@ -59,6 +59,7 @@ public class AttackManager : MonoBehaviour {
     //When the melee animation changes, change this so the box only spawns for this long.
     private float meleeAnimDuration = .633f;
     private bool meleeing = false;
+    public bool CanAttack = true;
 
     private PhaseManager PM;
     private ThirdPersonCharacter TPC;
@@ -79,14 +80,17 @@ public class AttackManager : MonoBehaviour {
     void Update()
     {
 
-
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            PM.TakeDamage(30);
+        }
         if (abilityCD > 0 || attackCD > 0)
         {
             abilityCD -= Time.deltaTime;
             attackCD -= Time.deltaTime;
         }
 
-        if (gameObject.GetComponent<PhaseManager>().Stunned)
+        if (gameObject.GetComponent<PhaseManager>().Stunned || !CanAttack)
         {
             return;
         }
@@ -118,7 +122,6 @@ public class AttackManager : MonoBehaviour {
             {
                 return;
             }
-
             switch (PM.phase)
             {
                 case 1:

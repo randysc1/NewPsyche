@@ -52,7 +52,7 @@ public class PhaseManager : MonoBehaviour
 
     private AttackManager AM;
 
-
+    ThirdPersonCharacter TPC;
 
 
 
@@ -63,8 +63,8 @@ public class PhaseManager : MonoBehaviour
         AM = transform.gameObject.GetComponent<AttackManager>();
         //We should try to find a prev phase if we have different level loading, otherwise set to 1 I guess?
         phase = 1;
-        
 
+        TPC = gameObject.GetComponent<ThirdPersonCharacter>();
         anim = GetComponent<Animator>();
         player = GameObject.Find("/PlayerPrefab/Player");
         phase1 = GameObject.Find("/PlayerPrefab/Player/Ethan");
@@ -246,10 +246,11 @@ public class PhaseManager : MonoBehaviour
         IBar.transform.localScale = new Vector3((curIns / maxIns), IBar.transform.localScale.y, 1);
     }
 
-    private void ChangeToPhase(int phase)
+    private void ChangeToPhase(int newPhase)
     {
+        print("Changing to phase: " + newPhase);
         curPhaseObj.SetActive(false);
-        if (phase == 1)
+        if (newPhase == 1)
         {
             phase1.SetActive(true);
             anim.runtimeAnimatorController = p1Controller;
@@ -257,7 +258,7 @@ public class PhaseManager : MonoBehaviour
             phase = 1;
             curPhaseObj = phase1;
         }
-        else if (phase == 2)
+        else if (newPhase == 2)
         {
             phase2.SetActive(true);
             anim.runtimeAnimatorController = p2Controller;
@@ -266,7 +267,7 @@ public class PhaseManager : MonoBehaviour
             curPhaseObj = phase2;
         }
         //Don't have phase 3 yet, so set to 2
-        else if (phase == 3)
+        else if (newPhase == 3)
         {
             curPhaseObj.SetActive(false);
             phase2.SetActive(true);
@@ -298,6 +299,9 @@ public class PhaseManager : MonoBehaviour
     {
         GOText.SetActive(true);
 
+        TPC.MovementLocked = true;
+        TPC.RotationLocked = true;
+        AM.CanAttack = false;
         // .. increment a timer to count up to restarting.
         restartTimer += Time.deltaTime;
 

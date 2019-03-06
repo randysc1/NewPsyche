@@ -42,7 +42,6 @@ public class Weapon : MonoBehaviour {
         {
             if (!isEnemyWeapon)
             {
-                print("Hit enemy!");
                 EnemyHealth Enemy = other.gameObject.GetComponent<EnemyHealth>();
 
                 Enemy.TakeDamage(damage);
