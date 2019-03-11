@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour {
 
@@ -11,14 +12,17 @@ public class EnemyHealth : MonoBehaviour {
     private int timer;
     public bool Dead = false;
     public bool Stunned;
+    public float StunDuration;
     private float onFire;
     private int colorChanged = 0;
     private Color storageColor;
+    private NavMeshAgent NMA;
 
 	// Use this for initialization
 	void Start () {
         CurHealth = StartHealth;
         storageColor = GetComponentInChildren<MeshRenderer>().material.color;
+        NMA = GetComponent<NavMeshAgent>();
 	}
 	
 	// Update is called once per frame
@@ -39,6 +43,8 @@ public class EnemyHealth : MonoBehaviour {
     public void SetStunned(float duration)
     {
         Stunned = true;
+        StunDuration = duration;
+        NMA.destination = transform.position;
         StartCoroutine(RemoveStunned(duration));
     }
 
@@ -50,6 +56,8 @@ public class EnemyHealth : MonoBehaviour {
 
         yield return new WaitForSecondsRealtime(duration);
         Stunned = false;
+        NMA.destination = GameObject.Find("Player").transform.position;
+        StunDuration = 0;
         colorChanged--;
 
         if (colorChanged == 0)
