@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114126369078270282}
   - component: {fileID: 114862871560429774}
   - component: {fileID: 54078056416725906}
+  - component: {fileID: 195926720057853714}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Enemy
@@ -117,6 +118,7 @@ MonoBehaviour:
   CurHealth: 10
   Dead: 0
   Stunned: 0
+  StunDuration: 0
 --- !u!114 &114862871560429774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,12 +130,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e217b5f04e1ac64d98202390749742d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRangeMin: 4
+  attackRangeMax: 8
   MoveSpeed: 4
   MinDist: 4
   MaxDist: 6
   Bullet: {fileID: 1135259138703104, guid: 298ebde56a4eede4292d3f740b74f13d, type: 2}
   delayToDestroyBullet: 2
   ShotSpeed: 6
+  MoveWhileAttacking: 0
 --- !u!136 &136416149898664186
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -147,3 +152,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &195926720057853714
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843337743989062}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 240
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
