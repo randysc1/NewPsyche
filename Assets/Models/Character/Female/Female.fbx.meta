@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 9d899f5ff5bd7164ebed963c8fa682e6
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bolt
+    100002: elbow.l.001
+    100004: elbow.r.001
+    100006: eye.l
+    100008: eye.r
+    100010: //RootNode
+    100012: FemaleMesh
+    100014: FemaleRig
+    100016: foot.l.001
+    100018: foot.l.002
+    100020: foot.r.001
+    100022: foot.r.002
+    100024: hair.l.001
+    100026: hair.l.002
+    100028: hair.r.001
+    100030: hair.r.002
+    100032: head
+    100034: ikarm.pole.l.001
+    100036: ikarm.pole.r.001
+    100038: ikarm.target.l.001
+    100040: ikarm.target.r.001
+    100042: ikfoot.target.l.001
+    100044: ikfoot.target.r.001
+    100046: ikleg.pole.l.001
+    100048: ikleg.pole.r.001
+    100050: ikleg.target.l.001
+    100052: ikleg.target.r.001
+    100054: knee.l.001
+    100056: knee.r.001
+    100058: middle.l.001
+    100060: middle.l.002
+    100062: middle.l.003
+    100064: middle.r.001
+    100066: middle.r.002
+    100068: middle.r.003
+    100070: Mosin Root
+    100072: MosinNagant
+    100074: neck
+    100076: pinky.l.001
+    100078: pinky.l.002
+    100080: pinky.l.003
+    100082: pinky.r.001
+    100084: pinky.r.002
+    100086: pinky.r.003
+    100088: pointer.l.001
+    100090: pointer.l.002
+    100092: pointer.l.003
+    100094: pointer.r.001
+    100096: pointer.r.002
+    100098: pointer.r.003
+    100100: ring.l.001
+    100102: ring.l.002
+    100104: ring.l.003
+    100106: ring.r.001
+    100108: ring.r.002
+    100110: ring.r.003
+    100112: Root
+    100114: shoulder.l.001
+    100116: shoulder.r.001
+    100118: spine.1
+    100120: spine.2
+    100122: thigh.l.001
+    100124: thigh.r.001
+    100126: thumb.l.001
+    100128: thumb.l.002
+    100130: thumb.l.003
+    100132: thumb.r.001
+    100134: thumb.r.002
+    100136: thumb.r.003
+    100138: Trigger
+    100140: wrist.l.001
+    100142: wrist.r.001
+    400000: Bolt
+    400002: elbow.l.001
+    400004: elbow.r.001
+    400006: eye.l
+    400008: eye.r
+    400010: //RootNode
+    400012: FemaleMesh
+    400014: FemaleRig
+    400016: foot.l.001
+    400018: foot.l.002
+    400020: foot.r.001
+    400022: foot.r.002
+    400024: hair.l.001
+    400026: hair.l.002
+    400028: hair.r.001
+    400030: hair.r.002
+    400032: head
+    400034: ikarm.pole.l.001
+    400036: ikarm.pole.r.001
+    400038: ikarm.target.l.001
+    400040: ikarm.target.r.001
+    400042: ikfoot.target.l.001
+    400044: ikfoot.target.r.001
+    400046: ikleg.pole.l.001
+    400048: ikleg.pole.r.001
+    400050: ikleg.target.l.001
+    400052: ikleg.target.r.001
+    400054: knee.l.001
+    400056: knee.r.001
+    400058: middle.l.001
+    400060: middle.l.002
+    400062: middle.l.003
+    400064: middle.r.001
+    400066: middle.r.002
+    400068: middle.r.003
+    400070: Mosin Root
+    400072: MosinNagant
+    400074: neck
+    400076: pinky.l.001
+    400078: pinky.l.002
+    400080: pinky.l.003
+    400082: pinky.r.001
+    400084: pinky.r.002
+    400086: pinky.r.003
+    400088: pointer.l.001
+    400090: pointer.l.002
+    400092: pointer.l.003
+    400094: pointer.r.001
+    400096: pointer.r.002
+    400098: pointer.r.003
+    400100: ring.l.001
+    400102: ring.l.002
+    400104: ring.l.003
+    400106: ring.r.001
+    400108: ring.r.002
+    400110: ring.r.003
+    400112: Root
+    400114: shoulder.l.001
+    400116: shoulder.r.001
+    400118: spine.1
+    400120: spine.2
+    400122: thigh.l.001
+    400124: thigh.r.001
+    400126: thumb.l.001
+    400128: thumb.l.002
+    400130: thumb.l.003
+    400132: thumb.r.001
+    400134: thumb.r.002
+    400136: thumb.r.003
+    400138: Trigger
+    400140: wrist.l.001
+    400142: wrist.r.001
+    2100000: Wood.001
+    2100002: Metal.001
+    2100004: Metal2.001
+    2100006: No Name
+    4300000: MosinNagant
+    4300002: FemaleMesh
+    9500000: //RootNode
+    13700000: FemaleMesh
+    13700002: MosinNagant
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
