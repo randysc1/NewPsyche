@@ -104,10 +104,37 @@ public class Ranger : MonoBehaviour {
                 continue;
             }
 
+            //If within range, attack.
+            if (Vector3.Distance(Player.transform.position, transform.position) >= attackRangeMin && Vector3.Distance(Player.transform.position, transform.position) <= attackRangeMax)
+            {
+                Attack();
+            }
+
             //If we aren't attacking or move while attack, update where to move.
             if (!attacking || MoveWhileAttacking)
             {
-                NMAgent.destination = Player.transform.position;
+                //If out of max range, get closer
+                if (Vector3.Distance(Player.transform.position, transform.position) >= attackRangeMax)
+                {
+                    NMAgent.destination = Player.transform.position;
+                }
+                //If within min range, check if backwards is a valid point, then move backwards if possible.
+                else if (Vector3.Distance(Player.transform.position, transform.position) <= attackRangeMin)
+                {
+                    Vector3 awayVec = transform.position - Player.transform.position;
+                    awayVec.Normalize();
+
+                    Vector3 awayPoint = transform.position + awayVec;
+
+                    NavMeshHit navHit;
+
+                    bool isValid = NavMesh.Raycast(awayPoint, awayPoint - (Vector3.down * 2), out navHit, NavMesh.AllAreas);
+
+                    NMAgent.destination = navHit.position;
+
+                    Debug.DrawRay(navHit.position, Vector3.down * 2, Color.green, 2f);
+
+                }
 
                 //If we are attacking and don't move during it, the destination is here
             }
@@ -116,12 +143,7 @@ public class Ranger : MonoBehaviour {
                 NMAgent.destination = transform.position;
             }
 
-            //If within range, attack.
-            if (Vector3.Distance(Player.transform.position, transform.position) >= attackRangeMin && Vector3.Distance(Player.transform.position, transform.position) <= attackRangeMax)
-            {
-                NMAgent.destination = transform.position;
-                Attack();
-            }
+
             yield return new WaitForSecondsRealtime(.5f);
         }
     }
@@ -139,8 +161,6 @@ public class Ranger : MonoBehaviour {
 
 
         playerTrans = Player.transform;
-        //transform.LookAt(playerTrans.position + new Vector3(0,1,0));
-        //transform.LookAt(new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z));
 
         tempShot = Instantiate(Bullet, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
@@ -157,7 +177,7 @@ public class Ranger : MonoBehaviour {
 
     IEnumerator AttackDeactivation()
     {
-        yield return new WaitForSecondsRealtime(delayToDestroyBullet);
+        yield return new WaitForSecondsRealtime(.5f);
         attacking = false;
     }
 }

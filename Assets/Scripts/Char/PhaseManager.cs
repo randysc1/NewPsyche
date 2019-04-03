@@ -85,13 +85,13 @@ public class PhaseManager : MonoBehaviour
 
         HBar = GameObject.Find("HealthBar");
         IBar = GameObject.Find("InsanityBar");
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (curHealth <= 0 || curIns <= 0)
+        //Bit redundant with the take damage already checking, keep?
+        if (curHealth <= 0)
         {
             die();
             return;
@@ -190,6 +190,20 @@ public class PhaseManager : MonoBehaviour
         Stunned = false;
     }
 
+    public void removeIns(float howMuch)
+    {
+        if(curIns - howMuch < 0)
+        {
+            curIns = 0;
+        } else
+        {
+            curIns = curIns - howMuch;
+        }
+        checkPhaseTransition();
+        RefreshHealthAndIns();
+
+    }
+
 
     public void TakeDamage(float howMuch)
     {
@@ -205,7 +219,7 @@ public class PhaseManager : MonoBehaviour
         {
             curHealth -= howMuch;
         }
-        if (howMuch > curHealth)
+        if (howMuch > curIns)
         {
             curIns = 0;
         }
@@ -217,27 +231,33 @@ public class PhaseManager : MonoBehaviour
 
 
         //Handle Death
-        if (curHealth <= 0 || curIns <= 0)
+        if (curHealth <= 0)
         {
             die();
         }
 
-
-        //If your insanity is above threshold 2, should nothing happen?
-        if (curIns > phase2Threshold)
-        {
-            
-        //If damaged under the threshold, enter phase 2
-        } else if (curIns <= phase2Threshold && curIns > phase3Threshold && phase!=2)
-        {
-            ChangeToPhase(2);
-        } else if(curIns <= phase3Threshold && phase!=3)
-        {
-            ChangeToPhase(3);
-        }
+        checkPhaseTransition();
 
         RefreshHealthAndIns();
 
+    }
+
+    private void checkPhaseTransition()
+    {
+        //If your insanity is above threshold 2, should nothing happen?
+        if (curIns > phase2Threshold)
+        {
+
+            //If damaged under the threshold, enter phase 2
+        }
+        else if (curIns <= phase2Threshold && curIns > phase3Threshold && phase != 2)
+        {
+            ChangeToPhase(2);
+        }
+        else if (curIns <= phase3Threshold && phase != 3)
+        {
+            ChangeToPhase(3);
+        }
     }
 
     private void RefreshHealthAndIns()

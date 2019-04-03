@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour {
     public float damage;
     public bool shouldDissapate = false;
     public bool isEnemyWeapon = false;
+    public bool isPlayerWeapon = false;
     //Type?
 	// Use this for initialization
 	void Start () {
@@ -34,10 +35,12 @@ public class Weapon : MonoBehaviour {
         if(other.transform.tag == "Player")
         {
             //print("Hit player !");
+            if (!isPlayerWeapon)
+            {
+                PhaseManager PM = other.gameObject.GetComponent<PhaseManager>();
 
-            PhaseManager PM = other.gameObject.GetComponent<PhaseManager>();
-
-            PM.TakeDamage(damage);
+                PM.TakeDamage(damage);
+            }
         } else
         {
             if (!isEnemyWeapon)
