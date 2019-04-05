@@ -125,12 +125,17 @@ public class AttackManager : MonoBehaviour {
             switch (PM.phase)
             {
                 case 1:
+                    PM.removeIns(2f);
                     rangedAttack();
                     break;
                 case 2:
+                    PM.removeIns(5f);
+
                     meleeAttack();
                     break;
                 case 3:
+                    PM.removeIns(10f);
+
                     AOEAttack();
                     break;
                 default:
@@ -151,12 +156,18 @@ public class AttackManager : MonoBehaviour {
             switch (PM.phase)
             {
                 case 1:
+                    PM.removeIns(-5f);
+
                     sniper();
                     break;
                 case 2:
+                    PM.removeIns(-5f);
+
                     StartCoroutine(PistolSpray());
                     break;
                 case 3:
+                    PM.removeIns(-10f);
+
                     tentacleGrabShot();
                     break;
                 default:
@@ -176,12 +187,17 @@ public class AttackManager : MonoBehaviour {
             switch (PM.phase)
             {
                 case 1:
+                    PM.removeIns(2f);
+
                     shotgun();
                     break;
                 case 2:
+                    PM.removeIns(-15f);
+
                     molotov();
                     break;
                 case 3:
+                    PM.removeIns(-30f);
                     wraithShroud();
                     break;
                 default:
@@ -201,12 +217,15 @@ public class AttackManager : MonoBehaviour {
             switch (PM.phase)
             {
                 case 1:
+                    PM.removeIns(2f);
                     mine();
                     break;
                 case 2:
+                    PM.removeIns(12f);
                     Miasma();
                     break;
                 case 3:
+                    PM.removeIns(30f);
                     setCharging(KeyCode.Alpha2, true, false);
                     StartCoroutine(dashSlash());
                     break;
@@ -382,7 +401,7 @@ public class AttackManager : MonoBehaviour {
             tempShot.SetActive(true);
             Weapon Weap = tempShot.GetComponent<Weapon>();
             Weap.damage = BulletDamage / 2;
-            tempShot.transform.Rotate(0, i * PistolSpraySpread, 0);
+            tempShot.transform.Rotate(0, (i * PistolSpraySpread) - (numSprayBullets/2 * PistolSpraySpread), 0);
 
             tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;
             Physics.IgnoreCollision(tempShot.GetComponent<Collider>(), GetComponent<Collider>());
