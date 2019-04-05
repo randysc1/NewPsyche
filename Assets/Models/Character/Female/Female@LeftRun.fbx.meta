@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: 4d7aa5840e6c00547acf298194b8c02f
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bolt
+    100002: elbow.l.001
+    100004: elbow.r.001
+    100006: eye.l
+    100008: eye.r
+    100010: //RootNode
+    100012: foot.l.001
+    100014: foot.l.002
+    100016: foot.r.001
+    100018: foot.r.002
+    100020: hair.l.001
+    100022: hair.l.002
+    100024: hair.r.001
+    100026: hair.r.002
+    100028: head
+    100030: ikarm.pole.l.001
+    100032: ikarm.pole.r.001
+    100034: ikarm.target.l.001
+    100036: ikarm.target.r.001
+    100038: ikfoot.target.l.001
+    100040: ikfoot.target.r.001
+    100042: ikleg.pole.l.001
+    100044: ikleg.pole.r.001
+    100046: ikleg.target.l.001
+    100048: ikleg.target.r.001
+    100050: knee.l.001
+    100052: knee.r.001
+    100054: middle.l.001
+    100056: middle.l.002
+    100058: middle.l.003
+    100060: middle.r.001
+    100062: middle.r.002
+    100064: middle.r.003
+    100066: Mosin Root
+    100068: neck
+    100070: pinky.l.001
+    100072: pinky.l.002
+    100074: pinky.l.003
+    100076: pinky.r.001
+    100078: pinky.r.002
+    100080: pinky.r.003
+    100082: pointer.l.001
+    100084: pointer.l.002
+    100086: pointer.l.003
+    100088: pointer.r.001
+    100090: pointer.r.002
+    100092: pointer.r.003
+    100094: ring.l.001
+    100096: ring.l.002
+    100098: ring.l.003
+    100100: ring.r.001
+    100102: ring.r.002
+    100104: ring.r.003
+    100106: Root
+    100108: shoulder.l.001
+    100110: shoulder.r.001
+    100112: spine.1
+    100114: spine.2
+    100116: thigh.l.001
+    100118: thigh.r.001
+    100120: thumb.l.001
+    100122: thumb.l.002
+    100124: thumb.l.003
+    100126: thumb.r.001
+    100128: thumb.r.002
+    100130: thumb.r.003
+    100132: Trigger
+    100134: wrist.l.001
+    100136: wrist.r.001
+    100138: FemaleRig
+    400000: Bolt
+    400002: elbow.l.001
+    400004: elbow.r.001
+    400006: eye.l
+    400008: eye.r
+    400010: //RootNode
+    400012: foot.l.001
+    400014: foot.l.002
+    400016: foot.r.001
+    400018: foot.r.002
+    400020: hair.l.001
+    400022: hair.l.002
+    400024: hair.r.001
+    400026: hair.r.002
+    400028: head
+    400030: ikarm.pole.l.001
+    400032: ikarm.pole.r.001
+    400034: ikarm.target.l.001
+    400036: ikarm.target.r.001
+    400038: ikfoot.target.l.001
+    400040: ikfoot.target.r.001
+    400042: ikleg.pole.l.001
+    400044: ikleg.pole.r.001
+    400046: ikleg.target.l.001
+    400048: ikleg.target.r.001
+    400050: knee.l.001
+    400052: knee.r.001
+    400054: middle.l.001
+    400056: middle.l.002
+    400058: middle.l.003
+    400060: middle.r.001
+    400062: middle.r.002
+    400064: middle.r.003
+    400066: Mosin Root
+    400068: neck
+    400070: pinky.l.001
+    400072: pinky.l.002
+    400074: pinky.l.003
+    400076: pinky.r.001
+    400078: pinky.r.002
+    400080: pinky.r.003
+    400082: pointer.l.001
+    400084: pointer.l.002
+    400086: pointer.l.003
+    400088: pointer.r.001
+    400090: pointer.r.002
+    400092: pointer.r.003
+    400094: ring.l.001
+    400096: ring.l.002
+    400098: ring.l.003
+    400100: ring.r.001
+    400102: ring.r.002
+    400104: ring.r.003
+    400106: Root
+    400108: shoulder.l.001
+    400110: shoulder.r.001
+    400112: spine.1
+    400114: spine.2
+    400116: thigh.l.001
+    400118: thigh.r.001
+    400120: thumb.l.001
+    400122: thumb.l.002
+    400124: thumb.l.003
+    400126: thumb.r.001
+    400128: thumb.r.002
+    400130: thumb.r.003
+    400132: Trigger
+    400134: wrist.l.001
+    400136: wrist.r.001
+    400138: FemaleRig
+    7400000: LeftRun
+    7400002: FemaleRig|HandtrackerAction
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LeftRun
+      takeName: FemaleRig|FemaleRigAction
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: FemaleRig|HandtrackerAction
+      takeName: FemaleRig|HandtrackerAction
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
