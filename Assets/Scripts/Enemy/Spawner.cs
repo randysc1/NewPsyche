@@ -33,6 +33,5 @@ public class Spawner : MonoBehaviour {
 
             yield return new WaitForSecondsRealtime(8);
         }
-
     }
 }

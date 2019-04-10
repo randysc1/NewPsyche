@@ -18,8 +18,9 @@ public class EnemyHealth : MonoBehaviour {
     private Color storageColor;
     private NavMeshAgent NMA;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         CurHealth = StartHealth;
         storageColor = GetComponentInChildren<MeshRenderer>().material.color;
         NMA = GetComponent<NavMeshAgent>();
@@ -33,6 +34,10 @@ public class EnemyHealth : MonoBehaviour {
             TakeDamage(1 * Time.deltaTime);
         }
 	}
+
+    public void SetStartingHealth(float newHealth){
+        CurHealth = newHealth;
+    }
 
 
     public void SetFire(float duration)
