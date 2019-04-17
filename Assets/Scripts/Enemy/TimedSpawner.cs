@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class TimedSpawner : MonoBehaviour {
 
+    //Delay between activate and actual spawning.
     public float activationDelay;
-    public float spawnRate;
+    //Time between spawns
+    public float spawnRate = 5;
     public float scaleRate;
+    private float countToSpawn;
     public GameObject TrackerPrefab;
     public GameObject FTrackerPrefab;
     public GameObject RangerPrefab;
@@ -14,13 +17,14 @@ public class TimedSpawner : MonoBehaviour {
     public GameObject TRangerPrefab;
     public GameObject JustSpawned;
     public string NameToActivate;
+    public bool IsActive;
+    private GameObject currentPrefab;
     private SpawnScaler Scaler;
 
     // Use this for initialization
     void Start()
     {
         Scaler = GameObject.Find("SpawnerScaler").GetComponent<SpawnScaler>();
-        StartCoroutine(countdown());
     }
 
     // Update is called once per frame
@@ -31,29 +35,29 @@ public class TimedSpawner : MonoBehaviour {
 
     IEnumerator countdown()
     {
-        while (Scaler.ActivationDelay > 0)
+        while (activationDelay > 0)
         {
-            Scaler.ActivationDelay -= Time.deltaTime;
-            if (Scaler.ActivationDelay < 0)
+            activationDelay -= Time.deltaTime;
+            if (activationDelay < 0)
             {
                 switch (NameToActivate)
                 {
                     case "TrackerPrefab":
-                        SpawnTracker(spawnRate);
+                        currentPrefab = TrackerPrefab;
                         break;
 
                     case "FTrackerPrefab":
-                        SpawnFTracker(spawnRate);
+                        currentPrefab = FTrackerPrefab;
                         break;
 
                     case "RangerPrefab":
-                        SpawnRanger(spawnRate);
+                        currentPrefab = RangerPrefab;
                         break;
                     case "FRangerPrefab":
-                        SpawnFRanger(spawnRate);
+                        currentPrefab = FRangerPrefab;
                         break;
                     case "TRangerPrefab":
-                        SpawnTRanger(spawnRate);
+                        currentPrefab = TRangerPrefab;
                         break;
 
                     default:
@@ -65,27 +69,33 @@ public class TimedSpawner : MonoBehaviour {
             {
                 yield return new WaitForFixedUpdate();
             }
+            SpawnEnemy(countToSpawn);
         }
     }
 
     public void Deactivate()
-    {
+    { 
         StopAllCoroutines();
+        IsActive = false;
     }
 
     public void Activate()
     {
+        IsActive = true;
+
         StartCoroutine(countdown());
     }
 
     public void Activate(string newEnemy)
     {
+        IsActive = true;
         NameToActivate = newEnemy;
         StartCoroutine(countdown());
     }
 
     public void Activate(string newEnemy, float newCD)
     {
+        IsActive = true;
         NameToActivate = newEnemy;
         activationDelay = newCD;
         StartCoroutine(countdown());
@@ -94,8 +104,18 @@ public class TimedSpawner : MonoBehaviour {
 
     public void Activate(string newEnemy, float newCD, int countSpawned)
     {
+        IsActive = true;
         NameToActivate = newEnemy;
         activationDelay = newCD;
+        countToSpawn = countSpawned;
+        StartCoroutine(countdown());
+    }
+
+    public void Activate(string newEnemy, int countSpawned)
+    {
+        IsActive = true;
+        NameToActivate = newEnemy;
+        countToSpawn = countSpawned;
         StartCoroutine(countdown());
     }
 
@@ -114,16 +134,15 @@ public class TimedSpawner : MonoBehaviour {
         }
     }
 
-    IEnumerator SpawnEnemy(GameObject enemyType, float spawnDelay)
+    IEnumerator SpawnEnemy(float spawnDelay)
     {
         while (true)
         {
             if (JustSpawned != null && JustSpawned.transform.position == transform.position + (transform.forward) + new Vector3(0, .8f, 0))
-            {
-            }
+            {}
             else
             {
-                JustSpawned = Instantiate(enemyType, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
+                JustSpawned = Instantiate(currentPrefab, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
                 JustSpawned.GetComponent<EnemyHealth>().SetStartingHealth((Time.time) * Scaler.ScalingRate);
                 JustSpawned.SetActive(true);
             }
@@ -132,22 +151,24 @@ public class TimedSpawner : MonoBehaviour {
         }
     }
 
-    IEnumerator SpawnEnemy(GameObject enemyType, int countSpawned)
+    IEnumerator SpawnEnemy(int countSpawned)
     {
         while (countSpawned-->0)
         {
             if (JustSpawned != null && JustSpawned.transform.position == transform.position + (transform.forward) + new Vector3(0, .8f, 0))
             {
+                countSpawned++;
             }
             else
             {
-                JustSpawned = Instantiate(enemyType, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
+                JustSpawned = Instantiate(currentPrefab, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
                 JustSpawned.GetComponent<EnemyHealth>().SetStartingHealth((Time.time) * Scaler.ScalingRate);
                 JustSpawned.SetActive(true);
             }
 
             yield return new WaitForSecondsRealtime(Scaler.SpawnRate);
         }
+        IsActive = false;
     }
 
 
@@ -160,14 +181,6 @@ public class TimedSpawner : MonoBehaviour {
         SpawnEnemy(TrackerPrefab);
     }
 
-    /*
-     * Spawns tracker enemy every 'input' seconds.
-     * */
-    public void SpawnTracker(float spawnDelay)
-    {
-        StartCoroutine(SpawnEnemy(TrackerPrefab, Scaler.HowManyToSpawn));
-    }
-
 
     /*
  * Spawns fast tracker enemy.
@@ -178,14 +191,6 @@ public class TimedSpawner : MonoBehaviour {
         SpawnEnemy(FTrackerPrefab);
     }
 
-    /*
-     * Spawns fast tracker enemy every 'input' seconds.
-     * */
-    public void SpawnFTracker(float spawnDelay)
-    {
-        StartCoroutine(SpawnEnemy(FTrackerPrefab, Scaler.HowManyToSpawn));
-    }
-
 
     /*
 * Spawns ranger enemy.
@@ -194,14 +199,6 @@ public class TimedSpawner : MonoBehaviour {
     public void SpawnRanger()
     {
         SpawnEnemy(RangerPrefab);
-    }
-
-    /*
-     * Spawns ranger enemy every 'input' seconds.
-     * */
-    public void SpawnRanger(float spawnDelay)
-    {
-        StartCoroutine(SpawnEnemy(RangerPrefab, Scaler.HowManyToSpawn));
     }
 
 
@@ -215,15 +212,6 @@ public class TimedSpawner : MonoBehaviour {
     }
 
     /*
-     * Spawns fast ranger enemy every 'input' seconds.
-     * */
-    public void SpawnFRanger(float spawnDelay)
-    {
-        StartCoroutine(SpawnEnemy(FRangerPrefab, Scaler.HowManyToSpawn));
-    }
-
-
-    /*
 * Spawns teleporting ranger enemy.
 * 
 * */
@@ -232,11 +220,4 @@ public class TimedSpawner : MonoBehaviour {
         SpawnEnemy(TRangerPrefab);
     }
 
-    /*
-     * Spawns teleporting ranger enemy every 'input' seconds.
-     * */
-    public void SpawnTRanger(float spawnDelay)
-    {
-        StartCoroutine(SpawnEnemy(TRangerPrefab, Scaler.HowManyToSpawn));
-    }
 }

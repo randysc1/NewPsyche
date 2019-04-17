@@ -6,8 +6,6 @@ public class SpawnScaler : MonoBehaviour {
 
     public float ScalingRate;
     public float SpawnRate;
-    public float HowManyToSpawn;
-    public float ActivationDelay;
 
 	// Use this for initialization
 	void Start () {

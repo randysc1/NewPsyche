@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4456966681198860}
-  - component: {fileID: 114859610835343894}
   - component: {fileID: 114796088461650218}
   m_Layer: 0
   m_Name: AdvancedSpawner
@@ -52,6 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8d88b12b03d1348ba513c48be8c10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationDelay: 0
+  spawnRate: 5
+  scaleRate: 0
   TrackerPrefab: {fileID: 1941825085857458, guid: 4d442ebe2740672419e507a440a4d06c,
     type: 2}
   FTrackerPrefab: {fileID: 1536503118261006, guid: 8e2e24c83d902ce4b8c55ed29ee7b551,
@@ -63,16 +65,5 @@ MonoBehaviour:
   TRangerPrefab: {fileID: 1519236297957908, guid: 75bd3af861488154cb0aa97dfcd0f7cf,
     type: 2}
   JustSpawned: {fileID: 0}
---- !u!114 &114859610835343894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092946380677148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5676e94d485e7d345b91f4fa2096a3f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemySpawned: {fileID: 0}
-  JustSpawned: {fileID: 0}
+  NameToActivate: 
+  IsActive: 0
