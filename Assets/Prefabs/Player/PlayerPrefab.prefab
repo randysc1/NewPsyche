@@ -831,7 +831,6 @@ GameObject:
   - component: {fileID: 4688719743350720}
   - component: {fileID: 33023728357242024}
   - component: {fileID: 23709774407138616}
-  - component: {fileID: 64198362083659064}
   m_Layer: 12
   m_Name: Plane
   m_TagString: Untagged
@@ -2704,7 +2703,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464380648377858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0064845085, y: 3.73, z: -3.66}
+  m_LocalPosition: {x: -17.96187, y: -0.7907364, z: 13.920128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4297602786789884}
@@ -4162,20 +4161,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!64 &64198362083659064
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1366238134416686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65327207959107664
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4356,6 +4341,7 @@ MonoBehaviour:
   damage: 5
   shouldDissapate: 0
   isEnemyWeapon: 0
+  isPlayerWeapon: 0
 --- !u!114 &114421482327396474
 MonoBehaviour:
   m_ObjectHideFlags: 1

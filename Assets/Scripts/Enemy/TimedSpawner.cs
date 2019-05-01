@@ -9,7 +9,7 @@ public class TimedSpawner : MonoBehaviour {
     //Time between spawns
     public float spawnRate = 5;
     public float scaleRate;
-    private float countToSpawn;
+    private int countToSpawn;
     public GameObject TrackerPrefab;
     public GameObject FTrackerPrefab;
     public GameObject RangerPrefab;
@@ -18,60 +18,38 @@ public class TimedSpawner : MonoBehaviour {
     public GameObject JustSpawned;
     public string NameToActivate;
     public bool IsActive;
+    [SerializeField]
     private GameObject currentPrefab;
-    private SpawnScaler Scaler;
+    private SpawnerMeta Scaler;
+    private bool spawningStill;
+    private Queue<string> toSpawn = new Queue<string>();
+    private Queue<int> toSpawnNumber = new Queue<int>();
 
     // Use this for initialization
     void Start()
     {
-        Scaler = GameObject.Find("SpawnerScaler").GetComponent<SpawnScaler>();
+        Scaler = GameObject.Find("LevelSpawnMeta").GetComponent<SpawnerMeta>();
+        
+        StartCoroutine(DelayedUpdate());
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
-    IEnumerator countdown()
+    IEnumerator DelayedUpdate()
     {
-        while (activationDelay > 0)
+        while (this.isActiveAndEnabled)
         {
-            activationDelay -= Time.deltaTime;
-            if (activationDelay < 0)
+            yield return new WaitForSecondsRealtime(10f);
+            if (!spawningStill)
             {
-                switch (NameToActivate)
-                {
-                    case "TrackerPrefab":
-                        currentPrefab = TrackerPrefab;
-                        break;
-
-                    case "FTrackerPrefab":
-                        currentPrefab = FTrackerPrefab;
-                        break;
-
-                    case "RangerPrefab":
-                        currentPrefab = RangerPrefab;
-                        break;
-                    case "FRangerPrefab":
-                        currentPrefab = FRangerPrefab;
-                        break;
-                    case "TRangerPrefab":
-                        currentPrefab = TRangerPrefab;
-                        break;
-
-                    default:
-                        print("Invalid input for spawner, make sure NameToActivate matches one of the gameobject var names above");
-                        break;
-                }
+                spawnQueue();
             }
-            else
-            {
-                yield return new WaitForFixedUpdate();
-            }
-            SpawnEnemy(countToSpawn);
         }
     }
+
 
     public void Deactivate()
     { 
@@ -79,48 +57,109 @@ public class TimedSpawner : MonoBehaviour {
         IsActive = false;
     }
 
-    public void Activate()
+    public void NewName(string newEnemy)
     {
-        IsActive = true;
-
-        StartCoroutine(countdown());
-    }
-
-    public void Activate(string newEnemy)
-    {
-        IsActive = true;
+        if (this.IsActive)
+        {
+            //Debug.Log("Attempted name change while still spawning, race condition for enemyHealth.myName and actual prefab used");
+        }
         NameToActivate = newEnemy;
-        StartCoroutine(countdown());
+        switch (newEnemy)
+        {
+            case "TrackerPrefab":
+                 currentPrefab = TrackerPrefab;
+                break;
+            case "FTrackerPrefab":
+                currentPrefab = FTrackerPrefab;
+                break;
+            case "RangerPrefab":
+                currentPrefab = RangerPrefab;
+                break;
+            case "FRangerPrefab":
+                currentPrefab = FRangerPrefab;
+                break;
+            case "TRangerPrefab":
+                currentPrefab = TRangerPrefab;
+                break;
+            default:
+                Debug.Log("Invalid input for spawner, make sure NameToActivate matches one of the gameobject var names above");
+                break;
+            }        
     }
 
-    public void Activate(string newEnemy, float newCD)
+    public IEnumerator SpawnEnemy(int countSpawned)
+    {
+        spawningStill = true;
+        //We have this here so they will not continue scaling just because of a delay in spawn. 
+        float scaleStopped = Scaler.ScalingRate;
+        while (countSpawned-- > 0)
+        {
+            if (JustSpawned != null && JustSpawned.transform.position == transform.position + (transform.forward) + new Vector3(0, .8f, 0))
+            {
+                countSpawned++;
+            }
+            else
+            {
+                JustSpawned = Instantiate(currentPrefab, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
+                JustSpawned.GetComponent<EnemyHealth>().SetStartingHealth((Time.time) * scaleStopped);
+                JustSpawned.GetComponent<EnemyHealth>().MyName = NameToActivate;
+                JustSpawned.GetComponent<EnemyHealth>().SpawnerMeta = Scaler;
+                JustSpawned.SetActive(true);
+            }
+
+            yield return new WaitForSecondsRealtime(Scaler.SpawnRate);
+        }
+        IsActive = toSpawn.Count != 0;
+        spawningStill = false;
+    }
+
+    public void AddQueue(string newEnemy, int countSpawned)
     {
         IsActive = true;
-        NameToActivate = newEnemy;
-        activationDelay = newCD;
-        StartCoroutine(countdown());
-
+        toSpawn.Enqueue(newEnemy);
+        toSpawnNumber.Enqueue(countSpawned);
     }
 
-    public void Activate(string newEnemy, float newCD, int countSpawned)
+    public void spawnQueue()
     {
-        IsActive = true;
+        if(toSpawn.Count == 0)
+        {
+            return;
+        }
+        string newEnemy = toSpawn.Dequeue();
+
         NameToActivate = newEnemy;
-        activationDelay = newCD;
-        countToSpawn = countSpawned;
-        StartCoroutine(countdown());
+
+        int howMany = toSpawnNumber.Dequeue();
+
+        switch (newEnemy)
+        {
+            case "TrackerPrefab":
+                currentPrefab = TrackerPrefab;
+                break;
+            case "FTrackerPrefab":
+                currentPrefab = FTrackerPrefab;
+                break;
+            case "RangerPrefab":
+                currentPrefab = RangerPrefab;
+                break;
+            case "FRangerPrefab":
+                currentPrefab = FRangerPrefab;
+                break;
+            case "TRangerPrefab":
+
+                currentPrefab = TRangerPrefab;
+                break;
+            default:
+                Debug.Log("Invalid input for spawner, make sure NameToActivate matches one of the gameobject var names above");
+                break;
+        }
+
+        StartCoroutine(SpawnEnemy(howMany));
     }
 
-    public void Activate(string newEnemy, int countSpawned)
-    {
-        IsActive = true;
-        NameToActivate = newEnemy;
-        countToSpawn = countSpawned;
-        StartCoroutine(countdown());
-    }
 
-
-    //base spawn enemy.
+    //base spawn enemy. Will not spawn if last spawn is too close.
     private void SpawnEnemy(GameObject enemyType)
     {
         if (JustSpawned != null && JustSpawned.transform.position == transform.position + (transform.forward) + new Vector3(0, .8f, 0))
@@ -132,92 +171,9 @@ public class TimedSpawner : MonoBehaviour {
             JustSpawned.GetComponent<EnemyHealth>().SetStartingHealth((Time.time) * Scaler.ScalingRate);
             JustSpawned.SetActive(true);
         }
-    }
-
-    IEnumerator SpawnEnemy(float spawnDelay)
-    {
-        while (true)
-        {
-            if (JustSpawned != null && JustSpawned.transform.position == transform.position + (transform.forward) + new Vector3(0, .8f, 0))
-            {}
-            else
-            {
-                JustSpawned = Instantiate(currentPrefab, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
-                JustSpawned.GetComponent<EnemyHealth>().SetStartingHealth((Time.time) * Scaler.ScalingRate);
-                JustSpawned.SetActive(true);
-            }
-
-            yield return new WaitForSecondsRealtime(Scaler.SpawnRate);
-        }
-    }
-
-    IEnumerator SpawnEnemy(int countSpawned)
-    {
-        while (countSpawned-->0)
-        {
-            if (JustSpawned != null && JustSpawned.transform.position == transform.position + (transform.forward) + new Vector3(0, .8f, 0))
-            {
-                countSpawned++;
-            }
-            else
-            {
-                JustSpawned = Instantiate(currentPrefab, transform.position + (transform.forward) + new Vector3(0, .8f, 0), transform.rotation, this.transform);
-                JustSpawned.GetComponent<EnemyHealth>().SetStartingHealth((Time.time) * Scaler.ScalingRate);
-                JustSpawned.SetActive(true);
-            }
-
-            yield return new WaitForSecondsRealtime(Scaler.SpawnRate);
-        }
-        IsActive = false;
+        IsActive = toSpawn.Count != 0;
     }
 
 
-    /*
-     * Spawns tracker enemy.
-     * 
-     * */
-    public void SpawnTracker()
-    {
-        SpawnEnemy(TrackerPrefab);
-    }
-
-
-    /*
- * Spawns fast tracker enemy.
- * 
- * */
-    public void SpawnFTracker()
-    {
-        SpawnEnemy(FTrackerPrefab);
-    }
-
-
-    /*
-* Spawns ranger enemy.
-* 
-* */
-    public void SpawnRanger()
-    {
-        SpawnEnemy(RangerPrefab);
-    }
-
-
-    /*
-* Spawns fast ranger enemy.
-* 
-* */
-    public void SpawnFRanger()
-    {
-        SpawnEnemy(FRangerPrefab);
-    }
-
-    /*
-* Spawns teleporting ranger enemy.
-* 
-* */
-    public void SpawnTRanger()
-    {
-        SpawnEnemy(TRangerPrefab);
-    }
 
 }

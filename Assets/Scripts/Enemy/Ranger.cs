@@ -41,12 +41,6 @@ public class Ranger : MonoBehaviour {
         StartCoroutine(delayedUpdate());
 
         return;
-
-        string[] layerString = new string[] { "Player", "Ground" };
-        sightMask = LayerMask.GetMask(layerString);
-        //GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-        myHealth = this.transform.GetComponent<EnemyHealth>();
-        Player = Players[0];
     }
 
     // Update is called once per frame

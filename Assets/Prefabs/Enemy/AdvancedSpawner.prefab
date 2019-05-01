@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114796088461650218}
   m_Layer: 0
   m_Name: AdvancedSpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
