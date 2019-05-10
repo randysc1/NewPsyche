@@ -42,10 +42,13 @@ public class LevelEnemyDispenser : MonoBehaviour {
         GameObject[] allSpawners = (GameObject[]) allSpawnersBase.Clone();
 
         //If the number of spawners found is less than 3, use all 3.
-        if (allSpawners.Length <= 3)
+        if (allSpawners.Length < 3)
         {
             Debug.Log("Please Add more than 3 total Advanced spawners in the level");
             Debug.Break();
+        } else if (allSpawners.Length == 3)
+        {
+            return allSpawners;
         }
 
         GameObject[] farthestSpawners = new GameObject[3];
