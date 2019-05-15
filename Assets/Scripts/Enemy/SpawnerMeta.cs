@@ -9,7 +9,7 @@ public class SpawnerMeta : MonoBehaviour {
     //Exposed variables for Ben/Will to tweak per level without entering the code, as requested.
     public float ScalingRate;
     public float SpawnRate;
-    public float TimeBetweenSpawnRounds;
+    public float TimeBetweenUpdateCheck;
     public int MaxSpawnPerRound;
     public float HowManyRoundsTillEnemyIncrease;
 
@@ -48,7 +48,7 @@ public class SpawnerMeta : MonoBehaviour {
     {
         while (this.isActiveAndEnabled)
         {            
-            yield return new WaitForSecondsRealtime(TimeBetweenSpawnRounds);
+            yield return new WaitForSecondsRealtime(TimeBetweenUpdateCheck);
             checkDead();
             dispenseEnemies();
         }

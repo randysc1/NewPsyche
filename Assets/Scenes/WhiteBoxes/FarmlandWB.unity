@@ -217,6 +217,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114261225887602996, guid: e2878f6ef34414a43903cf0ae4317d39,
+        type: 2}
+      propertyPath: SpawnRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114261225887602996, guid: e2878f6ef34414a43903cf0ae4317d39,
+        type: 2}
+      propertyPath: TimeBetweenSpawnRounds
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114261225887602996, guid: e2878f6ef34414a43903cf0ae4317d39,
+        type: 2}
+      propertyPath: TimeBetweenUpdateCheck
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2878f6ef34414a43903cf0ae4317d39, type: 2}
   m_IsPrefabParent: 0
