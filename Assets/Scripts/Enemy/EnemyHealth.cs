@@ -2,32 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour {
 
     public float StartHealth;
     public float CurHealth;
+    public string MyName;
     //Use this for invuln window later
     //private bool isDamaged = false;
     private int timer;
     public bool Dead = false;
     public bool Stunned;
     public float StunDuration;
+    public class EnemyEvent : UnityEvent<string> { } //empty class; just needs to exist
     private float onFire;
     private int colorChanged = 0;
     private Color storageColor;
     private NavMeshAgent NMA;
-
+    public SpawnerMeta SpawnerMeta;
 
     // Use this for initialization
     void Start () {
         CurHealth = StartHealth;
         storageColor = GetComponentInChildren<MeshRenderer>().material.color;
         NMA = GetComponent<NavMeshAgent>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+// Update is called once per frame
+void Update () {
 		if(onFire > 0)
         {
             onFire -= Time.deltaTime;
@@ -84,6 +87,8 @@ public class EnemyHealth : MonoBehaviour {
         {
             this.gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             Dead = true;
+            SpawnerMeta.OnEnemyDeath(MyName);
+
             Destroy(this.gameObject,1);
         }
     }

@@ -31,46 +31,11 @@ public class Tracker : MonoBehaviour {
         StartCoroutine(delayedUpdate());
 
         return;
-
-        //Depreciated prev move system, 
-        string[] layerString = new string[] { "Player", "Ground" };
-        sightMask = LayerMask.GetMask(layerString);
-        //GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-        myHealth = this.transform.GetComponent<EnemyHealth>();
-        Player = Players[0];
 	}
 
     // Update is called once per frame
     void Update()
     {
-        return;
-        if (myHealth.Dead || myHealth.Stunned)
-        {
-            return;
-        }
-        playerTrans = Player.transform;
-        //transform.LookAt(playerTrans.position + new Vector3(0,1,0));
-        transform.LookAt(new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z));
-
-        return;
-        //depreciated old move system.
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, sightDistance, sightMask))
-        {
-            if (hit.collider.gameObject.tag != "Player")
-            {
-                return;
-            }
-
-            if (Vector3.Distance(transform.position, playerTrans.position) >= MinDist || attacking)
-            {
-
-                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-            } else
-            {
-                Attack();
-            }
-        }
     }
 
     IEnumerator delayedUpdate()

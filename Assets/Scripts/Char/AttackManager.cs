@@ -374,6 +374,8 @@ public class AttackManager : MonoBehaviour {
     private void rangedAttack()
     {
         attackCD = rangedDelay;
+        anim.SetFloat("ASM", 2);
+        anim.SetTrigger("Attack");
         tempShot = Instantiate(curBullModel, this.transform.position + (transform.forward / 2) + new Vector3(0, .8f, 0), transform.rotation, null);
         tempShot.SetActive(true);
         tempShot.GetComponent<Rigidbody>().velocity = tempShot.transform.forward * CurShotSpeed;

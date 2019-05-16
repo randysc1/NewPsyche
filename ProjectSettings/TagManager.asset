@@ -14,6 +14,7 @@ TagManager:
   - Enemy
   - HB
   - GameManager
+  - Spawner
   layers:
   - Default
   - TransparentFX

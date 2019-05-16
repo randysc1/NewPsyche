@@ -67,7 +67,7 @@ public class PhaseManager : MonoBehaviour
         TPC = gameObject.GetComponent<ThirdPersonCharacter>();
         anim = GetComponent<Animator>();
         player = GameObject.Find("/PlayerPrefab/Player");
-        phase1 = GameObject.Find("/PlayerPrefab/Player/Ethan");
+        phase1 = GameObject.Find("/PlayerPrefab/Player/Female");
         p1Anim = phase1.GetComponent<Animator>();
         p1Controller = p1Anim.runtimeAnimatorController;
         p1Avatar = p1Anim.avatar;

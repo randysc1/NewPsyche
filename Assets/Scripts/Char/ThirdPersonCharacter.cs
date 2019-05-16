@@ -124,8 +124,7 @@ public class ThirdPersonCharacter : MonoBehaviour {
         curMove = (curMove * 50f);
         Vector3 storeMove = curMove;
         Vector3 negativeImpulse = Vector3.zero; 
-        bool movingPositive = curMove.x > 0;
-        bool wasMovingPositive = lastMove.x > 0;
+
         //If they're both positive, but new is lesser
 
         if (curMove.magnitude < lastMove.magnitude)
