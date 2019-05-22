@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Female Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: FemaleMesh
+    m_Weight: 0
+  - m_Path: FemaleRig
+    m_Weight: 1
+  - m_Path: FemaleRig/ikarm.pole.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikarm.pole.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikarm.target.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikarm.target.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikfoot.target.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikfoot.target.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikleg.pole.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikleg.pole.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikleg.target.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/ikleg.target.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Mosin Root
+    m_Weight: 0
+  - m_Path: FemaleRig/Mosin Root/Bolt
+    m_Weight: 0
+  - m_Path: FemaleRig/Mosin Root/Trigger
+    m_Weight: 0
+  - m_Path: FemaleRig/Root
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/spine.1
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head/eye.l
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head/eye.r
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head/hair.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head/hair.l.001/hair.l.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head/hair.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/neck/head/hair.r.001/hair.r.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/middle.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/middle.l.001/middle.l.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/middle.l.001/middle.l.002/middle.l.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/pinky.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/pinky.l.001/pinky.l.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/pinky.l.001/pinky.l.002/pinky.l.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/pointer.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/pointer.l.001/pointer.l.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/pointer.l.001/pointer.l.002/pointer.l.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/ring.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/ring.l.001/ring.l.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/ring.l.001/ring.l.002/ring.l.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/thumb.l.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/thumb.l.001/thumb.l.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.l.001/elbow.l.001/wrist.l.001/thumb.l.001/thumb.l.002/thumb.l.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/middle.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/middle.r.001/middle.r.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/middle.r.001/middle.r.002/middle.r.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/pinky.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/pinky.r.001/pinky.r.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/pinky.r.001/pinky.r.002/pinky.r.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/pointer.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/pointer.r.001/pointer.r.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/pointer.r.001/pointer.r.002/pointer.r.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/ring.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/ring.r.001/ring.r.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/ring.r.001/ring.r.002/ring.r.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/thumb.r.001
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/thumb.r.001/thumb.r.002
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/spine.1/spine.2/shoulder.r.001/elbow.r.001/wrist.r.001/thumb.r.001/thumb.r.002/thumb.r.003
+    m_Weight: 1
+  - m_Path: FemaleRig/Root/thigh.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.l.001/knee.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.l.001/knee.l.001/foot.l.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.l.001/knee.l.001/foot.l.001/foot.l.002
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.r.001/knee.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.r.001/knee.r.001/foot.r.001
+    m_Weight: 0
+  - m_Path: FemaleRig/Root/thigh.r.001/knee.r.001/foot.r.001/foot.r.002
+    m_Weight: 0
+  - m_Path: MosinNagant
+    m_Weight: 0
