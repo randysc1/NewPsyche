@@ -51,6 +51,9 @@ public class MusicManager : MonoBehaviour {
 	
 	void Update () {
 		if (Time.time >= nextEndTime && musicPlaying) {
+			float destroyTime = activeSources[0].clip.length - activeSources[0].time;
+			Destroy(activeSources[0].gameObject, destroyTime);
+			Destroy(activeSources[1].gameObject, destroyTime);
 			PlayNewTrack();
 		}
 		if (Time.time >= nextOutTime && musicPlaying) {
@@ -114,12 +117,13 @@ public class MusicManager : MonoBehaviour {
 		freshMusicSource.volume = intensity;
 		activeSources[1] = freshMusicSource;
 
-		activeSources[0].Play();
-		activeSources[1].Play();
-
 		SetNextEndTime();
 		SetNextOutTime();
 		SetNextBeat();
+
+		activeSources[0].Play();
+		activeSources[1].Play();
+
 		cueNewPool = false;
 	}
 
