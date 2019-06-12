@@ -11,16 +11,17 @@ public class EnemyHealth : MonoBehaviour {
     public string MyName;
     //Use this for invuln window later
     //private bool isDamaged = false;
-    private int timer;
     public bool Dead = false;
     public bool Stunned;
     public float StunDuration;
     public class EnemyEvent : UnityEvent<string> { } //empty class; just needs to exist
+    public SpawnerMeta SpawnerMeta;
+    private int timer;
     private float onFire;
     private int colorChanged = 0;
     private Color storageColor;
     private NavMeshAgent NMA;
-    public SpawnerMeta SpawnerMeta;
+    private bool knockedBack;
 
     // Use this for initialization
     void Start () {
@@ -109,5 +110,35 @@ void Update () {
         {
             myMesh.material.color = storageColor;
         }
+    }
+
+    private updateVector(Vector3 newImpact)
+    {
+        curKnockback.x  + curKnockback.x 
+    }
+
+    public IEnumerator PushBack(float forceOfBullet, Vector3 newImpact)
+    {
+
+        knockedBack = true;
+        updateVector(newImpact);
+
+
+        NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+        float speedStore, angularSpeed, acceleration;
+        speedStore = navAgent.speed;
+        angularSpeed = navAgent.angularSpeed;//Keeps the enemy facing forwad rther than spinning
+        acceleration = navAgent.acceleration;
+
+        navAgent.speed = 10;
+        navAgent.angularSpeed = 0;//Keeps the enemy facing forwad rther than spinning
+        navAgent.acceleration = 20;
+
+        yield return new WaitForSeconds(0.2f); //Only knock the enemy back for a short time    
+
+        //Reset to default values
+        navAgent.speed = 4;
+        navAgent.angularSpeed = 180;
+        navAgent.acceleration = 10;
     }
 }

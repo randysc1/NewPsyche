@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Weapon : MonoBehaviour {
 
     public float damage;
+    public float ForceOfBullet = 100000;
     public bool shouldDissapate = false;
     public bool isEnemyWeapon = false;
     public bool isPlayerWeapon = false;
+    private GameObject EO;
     //Type?
 	// Use this for initialization
 	void Start () {
@@ -48,6 +51,8 @@ public class Weapon : MonoBehaviour {
                 EnemyHealth Enemy = other.gameObject.GetComponent<EnemyHealth>();
 
                 Enemy.TakeDamage(damage);
+
+                StartCoroutine(Enemy.PushBack(ForceOfBullet));
             }
         }
         if (shouldDissapate)
@@ -55,4 +60,6 @@ public class Weapon : MonoBehaviour {
             Destroy(this.gameObject,.0f);
         }
     }
+
 }
+

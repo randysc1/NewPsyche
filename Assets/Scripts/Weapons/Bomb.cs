@@ -97,7 +97,6 @@ public class Bomb : MonoBehaviour {
 
     IEnumerator pulseExplosion()
     {
-        print("Got to pulse");
         float i = NumOfPulses;
         ParticleSystem PS = GetComponent<ParticleSystem>();
 
@@ -108,7 +107,6 @@ public class Bomb : MonoBehaviour {
         while (i > 0)
         {
             yield return new WaitForSecondsRealtime(.5f);
-            print("exploding : " + i);
             explode();
             PS.Play();
             i--;
