@@ -52,7 +52,7 @@ public class Weapon : MonoBehaviour {
 
                 Enemy.TakeDamage(damage);
 
-                StartCoroutine(Enemy.PushBack(ForceOfBullet));
+                StartCoroutine(Enemy.PushBack(ForceOfBullet, this.GetComponent<Rigidbody>().velocity));
             }
         }
         if (shouldDissapate)

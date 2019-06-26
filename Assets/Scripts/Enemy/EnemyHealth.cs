@@ -22,6 +22,7 @@ public class EnemyHealth : MonoBehaviour {
     private Color storageColor;
     private NavMeshAgent NMA;
     private bool knockedBack;
+    private Vector3 curKnockback;
 
     // Use this for initialization
     void Start () {
@@ -36,6 +37,13 @@ void Update () {
         {
             onFire -= Time.deltaTime;
             TakeDamage(1 * Time.deltaTime);
+        } else if(knockedBack)
+        {
+            if (this.GetComponent<Rigidbody>().velocity.x < .2f && this.GetComponent<Rigidbody>().velocity.y < .2f)
+            {
+                knockedBack = false;
+                this.GetComponent<NavMeshAgent>().enabled = true;
+            }
         }
 	}
 
@@ -112,18 +120,23 @@ void Update () {
         }
     }
 
-    private updateVector(Vector3 newImpact)
+    private void updateVector(Vector3 newImpact)
     {
-        curKnockback.x  + curKnockback.x 
+        curKnockback.x += newImpact.x;
+        curKnockback.z += newImpact.z;
     }
 
-    public IEnumerator PushBack(float forceOfBullet, Vector3 newImpact)
+    public void PushBack(float forceOfBullet, Vector3 newImpact)
     {
 
+        NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+        navAgent.enabled = false;
         knockedBack = true;
         updateVector(newImpact);
 
+        
 
+        /*
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
         float speedStore, angularSpeed, acceleration;
         speedStore = navAgent.speed;
@@ -140,5 +153,6 @@ void Update () {
         navAgent.speed = 4;
         navAgent.angularSpeed = 180;
         navAgent.acceleration = 10;
+        */
     }
 }
