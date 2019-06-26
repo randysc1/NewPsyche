@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b76982f6b0479c44b63606ef345636d, type: 3}
-  m_Name: Init
+  m_Name: init 1
   m_EditorClassIdentifier: 
   musicStemLow: {fileID: 0}
   musicStemHigh: {fileID: 0}
