@@ -1,98 +1,82 @@
 fileFormatVersion: 2
-guid: f899516429265d74497dc560dd494972
+guid: bd9b70084b458d240a7f4145fee96623
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: arm1.l
-    100004: arm1.r
-    100006: arm2.l
-    100008: arm2.r
-    100010: arm3.l
-    100012: arm3.r
-    100014: arm4.l
-    100016: arm4.r
-    100018: arm5.l
-    100020: arm5.r
-    100022: arm6.l
-    100024: arm6.r
-    100026: arm7.l
-    100028: arm7.r
-    100030: Bone
-    100032: crvTentacle.l
-    100034: crvTentacle.r
-    100036: foot1.l
-    100038: foot1.r
-    100040: foot2.l
-    100042: foot2.r
-    100044: ik.target.l
-    100046: ik.target.r
-    100048: ikarm1.target.l
-    100050: ikarm1.target.r
-    100052: ikfoot.target.l
-    100054: ikfoot.target.r
-    100056: knee.l
-    100058: knee.r
-    100060: Leggs
-    100062: Leggs.Rig
-    100064: Root
-    100066: spine2
-    100068: spint1
-    100070: thigh.l
-    100072: thigh.r
-    400000: //RootNode
-    400002: arm1.l
-    400004: arm1.r
-    400006: arm2.l
-    400008: arm2.r
-    400010: arm3.l
-    400012: arm3.r
-    400014: arm4.l
-    400016: arm4.r
-    400018: arm5.l
-    400020: arm5.r
-    400022: arm6.l
-    400024: arm6.r
-    400026: arm7.l
-    400028: arm7.r
-    400030: Bone
-    400032: crvTentacle.l
-    400034: crvTentacle.r
-    400036: foot1.l
-    400038: foot1.r
-    400040: foot2.l
-    400042: foot2.r
-    400044: ik.target.l
-    400046: ik.target.r
-    400048: ikarm1.target.l
-    400050: ikarm1.target.r
-    400052: ikfoot.target.l
-    400054: ikfoot.target.r
-    400056: knee.l
-    400058: knee.r
-    400060: Leggs
-    400062: Leggs.Rig
-    400064: Root
-    400066: spine2
-    400068: spint1
-    400070: thigh.l
-    400072: thigh.r
-    2100000: Material
-    2300000: //RootNode
-    2300002: crvTentacle.l
-    2300004: crvTentacle.r
-    2300006: Leggs
-    3300000: //RootNode
-    3300002: crvTentacle.l
-    3300004: crvTentacle.r
-    3300006: Leggs
-    4300000: Grunt_A
-    4300002: crvTentacle.r
-    4300004: crvTentacle.l
-    4300006: Leggs
+    100000: arm1.l
+    100002: arm1.r
+    100004: arm2.l
+    100006: arm2.r
+    100008: arm3.l
+    100010: arm3.r
+    100012: arm4.l
+    100014: arm4.r
+    100016: arm5.l
+    100018: arm5.r
+    100020: arm6.l
+    100022: arm6.r
+    100024: arm7.l
+    100026: arm7.r
+    100028: Bone
+    100030: foot1.l
+    100032: foot1.r
+    100034: foot2.l
+    100036: foot2.r
+    100038: ik.target.l
+    100040: ik.target.r
+    100042: ikarm1.target.l
+    100044: ikarm1.target.r
+    100046: ikfoot.target.l
+    100048: ikfoot.target.r
+    100050: knee.l
+    100052: knee.r
+    100054: //RootNode
+    100056: Root
+    100058: spine2
+    100060: spint1
+    100062: thigh.l
+    100064: thigh.r
+    100066: Leggs.Rig
+    400000: arm1.l
+    400002: arm1.r
+    400004: arm2.l
+    400006: arm2.r
+    400008: arm3.l
+    400010: arm3.r
+    400012: arm4.l
+    400014: arm4.r
+    400016: arm5.l
+    400018: arm5.r
+    400020: arm6.l
+    400022: arm6.r
+    400024: arm7.l
+    400026: arm7.r
+    400028: Bone
+    400030: foot1.l
+    400032: foot1.r
+    400034: foot2.l
+    400036: foot2.r
+    400038: ik.target.l
+    400040: ik.target.r
+    400042: ikarm1.target.l
+    400044: ikarm1.target.r
+    400046: ikfoot.target.l
+    400048: ikfoot.target.r
+    400050: knee.l
+    400052: knee.r
+    400054: //RootNode
+    400056: Root
+    400058: spine2
+    400060: spint1
+    400062: thigh.l
+    400064: thigh.r
+    400066: Leggs.Rig
+    7400000: Leggs.Rig|crvTentacle.target1.rAction
+    7400002: Leggs.Rig|crvTentacle.target2.rAction
+    7400004: Leggs.Rig|Empty.001Action
+    7400006: Leggs.Rig|EmptyAction
+    7400008: Leggs.Rig|Leggs.RigAction
     9500000: //RootNode
-    13700000: Leggs
-    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -113,7 +97,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -165,7 +149,7 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
