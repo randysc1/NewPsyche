@@ -9,6 +9,8 @@ public class MusicRegion : MonoBehaviour {
 	[SerializeField]
 	private LayerMask layers;
 
+	private bool inPool = false;
+
 	private void Start() {
 		if (pool == null) {
 			gameObject.SetActive(false);
@@ -16,12 +18,22 @@ public class MusicRegion : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (0 != (layers.value & 1 << other.gameObject.layer))
+		if (0 != (layers.value & 1 << other.gameObject.layer)) {
 			MusicManager.Instance.PushMusicPool(pool);
+			inPool = true;
+		}
 	}
 
 	void OnTriggerExit(Collider other) {
-		if (0 != (layers.value & 1 << other.gameObject.layer))
+		if (0 != (layers.value & 1 << other.gameObject.layer)) {
 			MusicManager.Instance.PopMusicPool();
+			inPool = false;
+		}
+	}
+
+	private void OnDestroy() {
+		if(inPool) {
+			MusicManager.Instance.PopMusicPool();
+		}
 	}
 }
