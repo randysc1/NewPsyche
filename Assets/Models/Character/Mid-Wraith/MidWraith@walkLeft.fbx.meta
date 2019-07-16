@@ -1,0 +1,221 @@
+fileFormatVersion: 2
+guid: 272c5d94c8608d040a596b02062dda58
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: _1st_finger1
+    100002: _1st_finger2
+    100004: _1st_finger3
+    100006: _2nd_finger1
+    100008: _2nd_finger2
+    100010: _2nd_finger3
+    100012: _3rd_finger1
+    100014: _3rd_finger2
+    100016: _3rd_finger3
+    100018: _4th_finger1
+    100020: _4th_finger2
+    100022: _4th_finger3
+    100024: joint12
+    100026: joint16
+    100028: joint20
+    100030: joint22
+    100032: joint23
+    100034: joint24
+    100036: joint25
+    100038: joint26
+    100040: joint27
+    100042: joint28
+    100044: joint29
+    100046: joint30
+    100048: joint31
+    100050: joint32
+    100052: joint33
+    100054: joint4
+    100056: joint8
+    100058: L_Hand
+    100060: //RootNode
+    100062: pSphere1
+    100064: pSphere2
+    100066: QuickRigCharacter_Head
+    100068: QuickRigCharacter_Hips
+    100070: QuickRigCharacter_HipsTranslation
+    100072: QuickRigCharacter_LeftArm
+    100074: QuickRigCharacter_LeftFoot
+    100076: QuickRigCharacter_LeftForeArm
+    100078: QuickRigCharacter_LeftHand
+    100080: QuickRigCharacter_LeftLeg
+    100082: QuickRigCharacter_LeftShoulder
+    100084: QuickRigCharacter_LeftToeBase
+    100086: QuickRigCharacter_LeftUpLeg
+    100088: QuickRigCharacter_Neck
+    100090: QuickRigCharacter_Neck1
+    100092: QuickRigCharacter_Neck2
+    100094: QuickRigCharacter_RightArm
+    100096: QuickRigCharacter_RightFoot
+    100098: QuickRigCharacter_RightForeArm
+    100100: QuickRigCharacter_RightHand
+    100102: QuickRigCharacter_RightLeg
+    100104: QuickRigCharacter_RightShoulder
+    100106: QuickRigCharacter_RightToeBase
+    100108: QuickRigCharacter_RightUpLeg
+    100110: QuickRigCharacter_Spine
+    100112: QuickRigCharacter_Spine1
+    100114: QuickRigCharacter_Spine2
+    100116: QuickRigCharacter_Spine3
+    100118: QuickRigCharacter_Spine4
+    100120: thumb1
+    100122: thumb2
+    100124: thumb3
+    400000: _1st_finger1
+    400002: _1st_finger2
+    400004: _1st_finger3
+    400006: _2nd_finger1
+    400008: _2nd_finger2
+    400010: _2nd_finger3
+    400012: _3rd_finger1
+    400014: _3rd_finger2
+    400016: _3rd_finger3
+    400018: _4th_finger1
+    400020: _4th_finger2
+    400022: _4th_finger3
+    400024: joint12
+    400026: joint16
+    400028: joint20
+    400030: joint22
+    400032: joint23
+    400034: joint24
+    400036: joint25
+    400038: joint26
+    400040: joint27
+    400042: joint28
+    400044: joint29
+    400046: joint30
+    400048: joint31
+    400050: joint32
+    400052: joint33
+    400054: joint4
+    400056: joint8
+    400058: L_Hand
+    400060: //RootNode
+    400062: pSphere1
+    400064: pSphere2
+    400066: QuickRigCharacter_Head
+    400068: QuickRigCharacter_Hips
+    400070: QuickRigCharacter_HipsTranslation
+    400072: QuickRigCharacter_LeftArm
+    400074: QuickRigCharacter_LeftFoot
+    400076: QuickRigCharacter_LeftForeArm
+    400078: QuickRigCharacter_LeftHand
+    400080: QuickRigCharacter_LeftLeg
+    400082: QuickRigCharacter_LeftShoulder
+    400084: QuickRigCharacter_LeftToeBase
+    400086: QuickRigCharacter_LeftUpLeg
+    400088: QuickRigCharacter_Neck
+    400090: QuickRigCharacter_Neck1
+    400092: QuickRigCharacter_Neck2
+    400094: QuickRigCharacter_RightArm
+    400096: QuickRigCharacter_RightFoot
+    400098: QuickRigCharacter_RightForeArm
+    400100: QuickRigCharacter_RightHand
+    400102: QuickRigCharacter_RightLeg
+    400104: QuickRigCharacter_RightShoulder
+    400106: QuickRigCharacter_RightToeBase
+    400108: QuickRigCharacter_RightUpLeg
+    400110: QuickRigCharacter_Spine
+    400112: QuickRigCharacter_Spine1
+    400114: QuickRigCharacter_Spine2
+    400116: QuickRigCharacter_Spine3
+    400118: QuickRigCharacter_Spine4
+    400120: thumb1
+    400122: thumb2
+    400124: thumb3
+    2100000: lambert1
+    2300000: pSphere1
+    2300002: pSphere2
+    3300000: pSphere1
+    3300002: pSphere2
+    4300000: pSphere2
+    4300002: pSphere1
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
