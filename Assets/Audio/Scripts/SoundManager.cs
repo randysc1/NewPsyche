@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour {
 
-	public static AudioManager Instance;
-	public GameObject audioSourcePrefab;
+	public static SoundManager Instance;
+	[SerializeField]
+	private GameObject audioSourcePrefab;
 
 	void Awake() {
 		if (Instance == null) {
@@ -13,6 +14,10 @@ public class AudioManager : MonoBehaviour {
 		} else {
 			Destroy(gameObject);
 		}
+	}
+
+	public void PlaySoundSimple(AudioClip clip, float volume = 1f) {
+		AudioSource.PlayClipAtPoint(clip, gameObject.transform.position, volume);
 	}
 
 	public void PlaySoundSimple(AudioClip clip, GameObject objectToPlayOn, float volume = 1f) {

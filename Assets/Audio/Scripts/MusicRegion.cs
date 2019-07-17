@@ -11,7 +11,7 @@ public class MusicRegion : MonoBehaviour {
 
 	private bool inPool = false;
 
-	private void Start() {
+	void Start() {
 		if (pool == null) {
 			gameObject.SetActive(false);
 		}
@@ -31,7 +31,7 @@ public class MusicRegion : MonoBehaviour {
 		}
 	}
 
-	private void OnDestroy() {
+	void OnDestroy() {
 		if(inPool) {
 			MusicManager.Instance.PopMusicPool();
 		}

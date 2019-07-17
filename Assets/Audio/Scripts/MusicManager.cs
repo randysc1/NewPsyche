@@ -5,39 +5,28 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour {
 
 	public static MusicManager Instance;
-
 	[SerializeField]
 	private GameObject musicAudioSourcePrefab;
 
 	[SerializeField]
-	private bool playMusicOnStart = true;
+	private bool playMusicOnStart = true, cueNewPool = false, hardOut = false;
 	private bool musicPlaying = false;
-	[SerializeField]
-	private bool cueNewPool = false;
-	[SerializeField]
-	private bool hardOut = false;
 
 	[SerializeField]
-	private float intensity = 0f;
-	[SerializeField]
-	private float nextEndTime = 0f;
-	[SerializeField]
-	private float nextOutTime = 0f;
-	[SerializeField]
-	private float nextBeat = 0f;
-
+	private float intensity = 0f, nextEndTime = 0f, nextOutTime = 0f, nextBeat = 0f;
 
 	[SerializeField]
 	private MusicPool activePool;
 	[SerializeField]
 	private MusicTrack activeTrack;
 	private AudioSource[] activeSources = new AudioSource[2];
-
+	
 	private Stack<MusicPool> musicStack = new Stack<MusicPool>();
 
 	void Awake() {
 		if (Instance == null) {
 			Instance = this;
+			DontDestroyOnLoad(this);
 		} else {
 			Destroy(gameObject);
 		}
@@ -50,22 +39,22 @@ public class MusicManager : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Time.time >= nextEndTime && musicPlaying) {
+		if (Time.time >= nextEndTime && musicPlaying) { //Transition on assigned end of clip
 			float destroyTime = activeSources[0].clip.length - activeSources[0].time;
 			Destroy(activeSources[0].gameObject, destroyTime);
 			Destroy(activeSources[1].gameObject, destroyTime);
 			PlayNewTrack();
 		}
-		if (Time.time >= nextOutTime && musicPlaying) {
-			if (cueNewPool) {
+		if (Time.time >= nextOutTime && musicPlaying) { 
+			if (cueNewPool) {//Transition on assigned end of phrase if new cue
 				FadeCurrentTrack();
 				PlayNewTrack();
 			} else {
 				SetNextOutTime();
 			}
 		}
-		if (Time.time >= nextBeat && musicPlaying) {
-			if (hardOut) {
+		if (Time.time >= nextBeat && musicPlaying) { 
+			if (hardOut) {//Transition on beat if hard out
 				FadeCurrentTrack();
 				PlayNewTrack();
 				hardOut = false;
@@ -142,8 +131,9 @@ public class MusicManager : MonoBehaviour {
 
 	private void SetNextOutTime() {
 		bool changed = false;
+		nextOutTime = activeSources[0].clip.length;
 		for (int i = activeTrack.outTimes.Length - 1; i >= 0; i--) {
-			if (activeTrack.outTimes[i] > activeSources[0].time) {
+			if (activeTrack.outTimes[i] > activeSources[0].time && activeTrack.outTimes[i] < nextOutTime) {
 				nextOutTime = activeTrack.outTimes[i] - activeSources[0].time + Time.time;
 				changed = true;
 			}

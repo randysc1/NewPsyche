@@ -4,8 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "MusicTrack", menuName = "MusicTrackContainer")]
 public class MusicTrack : ScriptableObject {
-	public AudioClip musicStemLow;
-	public AudioClip musicStemHigh;
+	public AudioClip musicStemLow,  musicStemHigh;
 
 	public float bpm;
 	public float endTime;
