@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour {
 
 	public static SoundManager Instance;
 	[SerializeField]
-	private GameObject audioSourcePrefab;
+	private GameObject soundAudioSourcePrefab;
 
 	void Awake() {
 		if (Instance == null) {
@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public AudioSource PlaySoundSFX(AudioClip clip, GameObject objectToPlayOn, float volume = 1f, float pitch = 1f, bool loop = false) {
-		AudioSource freshAudioSource = Instantiate(audioSourcePrefab).GetComponent<AudioSource>();
+		AudioSource freshAudioSource = Instantiate(soundAudioSourcePrefab).GetComponent<AudioSource>();
 		freshAudioSource.gameObject.transform.position = objectToPlayOn.transform.position;
 		freshAudioSource.gameObject.transform.parent = objectToPlayOn.gameObject.transform;
 		freshAudioSource.pitch = pitch;
@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public AudioSource PlaySoundSFX(AudioClip clip, Vector3 positionToPlayAt, float volume = 1f, float pitch = 1f, bool loop = false) {
-		AudioSource freshAudioSource = Instantiate(audioSourcePrefab).GetComponent<AudioSource>();
+		AudioSource freshAudioSource = Instantiate(soundAudioSourcePrefab).GetComponent<AudioSource>();
 		freshAudioSource.gameObject.transform.position = positionToPlayAt;
 		freshAudioSource.pitch = pitch;
 		freshAudioSource.volume = volume;
@@ -56,6 +56,20 @@ public class SoundManager : MonoBehaviour {
 		if (!loop) {
 			Destroy(freshAudioSource.gameObject, freshAudioSource.clip.length);
 		}
+		return freshAudioSource;
+	}
+
+	public AudioSource PlaySoundUI(AudioClip clip, float volume = 1f) {
+		AudioSource freshAudioSource = Instantiate(soundAudioSourcePrefab).GetComponent<AudioSource>();
+		freshAudioSource.gameObject.transform.position = gameObject.transform.position;
+		freshAudioSource.gameObject.transform.parent = gameObject.transform;
+		freshAudioSource.volume = volume;
+		freshAudioSource.spatialBlend = 0f;
+		freshAudioSource.clip = clip;
+		freshAudioSource.Play();
+
+		Destroy(freshAudioSource.gameObject, freshAudioSource.clip.length);
+
 		return freshAudioSource;
 	}
 

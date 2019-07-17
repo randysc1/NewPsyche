@@ -47,17 +47,17 @@ public class AudioUIManager : MonoBehaviour {
 	}
 
 	public void PlayUIAccept() {
-		AudioSource sound =  SoundManager.Instance.PlaySoundSFX(accept, this.gameObject);
+		AudioSource sound =  SoundManager.Instance.PlaySoundUI(accept);
 		sound.spatialBlend = 0;
 	}
 
 	public void PlayUIDecline() {
-		AudioSource sound = SoundManager.Instance.PlaySoundSFX(decline, this.gameObject);
+		AudioSource sound = SoundManager.Instance.PlaySoundUI(decline);
 		sound.spatialBlend = 0;
 	}
 
 	public void PlayUISliderTick() {
-		AudioSource sound = SoundManager.Instance.PlaySoundSFX(sliderTick, this.gameObject);
+		AudioSource sound = SoundManager.Instance.PlaySoundUI(sliderTick);
 		sound.spatialBlend = 0;
 	}
 
