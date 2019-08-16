@@ -43,6 +43,10 @@ void Update () {
             {
                 knockedBack = false;
                 this.GetComponent<NavMeshAgent>().enabled = true;
+            } else
+            {
+                this.GetComponent<Rigidbody>().velocity += curKnockback;
+                curKnockback = curKnockback / this.GetComponent<Rigidbody>().drag;
             }
         }
 	}
@@ -132,7 +136,7 @@ void Update () {
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
         navAgent.enabled = false;
         knockedBack = true;
-        updateVector(newImpact);
+        updateVector(newImpact * forceOfBullet);
 
         
 

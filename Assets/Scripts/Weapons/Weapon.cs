@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour {
     public bool shouldDissapate = false;
     public bool isEnemyWeapon = false;
     public bool isPlayerWeapon = false;
+    public bool applyForce;
     private GameObject EO;
     //Type?
 	// Use this for initialization
@@ -52,7 +53,10 @@ public class Weapon : MonoBehaviour {
 
                 Enemy.TakeDamage(damage);
 
-                StartCoroutine(Enemy.PushBack(ForceOfBullet, this.GetComponent<Rigidbody>().velocity));
+                if (applyForce)
+                {
+                    Enemy.PushBack(ForceOfBullet, this.GetComponent<Rigidbody>().velocity);
+                }
             }
         }
         if (shouldDissapate)
