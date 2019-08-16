@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b76982f6b0479c44b63606ef345636d, type: 3}
   m_Name: init 1
   m_EditorClassIdentifier: 
-  musicStemLow: {fileID: 0}
-  musicStemHigh: {fileID: 0}
-  bpm: 0
-  endTime: 0
+  musicStemLow: {fileID: 8300000, guid: 25129ba7e9c349d46b6785b299258927, type: 3}
+  musicStemHigh: {fileID: 8300000, guid: f28a76cb7713cee408daf05bde085ee9, type: 3}
+  bpm: 120
+  endTime: 4
   outTimes: []
   fadeTime: 0.25

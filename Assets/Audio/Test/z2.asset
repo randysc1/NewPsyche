@@ -11,4 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82596b35cae338f408de30e7313ca837, type: 3}
   m_Name: z2
   m_EditorClassIdentifier: 
-  musicStems: []
+  musicStems:
+  - {fileID: 11400000, guid: 46a580f713bef1740a30b38549fc4bfe, type: 2}
+  - {fileID: 11400000, guid: c35e5514b3b300d45b37a2cdbfa554d8, type: 2}
