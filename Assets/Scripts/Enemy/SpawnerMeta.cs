@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class SpawnerMeta : MonoBehaviour {
 
@@ -10,8 +11,10 @@ public class SpawnerMeta : MonoBehaviour {
     public float ScalingRate;
     public float SpawnRate;
     public float TimeBetweenUpdateCheck;
+    public float nextLevelDelay;
     public int MaxSpawnPerRound;
     public float HowManyRoundsTillEnemyIncrease;
+    public GameObject EndText;
 
     private Dictionary<string, int> howManyEnemiesThisLevel;
     private LevelData levelData;
@@ -27,10 +30,7 @@ public class SpawnerMeta : MonoBehaviour {
     //internal counter to update other counter. 
     public void OnEnemyDeath(string whoDied)
     {
-        int howManyLeft;
         diedThisUpdate++;
-        howManyEnemiesThisLevel.TryGetValue(whoDied, out howManyLeft);
-        howManyLeft--;
     }
 
 
@@ -108,7 +108,16 @@ public class SpawnerMeta : MonoBehaviour {
         diedThisLevel += diedThisUpdate;
         if(diedThisLevel >= totalEnemiesThisLevel)
         {
+            EndText.SetActive(true);
+
+            float curTime = 0;
+            while (curTime < nextLevelDelay)
+            {
+                curTime += Time.deltaTime;
+            }
             //TODO: Write something here that indicates the end of the level. 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
         }
     }
 

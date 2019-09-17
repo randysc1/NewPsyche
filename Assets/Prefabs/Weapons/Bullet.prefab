@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676360969018978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.508434, y: 0.24, z: -8.173764}
-  m_LocalScale: {x: 0.10660572, y: 0.10660573, z: 0.10660573}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.23636974, y: 0.23636974, z: 0.23636974}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,8 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  ForceOfBullet: 100000
   shouldDissapate: 1
   isEnemyWeapon: 0
+  isPlayerWeapon: 0
+  applyForce: 1
 --- !u!135 &135362127540588950
 SphereCollider:
   m_ObjectHideFlags: 1
